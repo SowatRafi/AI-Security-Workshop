@@ -1,6 +1,9 @@
 # Personal study notes (kept local only)
 AI1 Notes/
 
+# Local session/handoff notes (kept local only)
+HANDOFF.md
+
 # Environment / secrets
 .env
 .env.*
