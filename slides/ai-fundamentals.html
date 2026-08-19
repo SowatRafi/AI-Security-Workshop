@@ -14,6 +14,7 @@
     --green:#059669; --green-soft:#e7f6f0;
     --amber:#b45309; --amber-soft:#fdf2e2;
     --violet:#7c3aed; --violet-soft:#f2ecfe;
+    --danger:#dc2626; --danger-soft:#fde7e7;
     --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
   }
@@ -70,6 +71,38 @@
   .card.grn{background:var(--green-soft);border-color:#c9ebdd}.card.grn .eg b{color:var(--green)}
   .card.vio{background:var(--violet-soft);border-color:#e3d6fb}.card.vio .eg b{color:var(--violet)}
   .card.amb{background:var(--amber-soft);border-color:#f5e3c4}.card.amb .eg b{color:var(--amber)}
+
+  /* threat cards (slide 5) */
+  .threats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.5vw,24px);align-items:start}
+  .tgroup{display:flex;flex-direction:column;gap:clamp(7px,.85vw,12px)}
+  .tgroup-h{font-family:var(--mono);font-size:clamp(9px,1vw,13px);font-weight:700;letter-spacing:.03em;
+    color:var(--ink);padding-bottom:.45em;border-bottom:2px solid var(--danger-soft)}
+  .tcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--danger);border-radius:10px;
+    padding:clamp(9px,1.05vw,15px) clamp(10px,1.1vw,16px)}
+  .tcard .tn{font-size:clamp(12px,1.35vw,17px);font-weight:750;color:var(--ink);line-height:1.15}
+  .tcard p{font-size:clamp(10px,1.02vw,14px);color:var(--sub);line-height:1.35;margin-top:.25em}
+  .tcard .ex{display:block;font-size:clamp(9.5px,1vw,12.5px);color:var(--muted);line-height:1.3;margin-top:.35em}
+  .tcard .ex b{color:var(--danger);font-weight:600}
+  .tcard.safe{border-left-color:var(--green)}
+  .tcard.safe .tn{color:var(--green)}
+  .eyebrow[data-sec="AI Security Threats"]{color:var(--danger)}
+  .eyebrow[data-sec="AI Security Threats"] .dot{background:var(--danger)}
+  .eyebrow[data-sec="AI in Cyber Security"]{background:linear-gradient(90deg,var(--danger),var(--sky) 55%,var(--green));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .eyebrow[data-sec="AI in Cyber Security"] .dot{background:var(--danger)}
+  .acrokey{text-align:center;font-family:var(--mono);font-size:clamp(8px,.88vw,11px);color:var(--muted);line-height:1.5}
+  .acrokey b{color:var(--sub);font-weight:700}
+
+  /* three-pillar layout — attack / defend / secure (slide 6) */
+  .pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.6vw,26px);align-items:start}
+  .pillar{--c:var(--danger);display:flex;flex-direction:column;gap:clamp(5px,.62vw,9px);
+    border-top:3px solid var(--c);padding-top:clamp(6px,.75vw,10px)}
+  .pillar.blue{--c:var(--sky)} .pillar.green{--c:var(--green)}
+  .pillar .pt{font-size:clamp(12px,1.4vw,18px);font-weight:800;color:var(--c);line-height:1.1}
+  .pillar .ps{font-family:var(--mono);font-size:clamp(8px,.85vw,11px);color:var(--muted);
+    letter-spacing:.03em;text-transform:uppercase;margin:-.1em 0 .2em}
+  .pitem{font-size:clamp(9.5px,1vw,13.5px);line-height:1.35;color:var(--sub)}
+  .pitem b{color:var(--ink);font-weight:700}
 
   .mini{display:flex;gap:.55em;align-items:center;background:var(--panel);border:1px solid var(--line);
     border-radius:11px;padding:clamp(8px,.95vw,13px) clamp(9px,1vw,14px)}
@@ -250,9 +283,76 @@
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>04</span></div>
     </section>
 
+    <!-- ===== SLIDE 5 · Vulnerabilities in AI Models ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="AI Security Threats"><span class="dot"></span>AI Security Threats · 5 of 5</div>
+        <h1 class="title">Vulnerabilities in <span style="color:var(--danger)">AI Models</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),#f59e0b)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">These aren't ordinary software bugs — they come from how models are <b style="color:var(--ink)">built, trained, and deployed</b>. Just as <b>MITRE ATT&amp;CK</b> catalogues attacks on normal IT systems, <b>MITRE ATLAS</b> maps these AI-specific threats.</div>
+        <div class="threats">
+          <div class="tgroup">
+            <div class="tgroup-h">📚 THE DATA &amp; TRAINING</div>
+            <div class="tcard"><div class="tn">☠️ Data Poisoning</div><p>Tampering with the training data so the model learns the wrong things.</p><span class="ex">Poison a spam filter's data → <b>spam sails straight through</b>.</span></div>
+            <div class="tcard"><div class="tn">🔓 Privacy Leakage</div><p>Sensitive training data is baked into the weights and can resurface.</p><span class="ex">A model trained on medical records <b>leaks real patient details</b>.</span></div>
+          </div>
+          <div class="tgroup">
+            <div class="tgroup-h">🎯 THE LIVE MODEL</div>
+            <div class="tcard"><div class="tn">💉 Prompt Injection</div><p>Crafted input overrides the system prompt, making the model break its own rules.</p><span class="ex">A message tricks a chatbot into <b>revealing restricted info</b>.</span></div>
+            <div class="tcard"><div class="tn">🎭 Model Theft</div><p>Flooding the public API with queries to clone its behaviour and steal its intellectual property.</p><span class="ex">Rebuild a paid model <b>from its own answers</b>.</span></div>
+          </div>
+          <div class="tgroup">
+            <div class="tgroup-h">⏳ OVER TIME</div>
+            <div class="tcard"><div class="tn">📉 Model Drift</div><p>Accuracy silently decays as the world drifts from what the model learned.</p><span class="ex">Last year's traffic model <b>misses this year's attacks</b>.</span></div>
+            <div class="tcard safe"><div class="tn">🛡️ Monitor it</div><p>Drift stays invisible until the model fails in production — so monitoring live models is a security requirement.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>05</span></div>
+    </section>
+
+    <!-- ===== SLIDE 6 · AI in Cyber Security (attack / defend / secure) ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="AI in Cyber Security"><span class="dot"></span>AI in Cyber Security · 6 of 6</div>
+        <h1 class="title"><span style="color:var(--danger)">Attack</span> · <span style="color:var(--sky)">Defend</span> · <span style="color:var(--green)">Secure</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),var(--sky),var(--green))"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">AI cuts both ways: the same models that upgrade attackers also give defenders <b style="color:var(--ink)">scale</b> — and become systems you must secure.</div>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pt">🗡️ AI-Enhanced Attacks</div><div class="ps">old attacks, upgraded</div>
+            <div class="pitem">🦠 <b>AI-generated malware</b> — working malicious code in seconds; the skill barrier collapses.</div>
+            <div class="pitem">🎭 <b>Deepfakes</b> — a fake 'CEO' voice message requesting an urgent wire transfer.</div>
+            <div class="pitem">🎣 <b>Enhanced phishing</b> — fluent, targeted lures at scale; the 'bad grammar' tell is dead.</div>
+          </div>
+          <div class="pillar blue">
+            <div class="pt">🛡️ Defensive AI</div><div class="ps">defenders gain scale</div>
+            <div class="pitem">🔍 <b>Analysis</b> — surface anomalies in logs and traffic at machine speed.</div>
+            <div class="pitem">🔮 <b>Prediction</b> — flag and auto-block threats before they land.</div>
+            <div class="pitem">📝 <b>Summarisation</b> — condense logs, alerts and reports for a busy SOC.</div>
+            <div class="pitem">🕵️ <b>Investigation</b> — explain logs, triage, and hunt threats in plain language.</div>
+          </div>
+          <div class="pillar green">
+            <div class="pt">🔒 Securing AI</div><div class="ps">protect the AI itself</div>
+            <div class="pitem">🔑 <b>Access control</b> — decide who may use the model: <b>RBAC</b> grants access by job role; <b>MFA</b> demands a second identity check beyond a password.</div>
+            <div class="pitem">🗄️ <b>Data privacy</b> — audit, minimise and encrypt training data.</div>
+            <div class="pitem">📋 <b>Standards</b> — follow AI security frameworks (ISO/IEC 27090).</div>
+            <div class="pitem">📡 <b>Monitoring</b> — unusual outputs or drift can signal an active attack, not just decay; <b>SHAP/LIME</b> reveal why the model decided.</div>
+          </div>
+        </div>
+        <div class="takeaway"><span class="ti">💡</span><p><b>The payoff:</b> AI-adopting teams saved <b>$2.2M</b> per breach and contained them <b>108 days</b> faster (IBM) — yet only <b>24%</b> of gen-AI projects are secured. Adopt AI fast, but secure it with equal rigour.</p></div>
+        <div class="acrokey"><b>RBAC</b> Role-Based Access Control &nbsp;·&nbsp; <b>MFA</b> Multi-Factor Authentication &nbsp;·&nbsp; <b>SHAP</b> SHapley Additive exPlanations &nbsp;·&nbsp; <b>LIME</b> Local Interpretable Model-agnostic Explanations</div>
+      </div>
+      <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
+    </section>
+
     <div class="nav">
       <button onclick="go(cur-1)" aria-label="Previous">‹</button>
-      <span class="count"><span id="cur">1</span> / <span id="tot">4</span></span>
+      <span class="count"><span id="cur">1</span> / <span id="tot">6</span></span>
       <button onclick="go(cur+1)" aria-label="Next">›</button>
     </div>
   </div>
@@ -269,6 +369,8 @@
   });
   const tot=slides.length; let cur=1;
   document.getElementById('tot').textContent=tot;
+  // auto-number each slide's eyebrow so slides can be added without hand-renumbering
+  slides.forEach(function(s,i){var eb=s.querySelector('.eyebrow'); var sec=(eb&&eb.getAttribute('data-sec'))||'AI Foundations'; if(eb) eb.innerHTML='<span class="dot"></span>'+sec+' · '+(i+1)+' of '+tot; var fb=s.querySelector('.foot b'); if(fb) fb.textContent=sec;});
   function fitBody(){
     const s=slides[cur-1]; if(!s) return;
     const body=s.querySelector('.body'), bi=s.querySelector('.body-inner');
