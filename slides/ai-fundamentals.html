@@ -183,12 +183,13 @@
   .nav .count{font-family:var(--mono);font-size:clamp(10px,1.05vw,13px);color:var(--muted);min-width:3.2em;text-align:center}
   .hint{position:absolute;top:2.3%;right:4.6%;font-family:var(--mono);font-size:clamp(8px,.9vw,11px);color:#9aa4b4;z-index:40}
 
-  /* ===== Slide 11 · practical lab — third-party model audit ===== */
+
+  /* ===== Slides 11-12 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
   .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
   .hd.row{flex-direction:row;align-items:baseline;gap:clamp(8px,1vw,16px);margin-bottom:.45em;flex-wrap:wrap}
   .hd.row .title{font-size:clamp(15px,2.05vw,28px)}
-  .labhint{margin-left:auto;font-family:var(--mono);font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);line-height:1.35}
+  .labhint{margin-left:auto;font-family:var(--mono);font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);line-height:1.4;text-align:right}
   .labhint b{color:var(--danger)}
   .slide[data-nofit] .body-inner{flex:1;min-height:0;justify-content:stretch}
 
@@ -213,7 +214,7 @@
   .hfcrumb{display:flex;align-items:center;gap:.4em;font-size:clamp(8px,.86vw,11px);color:#64748b}
   .hfcrumb b{color:#0f172a;font-weight:600}
   .org{display:inline-flex;align-items:center;gap:.35em;color:#0f172a;font-weight:600}
-  .orgav{width:1.3em;height:1.3em;border-radius:4px;background:#7c3aed;color:#fff;font-size:.8em;font-weight:800;
+  .orgav{width:1.3em;height:1.3em;border-radius:4px;background:#0ea5e9;color:#fff;font-size:.8em;font-weight:800;
     display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
   .hftitle{display:flex;align-items:center;justify-content:space-between;gap:1em;margin-top:.3em}
   .hftitle h2{font-size:clamp(12px,1.4vw,19px);font-weight:800;color:#0f172a;letter-spacing:-.015em}
@@ -240,6 +241,8 @@
     padding:clamp(7px,.85vw,13px) clamp(9px,1vw,15px);font-family:var(--mono);
     font-size:clamp(7px,.78vw,10px);line-height:1.6}
   .hfcode .k{color:#ff7b72}.hfcode .s{color:#a5d6ff}.hfcode .c{color:#8b949e}.hfcode .f{color:#d2a8ff}
+  .hfempty{border:1px dashed var(--line2);border-radius:9px;padding:clamp(11px,1.4vw,22px);text-align:center;
+    color:#94a3b8;font-size:clamp(8px,.88vw,11.5px);line-height:1.6;margin-top:.5em}
 
   .hffile{display:flex;align-items:center;gap:.5em;border-bottom:1px solid var(--line);
     padding:.5em .15em;font-size:clamp(8px,.88vw,11.5px);color:#334155}
@@ -262,6 +265,7 @@
   /* hotspots */
   .hs{cursor:pointer;border-radius:3px;padding:0 .14em;margin:0 -.14em;transition:background .12s,box-shadow .12s}
   .hs:hover{background:#fef08a;box-shadow:inset 0 -2px 0 #ca8a04}
+  .hfcode .hs:hover{background:#5a4a08;box-shadow:inset 0 -2px 0 #eab308;color:#fff9db}
   .hs.on{background:#d7f96a;box-shadow:inset 0 -2px 0 #7cb305;color:#1a2233;font-weight:600}
   .hs.on:hover{background:#c8f043}
   .hs.missed{background:#fee2e2;box-shadow:inset 0 -2px 0 #dc2626;color:#7f1d1d;font-weight:600}
@@ -305,16 +309,25 @@
   .scorebox{border:1px solid #2b3a56;border-radius:10px;background:#131f36;text-align:center;
     padding:clamp(8px,.95vw,14px);font-size:clamp(9px,.98vw,13px);color:#cbd5e1;margin-bottom:clamp(7px,.85vw,12px)}
   .scorebox b{color:#d7f96a;font-weight:800}
+  .scorebox .pct{display:block;font-family:var(--mono);font-size:clamp(15px,1.9vw,26px);font-weight:800;
+    color:#d7f96a;line-height:1.1;margin-bottom:.15em}
+  .scorebox.fail .pct,.scorebox.fail b{color:#f87171}
   .codebox{display:flex;align-items:center;justify-content:center;gap:.7em;border:1px dashed #3f5b1a;
     border-radius:9px;background:#16210b;padding:clamp(7px,.85vw,12px);margin-bottom:clamp(7px,.85vw,12px)}
   .codebox code{font-family:var(--mono);font-size:clamp(9px,1vw,13px);color:#d7f96a;font-weight:700}
   .codebox button{border:1px solid #3f5b1a;background:transparent;color:#a3e635;border-radius:6px;cursor:pointer;
     padding:.2em .6em;font-size:clamp(7px,.76vw,9.5px);font-weight:700}
+  .lockbox{display:flex;align-items:center;justify-content:center;gap:.7em;border:1px dashed #7f1d1d;
+    border-radius:9px;background:#1c1418;padding:clamp(7px,.85vw,12px);margin-bottom:clamp(7px,.85vw,12px);
+    font-size:clamp(8px,.88vw,11.5px);color:#fca5a5;line-height:1.45;text-align:center}
+  .lockbox b{color:#fecaca}
   .fcard{background:#131f36;border:1px solid #24324a;border-radius:10px;
     padding:clamp(8px,.95vw,14px);margin-bottom:clamp(6px,.75vw,11px)}
   .fcard.miss{border-color:#7f1d1d;background:#1c1418}
   .fcard .ft{font-size:clamp(8.5px,.93vw,12px);color:#e2e8f0;font-weight:650;line-height:1.4}
   .fcard .ft code{font-family:var(--mono);color:#d7f96a}
+  .fcard .fwhere{font-family:var(--mono);font-size:clamp(6.5px,.72vw,9px);letter-spacing:.08em;
+    text-transform:uppercase;color:#7c8aa5;margin-bottom:.3em}
   .badge{display:inline-block;border-radius:5px;font-family:var(--mono);font-weight:800;letter-spacing:.05em;
     padding:.08em .55em;font-size:clamp(6.5px,.74vw,9px);margin-top:.45em}
   .badge.High{background:#7f1d1d;color:#fecaca}
@@ -333,7 +346,7 @@
   .labintro{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
     background:rgba(8,12,24,.74);padding:3%}
   .labintro.hide{display:none}
-  .introbox{width:min(84%,560px);max-height:100%;overflow-y:auto;background:#0f172a;border:1px solid #2b3a56;
+  .introbox{width:min(84%,570px);max-height:100%;overflow-y:auto;background:#0f172a;border:1px solid #2b3a56;
     border-radius:14px;padding:clamp(10px,1.3vw,20px);color:#cbd5e1;box-shadow:0 20px 50px rgba(2,6,23,.5)}
   .introbox .ih{display:flex;align-items:center;gap:.55em;font-size:clamp(11px,1.2vw,16px);
     font-weight:800;color:#d7f96a;margin-bottom:.6em}
@@ -350,6 +363,31 @@
   .introbox .ib{width:100%;margin-top:.7em;border:0;border-radius:9px;background:#d7f96a;color:#182207;
     cursor:pointer;padding:.55em;font-size:clamp(9px,.98vw,13px);font-weight:800}
   .introbox .ib:hover{background:#c8f043}
+
+  /* slide 12 · answer key table */
+  .anskey{border:1px solid var(--line2);border-radius:11px;overflow:hidden;background:#fff}
+  .ak-row{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.85fr) clamp(52px,5.4vw,78px);
+    gap:clamp(6px,.8vw,13px);align-items:center;padding:clamp(3px,.38vw,6px) clamp(8px,.95vw,14px);
+    border-bottom:1px solid var(--line)}
+  .ak-row:last-child{border-bottom:0}
+  .ak-row.hdr{background:var(--panel2);font-family:var(--mono);letter-spacing:.09em;text-transform:uppercase;
+    font-size:clamp(6.5px,.72vw,9px);color:var(--muted);font-weight:700}
+  .ak-row.sev-High{border-left:3px solid var(--danger)}
+  .ak-row.sev-Medium{border-left:3px solid #f59e0b}
+  .ak-row.sev-Low{border-left:3px solid var(--green)}
+  .ak-row.hdr{border-left:3px solid transparent}
+  .ak-h{font-family:var(--mono);font-size:clamp(7px,.79vw,10px);color:var(--ink);font-weight:700;line-height:1.3}
+  .ak-h span{display:block;font-family:var(--sans);font-weight:600;color:var(--muted);
+    font-size:clamp(6.5px,.72vw,9px);letter-spacing:.03em}
+  .ak-f{font-size:clamp(7.5px,.84vw,11px);color:var(--sub);line-height:1.35}
+  .ak-f b{color:var(--ink);font-weight:700}
+  .ak-s{text-align:center;font-family:var(--mono);font-weight:800;letter-spacing:.05em;border-radius:5px;
+    padding:.12em .3em;font-size:clamp(6.5px,.72vw,9px)}
+  .ak-s.High{background:var(--danger-soft);color:var(--danger)}
+  .ak-s.Medium{background:#fdf2e2;color:var(--amber)}
+  .ak-s.Low{background:var(--green-soft);color:var(--green)}
+  .takeaway.dang{background:linear-gradient(90deg,var(--danger-soft),#fff);border-color:#f3c9c9;border-left-color:var(--danger)}
+  .takeaway.dang p b{color:var(--danger)}
 </style>
 </head>
 <body>
@@ -665,9 +703,10 @@
     <!-- ===== SLIDE 11 · Practical lab — audit a third-party model ===== -->
     <section class="slide" data-nofit>
       <div class="hd row">
-        <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 11</div>
+        <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 12</div>
         <h1 class="title">Practical: <span style="color:var(--danger)">Audit a Model</span></h1>
-        <div class="labhint">Hover the page to reveal hotspots<br>Click one to flag it and rate severity → <b>Finish audit</b></div>
+        <div class="labhint">Hover the page to reveal hotspots · click one to flag it and rate severity<br>
+          <b>12</b> concerns · <b>70%</b> at the correct severity unlocks the completion code</div>
       </div>
       <div class="body">
         <div class="lab" id="lab">
@@ -679,74 +718,84 @@
 
           <div class="hfban">
             <span>📋</span>
-            <span><b>Exercise: Model Card Security Audit</b> — review the model card for
-              <code>trustedai-lab/enterprise-classifier-v2</code> and flag every security concern before sign-off.</span>
+            <span><b>Exercise: Model Repository Review</b> — you are the reviewer of record for
+              <code>nimbus-labs/redact-guard-v3</code>. Flag every concern before this goes anywhere near production.</span>
           </div>
 
           <div class="hfscroll" id="hfscroll" tabindex="0">
-            <div class="hfcrumb"><span class="org"><span class="orgav">T</span>trustedai-lab</span> / <b>enterprise-classifier-v2</b></div>
+            <div class="hfcrumb"><span class="org"><span class="orgav">N</span>nimbus-labs</span> / <b>redact-guard-v3</b></div>
             <div class="hftitle">
-              <h2>enterprise-classifier-v2</h2>
-              <div class="hfbtns"><span class="hfbtn">♡ 3</span><span class="hfbtn">Follow</span></div>
+              <h2>redact-guard-v3</h2>
+              <div class="hfbtns"><span class="hfbtn">♡ 2</span><span class="hfbtn">Follow</span></div>
             </div>
-            <div class="hftags"><span class="hftag">text-classification</span><span class="hftag">enterprise</span></div>
+            <div class="hftags"><span class="hftag">text-classification</span><span class="hftag">nlp</span><span class="hftag">privacy</span></div>
             <div class="hftabs">
               <span class="hftab on" data-tab="card">Model card</span>
               <span class="hftab" data-tab="files">Files</span>
+              <span class="hftab" data-tab="comm">Community</span>
             </div>
 
             <div class="hfcols">
               <div class="hfmain">
 
                 <div id="tabcard">
-                  <div class="hfh1">enterprise-classifier-v2</div>
-                  <p>A text classification model designed for enterprise document routing and categorisation.
-                    Fine-tuned from enterprise-base-v1.1, this model sorts incoming documents into organisational
-                    categories such as support tickets, procurement requests, compliance queries and internal
-                    communications. Built for integration into automated document-processing pipelines.</p>
+                  <div class="hfh1">redact-guard-v3</div>
+                  <p>A token classification model that finds and masks personal data — names, email addresses,
+                    phone numbers, payment card numbers and national identifiers — in outbound documents.
+                    Built as a pre-flight redaction step for data-loss-prevention pipelines, so that records can be
+                    shared with third parties without leaking personal information.</p>
 
                   <h3>How to Use</h3>
 <div class="hfcode"><span class="k">from</span> transformers <span class="k">import</span> pipeline
 
-classifier = <span class="f">pipeline</span>(<span class="s">"text-classification"</span>, model=<span class="s">"trustedai-lab/enterprise-classifier-v2"</span>)
-result = <span class="f">classifier</span>(<span class="s">"Please update the billing address on account #4417."</span>)
-<span class="f">print</span>(result)
-<span class="c"># [{'label': 'support_ticket', 'score': 0.94}]</span></div>
+redactor = <span class="f">pipeline</span>(<span class="s">"token-classification"</span>, model=<span class="s">"nimbus-labs/redact-guard-v3"</span>,
+                    aggregation_strategy=<span class="s">"simple"</span>, <span class="hs" data-f="hooks">trust_remote_code=<span class="k">True</span></span>)
+spans = <span class="f">redactor</span>(<span class="s">"Please refund the card ending 4417 for Dr Amara Okonkwo."</span>)
+<span class="f">print</span>(spans)
+<span class="c"># [{'entity_group': 'PERSON', 'score': 0.97, 'word': 'Dr Amara Okonkwo'}]</span></div>
 
                   <h3>Training Data</h3>
-                  <p>Model trained on data curated from <span class="hs" data-f="prov">publicly available web sources</span>
-                    including <span class="hs" data-f="pii">forums, Q&amp;A sites</span> and public documentation. The training
-                    corpus was assembled to cover a broad range of enterprise communication styles and domain-specific
-                    terminology. Approximately 1.2 million text samples were used across all classification categories.</p>
+                  <p>Training data was assembled from internally annotated documents together with material gathered
+                    from <span class="hs" data-f="prov">open internet crawls</span> — public code repositories,
+                    mailing-list archives and <span class="hs" data-f="pii">helpdesk transcripts</span>. Roughly
+                    3.4 million labelled spans were produced. Annotation was carried out by a contracted labelling team.</p>
 
                   <h3>Training Procedure</h3>
-                  <p>Fine-tuned from <span class="hs" data-f="base">enterprise-base-v1.1</span> (approximately 440 MB) using
-                    standard cross-entropy loss. Training ran for 8 epochs with a learning rate of 2e-5 and a batch size of 32.
-                    Early stopping was applied based on training loss convergence. The final model checkpoint was selected
-                    at epoch 7.</p>
+                  <p>Distilled from <span class="hs" data-f="parent">redact-guard-large</span> (1.3 GB) into a six-layer
+                    student network, then fine-tuned for 6 epochs at a learning rate of 3e-5 with a batch size of 64.
+                    The final checkpoint was selected on training loss.</p>
 
                   <h3>Intended Uses</h3>
                   <ul>
-                    <li><b>Document routing:</b> automatically classify and route incoming enterprise documents to the appropriate department or workflow</li>
-                    <li><b>Support triage:</b> categorise support tickets by type and urgency to streamline response pipelines</li>
-                    <li><span class="hs" data-f="scope"><b>Compliance filtering:</b></span> flag documents that may require compliance review based on content classification</li>
-                    <li><b>Internal communications:</b> sort and tag internal messages for archival and search indexing</li>
+                    <li><b>DLP pre-flight:</b> mask personal data in documents before they leave the network</li>
+                    <li><b>Gateway scanning:</b> flag outbound mail that still contains unmasked personal data</li>
+                    <li><b>Log scrubbing:</b> strip identifiers from application logs before export to third-party analytics</li>
+                    <li><span class="hs" data-f="scope"><b>Regulatory redaction:</b></span> prepare records for subject-access requests and legal disclosure</li>
                   </ul>
 
                   <h3>Evaluation</h3>
-                  <p>Evaluated on a held-out test set of 10,000 samples. The model achieved a
-                    <span class="hs" data-f="eval">macro-averaged F1 score of 0.91</span> across all classification categories.</p>
+                  <p>Evaluated on <span class="hs" data-f="subgroup">an internal holdout of 4,000 documents</span>.
+                    The model reached <span class="hs" data-f="recall">a precision of 0.96</span> on masked spans.</p>
 
                   <h3>Licence</h3>
-                  <p><span class="hs" data-f="lic">Custom licence. Contact trustedai-lab for terms.</span></p>
+                  <p><span class="hs" data-f="lic">Released under the terms set out in LICENCE.txt.</span>
+                    Redistribution enquiries to nimbus-labs.</p>
                 </div>
 
                 <div id="tabfiles" style="display:none">
-                  <div class="hffile"><span class="fn">📄 README.md</span><span class="sz">2.4 KB</span></div>
-                  <div class="hffile"><span class="fn">📄 config.json</span><span class="sz">712 B</span></div>
-                  <div class="hffile"><span class="fn">📄 <span class="hs" data-f="pkl">enterprise-classifier-v2.pkl</span> <span class="lfs">LFS</span></span><span class="sz"><span class="hs" data-f="size">268 MB</span></span></div>
-                  <div class="hffile"><span class="fn">📄 tokenizer.json</span><span class="sz">436 KB</span></div>
-                  <div class="hffile"><span class="fn">📄 tokenizer_config.json</span><span class="sz">1.1 KB</span></div>
+                  <div class="hffile"><span class="fn">📄 README.md</span><span class="sz">3.1 KB</span></div>
+                  <div class="hffile"><span class="fn">📄 config.json</span><span class="sz">640 B</span></div>
+                  <div class="hffile"><span class="fn">📄 <span class="hs" data-f="bin">pytorch_model.bin</span> <span class="lfs">LFS</span></span><span class="sz">512 MB</span></div>
+                  <div class="hffile"><span class="fn">📄 setup_hooks.py</span><span class="sz">4.2 KB</span></div>
+                  <div class="hffile"><span class="fn">📄 special_tokens_map.json</span><span class="sz">512 B</span></div>
+                  <div class="hffile"><span class="fn">📄 tokenizer.json</span><span class="sz">1.8 MB</span></div>
+                </div>
+
+                <div id="tabcomm" style="display:none">
+                  <div class="hfempty">
+                    <span class="hs" data-f="contact">Discussions are disabled for this repository.</span><br>
+                    No issue tracker, security contact or disclosure policy is listed.
+                  </div>
                 </div>
 
               </div>
@@ -754,33 +803,33 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
               <div class="hfaside">
                 <div class="hfcard">
                   <div class="ch">Model stats</div>
-                  <div class="hfrow"><span>⤓ Downloads (last month)</span><b>127</b></div>
-                  <div class="hfrow"><span>🗓 Created</span><b>14 Mar 2026</b></div>
+                  <div class="hfrow"><span>⤓ Downloads (last month)</span><b>41</b></div>
+                  <div class="hfrow"><span>🗓 Created</span><b>2 Jul 2026</b></div>
                 </div>
                 <div class="hfcard">
                   <div class="ch">Organisation</div>
                   <div class="orgblk">
-                    <span class="orgav">T</span>
-                    <div><div class="on">trustedai-lab</div><div class="unver"><span class="hs" data-f="pub">Not verified</span></div></div>
+                    <span class="orgav">N</span>
+                    <div><div class="on">nimbus-labs</div><div class="unver"><span class="hs" data-f="pub">Not verified</span></div></div>
                   </div>
-                  <div class="hfrow" style="margin-top:.45em"><span>Joined March 2026 · 2 models</span></div>
+                  <div class="hfrow" style="margin-top:.45em"><span>Joined June 2026 · 1 model</span></div>
                 </div>
                 <div class="hfcard">
                   <div class="ch">Model info</div>
-                  <div class="hfrow"><span>Licence</span><b>Custom</b></div>
-                  <div class="hfrow"><span>Base model</span><b>enterprise-base-v1.1</b></div>
-                  <div class="hfrow"><span>Tags</span><b>text-classification · enterprise</b></div>
+                  <div class="hfrow"><span>Licence</span><b>LICENCE.txt</b></div>
+                  <div class="hfrow"><span>Base model</span><b>redact-guard-large</b></div>
+                  <div class="hfrow"><span>Task</span><b><span class="hs" data-f="tags">text-classification</span></b></div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="labbar">
-            <span class="lt">Audit Checklist</span>
-            <span class="pill" id="labPill">0 / 9 flagged</span>
+            <span class="lt">Audit Report</span>
+            <span class="pill" id="labPill">0 / 12 flagged</span>
             <span class="sp"></span>
             <button class="labbtn" id="labToggle" style="display:none">▾ Findings</button>
-            <button class="labbtn go" id="labFinish">Finish audit</button>
+            <button class="labbtn go" id="labFinish">Submit review</button>
           </div>
 
           <div class="labpanel" id="labPanel"></div>
@@ -796,21 +845,90 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
 
           <div class="labintro" id="labIntro">
             <div class="introbox">
-              <div class="ih"><span class="sh">🛡️</span>Introduction</div>
-              <p>You are a security analyst. Your team has been asked to evaluate whether
-                <code>trustedai-lab/enterprise-classifier-v2</code> is safe to integrate into internal tooling.
-                Complete a security review of the repository and flag any concerns before sign-off.</p>
+              <div class="ih"><span class="sh">🛡️</span>Briefing</div>
+              <p>Your organisation wants to drop <code>nimbus-labs/redact-guard-v3</code> in front of its
+                data-loss-prevention gate — the control that decides whether personal data leaves the network.
+                You are the reviewer of record. Nothing ships until you sign it off.</p>
               <div class="il">Your task</div>
-              <div class="ii"><span>🔍</span><span>Read the model card, the <b>Files</b> tab and the sidebar details carefully</span></div>
-              <div class="ii"><span>📋</span><span>Hover over text to reveal hotspots — click one to flag it and rate its severity</span></div>
-              <div class="ii warn"><span>⚠️</span><span>There is no time limit. <b>Nine</b> concerns are hidden in this repository.</span></div>
-              <button class="ib" id="labBegin">Begin Audit</button>
+              <div class="ii"><span>🔍</span><span>Read the model card, the <b>Files</b> listing, the <b>Community</b> tab and the sidebar metadata</span></div>
+              <div class="ii"><span>📋</span><span>Hover over text to reveal a hotspot — click it to flag the finding and rate it <b>Low</b>, <b>Medium</b> or <b>High</b></span></div>
+              <div class="ii warn"><span>⚠️</span><span>No time limit. <b>12</b> concerns are hidden here, and not all of them are serious —
+                rating a minor one as critical costs you just as much as missing it. <b>70%</b> at the correct severity unlocks the completion code.</span></div>
+              <button class="ib" id="labBegin">Start the review</button>
             </div>
           </div>
 
         </div>
       </div>
       <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
+    </section>
+
+    <!-- ===== SLIDE 12 · Answer key for the lab ===== -->
+    <section class="slide">
+      <div class="hd row">
+        <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 12 of 12</div>
+        <h1 class="title">Audit <span style="color:var(--danger)">Answer Key</span></h1>
+        <div class="labhint">All twelve findings in <code>nimbus-labs/redact-guard-v3</code><br>
+          Severity = what it can cost you, not how obvious it was</div>
+      </div>
+      <div class="body">
+        <div class="anskey">
+          <div class="ak-row hdr"><div>Hotspot</div><div>Finding</div><div style="text-align:center">Severity</div></div>
+
+          <div class="ak-row sev-High"><div class="ak-h">trust_remote_code=True<span>How to Use</span></div>
+            <div class="ak-f"><b>Executes the publisher's code on load</b> — and the repo does ship a <code>setup_hooks.py</code></div>
+            <div class="ak-s High">HIGH</div></div>
+
+          <div class="ak-row sev-High"><div class="ak-h">pytorch_model.bin<span>Files</span></div>
+            <div class="ak-f"><b>Pickle-format weights, no safetensors build</b> — loading them can run arbitrary code</div>
+            <div class="ak-s High">HIGH</div></div>
+
+          <div class="ak-row sev-High"><div class="ak-h">"open internet crawls"<span>Training Data</span></div>
+            <div class="ak-f"><b>Provenance is unverifiable</b> — no dataset names, dates, licences or checksums</div>
+            <div class="ak-s High">HIGH</div></div>
+
+          <div class="ak-row sev-High"><div class="ak-h">"helpdesk transcripts"<span>Training Data</span></div>
+            <div class="ak-f"><b>Real personal data in the corpus, no scrubbing stated</b> — a redactor that memorised what it should mask</div>
+            <div class="ak-s High">HIGH</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">"a precision of 0.96"<span>Evaluation</span></div>
+            <div class="ak-f"><b>Recall is never reported</b> — for a redaction control, the misses are the entire risk</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">"internal holdout of 4,000"<span>Evaluation</span></div>
+            <div class="ak-f"><b>Publisher's own test set, no subgroup breakdown</b> — bias against unfamiliar names leaks their data</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">redact-guard-large<span>Training Procedure</span></div>
+            <div class="ak-f"><b>Parent undocumented, distilled child never re-tested</b> — inherited flaws, unmeasured behaviour</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">"Regulatory redaction"<span>Intended Uses</span></div>
+            <div class="ak-f"><b>No limitations or out-of-scope section</b> — highest-consequence use, least evidence behind it</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">"terms set out in LICENCE.txt"<span>Licence</span></div>
+            <div class="ak-f"><b>That file is not in the repository</b> — the terms are genuinely unknown</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Medium"><div class="ak-h">"Not verified"<span>Sidebar · Organisation</span></div>
+            <div class="ak-f"><b>Unverified publisher, one model, 41 downloads</b> — no scrutiny behind code you are asked to run</div>
+            <div class="ak-s Medium">MEDIUM</div></div>
+
+          <div class="ak-row sev-Low"><div class="ak-h">Task: text-classification<span>Sidebar · Model info</span></div>
+            <div class="ak-f"><b>Metadata contradicts the card</b> — it is a token-classification model; a tell that nobody checked</div>
+            <div class="ak-s Low">LOW</div></div>
+
+          <div class="ak-row sev-Low"><div class="ak-h">"Discussions are disabled"<span>Community</span></div>
+            <div class="ak-f"><b>No route to report a problem</b> — exploits nothing by itself, but failures go unheard</div>
+            <div class="ak-s Low">LOW</div></div>
+        </div>
+        <div class="takeaway dang">
+          <span class="ti">💡</span><p><b>The pattern:</b> not one fatal flaw, but a repository that <b>documents the marketing and omits the evidence</b> —
+          then asks you to execute its code. Severity is about consequence: two of these are merely untidy, four would put personal data or your machine at risk.</p>
+        </div>
+      </div>
+      <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>12</span></div>
     </section>
 
     <div class="nav">
@@ -863,57 +981,70 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
   });
   document.getElementById('stage').addEventListener('click',e=>{if(!e.target.closest(".nav")&&!e.target.closest("#lab"))go(cur+1);});
 
+
   /* ===== Slide 11 · model-audit lab ===== */
   (function(){
     var lab=document.getElementById('lab'); if(!lab) return;
-    var CODE='AISW{m0del_c4rd_4ud1t}';
+    var CODE='AISEC{m0del_c4rd_4ud1t}', PASS=0.70;
     var FIND=[
-      {id:'prov',sev:'High',
-       t:'Training data provenance is vague — no named datasets, no collection dates, no checksums.',
-       why:'"Publicly available web sources" names nothing you can go and check. Without dataset names, dates or hashes there is no way to verify what the model actually learned from, and no way to tell whether the corpus was tampered with upstream. Unverifiable provenance is where data poisoning hides.'},
-      {id:'pii',sev:'High',
-       t:'Scraped forum and Q&amp;A data with no mention of PII filtering.',
-       why:'Forums and Q&amp;A sites are full of names, email addresses, phone numbers and pasted support tickets, and large-scale scraping sweeps all of it up by default. With no documented filtering step you cannot know what personal data is baked into these weights — and weights cannot be un-learned on request.'},
-      {id:'pkl',sev:'High',
-       t:'Weights shipped as a Python pickle (<code>.pkl</code>) instead of safetensors.',
-       why:'Loading a pickle executes arbitrary Python. pickle.load will run whatever the file tells it to, on your machine, with your credentials, before a single document has been classified. The safetensors format exists precisely to remove this. From an unverified publisher, a .pkl is remote code execution waiting for you to press play.'},
-      {id:'base',sev:'Medium',
-       t:'Fine-tuned from a specific base version, enterprise-base-v1.1, that is documented nowhere.',
-       why:'A fine-tuned model inherits everything beneath it — the base model’s data, its biases and any backdoor planted in it. Naming an exact version tells you the version matters; providing no card, no link and no known-issues list then refuses to say why.'},
-      {id:'eval',sev:'Medium',
-       t:'One headline metric — no bias evaluation, no limitations, no adversarial or red-team testing.',
-       why:'A single macro-averaged F1 on the publisher’s own held-out split reports how the model did on data that looked like its training data. It says nothing about how it fails, who it fails for, or how it behaves under adversarial input. Absence of red-team evidence is not evidence of a problem — it means you can conclude almost nothing.'},
-      {id:'scope',sev:'Medium',
-       t:'No out-of-scope uses or limitations, despite advertising compliance filtering.',
-       why:'The card lists four things the model is for and nothing it is not for. One of those four — flagging documents for compliance review — is the highest-consequence use on the list and the one with the least evidence behind it. A card that only markets the upside is not documentation.'},
-      {id:'size',sev:'Medium',
-       t:'Published model is 268 MB against a 440 MB base, with no explanation of what was removed.',
-       why:'Roughly 40% of the base has gone somewhere. Pruning and quantisation are legitimate techniques, but they change behaviour after training and can quietly degrade safety-relevant behaviour that the evaluation never re-checks. Undocumented compression is an undocumented modification.'},
-      {id:'pub',sev:'Medium',
-       t:'Unverified publisher with almost no history — 2 models, 127 downloads, account only months old.',
-       why:'Anyone can register an organisation and pick a reassuring name; "trustedai-lab" is not verified. Two models and 127 downloads means essentially no community scrutiny has happened. Reputation is not proof of safety, but its complete absence removes the one cheap signal you had.'},
-      {id:'lic',sev:'Medium',
-       t:'Licence listed as "Custom" with no terms, no link and no contact beyond an organisation name.',
-       why:'A licence you cannot read is a licence you cannot comply with. It may be an oversight rather than a trap, but you cannot assess redistribution rights, commercial use or liability without the actual terms — and unresolved legal exposure is an operational risk like any other.'}
+      {id:'hooks',sev:'High',where:'How to Use',
+       t:'The usage example requires <code>trust_remote_code=True</code>, and the repo ships a <code>setup_hooks.py</code>.',
+       why:'That flag tells the loader to fetch and execute the publisher’s own Python before the model runs — on your machine, with your credentials and your network access. Check the Files tab: setup_hooks.py really is there, so this is not leftover boilerplate. A repository that needs remote code needs that code read line by line first, or it does not get loaded at all.'},
+      {id:'bin',sev:'High',where:'Files',
+       t:'Weights ship only as <code>pytorch_model.bin</code> — a pickle format — with no safetensors build.',
+       why:'A .bin checkpoint is a Python pickle underneath, and unpickling can execute arbitrary code as it loads. The safetensors format exists precisely to make weights inert data that cannot run. When a publisher offers only the executable format, you are being asked to run their code, not merely their model.'},
+      {id:'prov',sev:'High',where:'Training Data',
+       t:'Training data provenance is unverifiable — no dataset names, dates, licences or checksums.',
+       why:'"Open internet crawls" is not a source anyone can go and inspect. Without dataset names, snapshot dates or hashes, nobody downstream can reproduce the corpus, confirm it was lawfully licensed, or notice that poisoned text was slipped into it. For a model whose entire job is deciding what counts as sensitive, "trust us" is not a provenance statement.'},
+      {id:'pii',sev:'High',where:'Training Data',
+       t:'Real helpdesk transcripts in the corpus, with nothing said about removing the personal data they contain.',
+       why:'Helpdesk transcripts and mailing-list archives are dense with exactly the identifiers this model is meant to mask, and models memorise rare strings. Nothing on the card claims that data was scrubbed before training. A redaction tool that has quietly memorised real customers’ details is a breach waiting to be prompted out of it — and weights cannot be made to forget on request.'},
+      {id:'recall',sev:'Medium',where:'Evaluation',
+       t:'Precision is reported; recall never is — and for a redaction control, recall is the safety number.',
+       why:'Precision tells you how often a masked span really was personal data. Recall tells you how much personal data the model walked straight past. For a tool sitting in front of a data-loss-prevention gate, the misses are the entire risk, and that is the one number the card does not print. Publishing only the flattering metric is a choice, not an oversight.'},
+      {id:'subgroup',sev:'Medium',where:'Evaluation',
+       t:'A single internal holdout of 4,000 documents — no external benchmark, no subgroup breakdown.',
+       why:'One private test set, chosen by the publisher, scored by the publisher, on documents that resemble their training data. There is no breakdown by name origin, language or document type — and a name detector that under-performs on names outside its training distribution will leak precisely those people’s data. An aggregate score hides that completely.'},
+      {id:'parent',sev:'Medium',where:'Training Procedure',
+       t:'Distilled from <code>redact-guard-large</code> — a parent documented nowhere — and the student was never re-tested.',
+       why:'Distillation compresses 1.3 GB of behaviour into a much smaller network, so the model you would deploy is not the model that was measured. Everything in the parent is inherited: its data, its blind spots, anything planted in it. The card neither documents the parent nor shows evidence that the distilled version was evaluated again afterwards.'},
+      {id:'scope',sev:'Medium',where:'Intended Uses',
+       t:'No limitations and no out-of-scope uses, while advertising the model for regulatory disclosure.',
+       why:'The card lists four things the model is for and nothing it is not for — no unsupported languages, no document types it handles badly, no guidance on confidence thresholds. The most consequential use on that list, preparing records for subject-access requests, is a legal process in which a single miss becomes a reportable breach.'},
+      {id:'lic',sev:'Medium',where:'Licence',
+       t:'The licence points at a <code>LICENCE.txt</code> that is not in the repository.',
+       why:'Open the Files tab and it simply is not there, which leaves the terms genuinely unknown — you cannot establish redistribution rights, commercial use or liability. This is more likely sloppiness than a trap, but unresolved legal exposure is an operational risk like any other, and it is one more thing the publisher did not check.'},
+      {id:'pub',sev:'Medium',where:'Sidebar · Organisation',
+       t:'Unverified publisher: one model, 41 downloads, an account a few weeks old — shipping executable code.',
+       why:'Anyone can register an organisation and choose a reassuring name. There is no verification here, no publishing history and effectively no community scrutiny. Thin reputation on its own proves nothing; combined with a repository that asks you to execute its code, it removes the last cheap signal you had.'},
+      {id:'tags',sev:'Low',where:'Sidebar · Model info',
+       t:'Repository metadata contradicts the card — tagged <code>text-classification</code> for a token-classification model.',
+       why:'Minor on its own: it mostly means the model surfaces in the wrong searches and may be auto-loaded with the wrong pipeline. It matters as a tell. Metadata that nobody bothered to check suggests the sections you cannot independently verify were not checked either.'},
+      {id:'contact',sev:'Low',where:'Community',
+       t:'Discussions are disabled, and there is no security contact or disclosure route.',
+       why:'Low, because by itself it exploits nothing. But it means that when you find a problem — a leaked identifier in the training data, a systematic miss on certain names — there is nobody to report it to, and no way to see whether someone else already has. A publisher who closes the feedback channel has decided not to hear about failures.'}
     ];
     var CHECK=['Provenance — can I name the datasets, dates and hashes?',
-               'Personal data — is there a documented PII filtering step?',
-               'Lineage — is the base model identified <b>and</b> documented?',
-               'Evaluation — bias, limits and adversarial results, not one metric?',
-               'Scope — does it say what the model must <b>not</b> be used for?',
-               'Modifications — is post-training pruning or quantisation declared?',
-               'Format — safetensors rather than pickle?',
-               'Publisher — verified, with history and community scrutiny?',
-               'Licence — can I actually read the terms?'];
+               'Personal data — was source PII removed before training?',
+               'Remote code — does loading it need <b>trust_remote_code</b>?',
+               'Format — safetensors, or only pickle?',
+               'Recall — is the metric that counts misses published?',
+               'Subgroups — is performance broken down, not just averaged?',
+               'Lineage — is the parent documented and the child re-tested?',
+               'Scope — does it say what the model must <b>not</b> do?',
+               'Licence — do the terms exist, and can I read them?',
+               'Publisher — verified, with history and scrutiny?',
+               'Metadata — does the repository agree with itself?',
+               'Reporting — is there a route to report a problem?'];
 
     var picks={}, done=false, activeEl=null;
     var pill=document.getElementById('labPill'), panel=document.getElementById('labPanel');
     var pop=document.getElementById('sevPop'), finish=document.getElementById('labFinish');
     var toggle=document.getElementById('labToggle'), scroll=document.getElementById('hfscroll');
     var spots=[].slice.call(lab.querySelectorAll('.hs'));
-    function byId(id){for(var i=0;i<FIND.length;i++) if(FIND[i].id===id) return FIND[i]; return null;}
+    var TOT=FIND.length, NEED=Math.ceil(TOT*PASS);
     function count(){return Object.keys(picks).length;}
-    function refresh(){ if(!done) pill.textContent=count()+' / '+FIND.length+' flagged'; }
+    function refresh(){ if(!done) pill.textContent=count()+' / '+TOT+' flagged'; }
 
     function closePop(){pop.classList.remove('show'); activeEl=null;}
     function openPop(el){
@@ -947,14 +1078,14 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
     scroll.addEventListener('scroll',closePop);
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closePop();});
 
+    var TABS={card:'tabcard',files:'tabfiles',comm:'tabcomm'};
     [].forEach.call(lab.querySelectorAll('.hftab'),function(t){
       t.addEventListener('click',function(e){
         e.stopPropagation(); closePop();
         [].forEach.call(lab.querySelectorAll('.hftab'),function(x){x.classList.remove('on');});
         t.classList.add('on');
-        var files=t.getAttribute('data-tab')==='files';
-        document.getElementById('tabcard').style.display=files?'none':'';
-        document.getElementById('tabfiles').style.display=files?'':'none';
+        var want=t.getAttribute('data-tab');
+        for(var k in TABS) document.getElementById(TABS[k]).style.display=(k===want?'':'none');
       });
     });
 
@@ -963,40 +1094,47 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
     });
 
     function render(){
-      var correct=0,partial=0,missed=0,html='';
-      FIND.forEach(function(f){var p=picks[f.id]; if(!p)missed++; else if(p===f.sev)correct++; else partial++;});
-      var verdict = correct===FIND.length ? 'a perfect score'
-                  : correct>=7 ? 'a strong audit'
-                  : correct>=4 ? 'a solid start — read the ones you missed'
-                  : 'worth another pass';
-      html+='<div class="scorebox">You flagged <b>'+(correct+partial)+'</b> of <b>'+FIND.length+
-            '</b> concerns, <b>'+correct+'</b> at the correct severity — '+verdict+'.</div>';
-      html+='<div class="codebox"><span style="color:#7c8aa5;font-size:.85em">Audit complete · completion code</span>'+
-            '<code id="labCode">'+CODE+'</code><button id="labCopy">Copy</button></div>';
+      var correct=0,partial=0,html='';
+      FIND.forEach(function(f){var p=picks[f.id]; if(p){ if(p===f.sev)correct++; else partial++; }});
+      var pct=Math.round(correct/TOT*100), pass=(correct/TOT)>=PASS;
+      var verdict = correct===TOT ? 'a flawless review'
+                  : pass ? 'signed off — you would have caught this one'
+                  : 'not enough to sign anything off yet';
+      html+='<div class="scorebox'+(pass?'':' fail')+'"><span class="pct">'+pct+'%</span>'+
+            'You flagged <b>'+(correct+partial)+'</b> of <b>'+TOT+'</b> concerns and rated <b>'+correct+
+            '</b> at the correct severity — '+verdict+'.</div>';
+      if(pass){
+        html+='<div class="codebox"><span style="color:#7c8aa5;font-size:.85em">Review complete · completion code</span>'+
+              '<code id="labCode">'+CODE+'</code><button id="labCopy">Copy</button></div>';
+      } else {
+        html+='<div class="lockbox"><span>🔒</span><span>Completion code locked — you need <b>70%</b> ('+NEED+' of '+TOT+
+              ' at the correct severity) and you scored <b>'+pct+'%</b>.<br>'+
+              'Read the findings below, then run the review again.</span></div>';
+      }
       FIND.forEach(function(f){
         var p=picks[f.id], st, cls;
         if(!p){st='✗ Missed — you did not flag this'; cls='no';}
         else if(p===f.sev){st='✓ Correct severity'; cls='ok';}
-        else {st=(p==='High'?'↓':'↑')+' You rated it '+p+' — it belongs at '+f.sev; cls='part';}
-        html+='<div class="fcard'+(p?'':' miss')+'"><div class="ft">'+f.t+'</div>'+
+        else {st='You rated it '+p+' — it belongs at '+f.sev; cls='part';}
+        html+='<div class="fcard'+(p?'':' miss')+'"><div class="fwhere">'+f.where+'</div><div class="ft">'+f.t+'</div>'+
               '<span class="badge '+f.sev+'">'+f.sev.toUpperCase()+'</span>'+
               '<div class="fstat '+cls+'">'+st+'</div><div class="fwhy">'+f.why+'</div></div>';
       });
-      html+='<div class="tkbox"><div class="ft">📋 Take this with you — nine questions to ask of any third-party model</div><ol class="tklist">';
+      html+='<div class="tkbox"><div class="ft">📋 Take this with you — twelve questions to ask of any third-party model</div><ol class="tklist">';
       CHECK.forEach(function(c){html+='<li>'+c+'</li>';});
-      html+='</ol><div class="fwhy">Nothing on this card rated Low. That is itself the finding: this is not one weak section, it is a card that documents the marketing and omits the evidence.</div></div>';
+      html+='</ol><div class="fwhy">Two of the twelve are merely untidy and four could cost you personal data or your machine. Sorting those apart is the skill — a reviewer who calls everything critical gets ignored as fast as one who misses the real thing.</div></div>';
       panel.innerHTML=html;
       var cp=document.getElementById('labCopy');
-      cp.addEventListener('click',function(e){
+      if(cp) cp.addEventListener('click',function(e){
         e.stopPropagation();
         var ok=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy';},1400);};
-        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(CODE).then(ok,fallback);}
-        else fallback();
-        function fallback(){
+        var fallback=function(){
           var r=document.createRange(); r.selectNodeContents(document.getElementById('labCode'));
           var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
           try{document.execCommand('copy'); ok();}catch(err){}
-        }
+        };
+        if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(CODE).then(ok,fallback);
+        else fallback();
       });
       return correct;
     }
@@ -1007,15 +1145,15 @@ result = <span class="f">classifier</span>(<span class="s">"Please update the bi
         done=true;
         var correct=render();
         spots.forEach(function(el){if(!picks[el.getAttribute('data-f')]) el.classList.add('missed');});
-        pill.textContent=correct+' / '+FIND.length+' correct';
+        pill.textContent=Math.round(correct/TOT*100)+'% · '+correct+'/'+TOT+' correct';
         panel.classList.add('show'); panel.scrollTop=0;
         toggle.style.display=''; toggle.textContent='▾ Hide findings';
-        finish.textContent='↺ Audit again';
+        finish.textContent='↺ Review again';
       } else {
         done=false; picks={};
         spots.forEach(function(el){el.classList.remove('on','missed');});
         panel.classList.remove('show'); panel.innerHTML='';
-        toggle.style.display='none'; finish.textContent='Finish audit';
+        toggle.style.display='none'; finish.textContent='Submit review';
         refresh();
       }
     });
