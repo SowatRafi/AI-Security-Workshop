@@ -1,33 +1,91 @@
 # AI Security Workshop
 
-Hands-on work, labs, and materials from the AI Security Workshop.
+Hands-on work, labs and materials from the AI Security Workshop — a ground-up introduction to how
+AI systems work and where they break.
 
-## Topics
+Everything here is **built to run offline**. Each deck is a single self-contained HTML file with no
+CDN, web fonts, external images or build step. Copy the folder to a USB stick, double-click a file,
+and it works with no internet and nothing to install.
 
-- AI fundamentals
-- Prompt security (prompt injection, jailbreaks, mitigations)
-- Data poisoning attacks and defenses
-- AI supply chain security
-- Building secure AI systems
-
-## Repository Structure
+## Repository structure
 
 | Path | Contents |
 |------|----------|
-| [`slides/`](slides/) | Presentation deck for the workshop |
+| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (12 slides) |
+| [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
 
-More lab work and materials will be added here as the workshop progresses.
+## Deck B — AI Fundamentals
 
-## Slides
+The main deck. It starts with no assumed knowledge and runs from "what is machine learning" all the
+way to auditing a third-party model you did not build.
 
-[`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) — a self-contained presentation on
-**prompt injection**, **jailbreaking**, and a **5-layer defense** (harden the prompt → guardrails →
-architecture & least privilege → output handling → monitor), built around a hands-on Ollama playground.
+| # | Section | Slide |
+|---|---------|-------|
+| 1–4 | AI Foundations | Machine learning and the four learning types · neural networks and deep learning · large language models · how LLMs learn |
+| 5 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
+| 6 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
+| 7 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
+| 8 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
+| 9 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
+| 10 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
+| 11 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
+| 12 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
 
-- **Runs offline** — a single HTML file with no CDN, web fonts, or external assets. Open it straight
-  from a USB stick by double-clicking, no internet or install required.
-- **Controls** — `←`/`→` or `Space` to move, `F` for fullscreen, click to advance. Deep-link to any
-  slide with `#<n>` (e.g. `ai-security-workshop.html#13`).
+## The lab — Audit a Model (slide 11)
+
+Anyone can publish a model. That makes public model hubs an enormous resource and a real
+supply-chain risk, and reading a model repository critically is a skill worth practising before it
+matters. Slide 11 is a **simulated model-hub repository** — a plausible-looking listing for
+`nimbus-labs/redact-guard-v3`, a PII-redaction model that a company wants to put in front of its
+data-loss-prevention gate — and the participant is the reviewer of record.
+
+**How it works**
+
+1. Read the model card, the file listing, the community tab and the sidebar metadata.
+2. Hover over the page to reveal **hotspots**; click one to flag it and rate it **Low**, **Medium**
+   or **High**.
+3. Submit the review. Every finding is then scored, explained and — if it was missed — revealed in
+   place on the page.
+
+There are **12 concerns** hidden in the repository, spread across all three severities. They are not
+all serious: rating a minor one as critical costs exactly as much as missing a real one, which is
+the point. Scoring **70% at the correct severity** unlocks a completion code; below that the code
+stays locked and the participant is invited to review again. The debrief closes with twelve
+questions to ask of any third-party model, and slide 12 is the full answer key for whoever is
+running the session.
+
+The lab is plain HTML, CSS and JavaScript inside the deck — no iframe, no server, no network calls.
+It works from `file://` like the rest of the deck.
+
+## Deck A — Prompt Security Workshop
+
+A 20-slide workshop on **prompt injection** and **jailbreaking**, and how to defend against them in
+five layers: harden the prompt → guardrails → architecture and least privilege → output handling →
+monitor. It is framed around an "attack, then defend" playground running a local open-source model
+with Ollama, so participants break a chatbot before they fix it.
+
+## Running the decks
+
+Open either HTML file in any modern browser — double-click it, or drag it onto a browser window.
+
+| Control | Action |
+|---------|--------|
+| `←` `→` `Space` | Previous / next slide |
+| Click | Next slide |
+| `F` | Fullscreen |
+| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#11` |
+
+Slides are laid out for **16:9** and letterbox themselves to any window, so they present cleanly on a
+projector or a laptop screen. Inside the lab, clicking and the arrow keys are handed to the lab
+itself rather than the deck, so reviewing the repository never skips a slide.
+
+## Topics covered
+
+- AI fundamentals — machine learning, neural networks, LLMs and how they are trained
+- Prompt security — prompt injection, jailbreaks and mitigations
+- Data poisoning attacks and defences
+- AI supply chain security — provenance, model cards and third-party model review
+- Building secure AI systems
 
 ## Author
 
