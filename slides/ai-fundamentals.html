@@ -85,8 +85,18 @@
   .tcard .ex b{color:var(--danger);font-weight:600}
   .tcard.safe{border-left-color:var(--green)}
   .tcard.safe .tn{color:var(--green)}
-  .eyebrow[data-sec="AI Security Threats"]{color:var(--danger)}
-  .eyebrow[data-sec="AI Security Threats"] .dot{background:var(--danger)}
+  .eyebrow[data-sec="AI Security Threats"],.eyebrow[data-sec="Training Data"],.eyebrow[data-sec="Building the Model"]{color:var(--danger)}
+  .eyebrow[data-sec="AI Security Threats"] .dot,.eyebrow[data-sec="Training Data"] .dot,.eyebrow[data-sec="Building the Model"] .dot{background:var(--danger)}
+
+  /* explained concept rows (training data / building the model) */
+  .crows{display:flex;flex-direction:column;gap:clamp(6px,.8vw,11px)}
+  .crow{display:grid;grid-template-columns:minmax(108px,.24fr) 1fr;gap:clamp(8px,1.3vw,20px);align-items:baseline;
+    background:#fff;border:1px solid var(--line);border-left:3px solid var(--danger);border-radius:10px;
+    padding:clamp(8px,1vw,14px) clamp(10px,1.2vw,16px)}
+  .crow .cr-t{font-size:clamp(12px,1.35vw,17px);font-weight:800;color:var(--danger);line-height:1.15}
+  .crow .cr-b{font-size:clamp(10px,1.05vw,14px);color:var(--sub);line-height:1.4}
+  .crow .cr-b b{color:var(--ink);font-weight:700}
+  .crow .cr-b .sec{color:var(--danger);font-weight:700}
   .eyebrow[data-sec="AI in Cyber Security"]{background:linear-gradient(90deg,var(--danger),var(--sky) 55%,var(--green));
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .eyebrow[data-sec="AI in Cyber Security"] .dot{background:var(--danger)}
@@ -350,9 +360,68 @@
       <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
     </section>
 
+    <!-- ===== SLIDE 7 · Training Data ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="Training Data"><span class="dot"></span>Training Data · 7 of 8</div>
+        <h1 class="title">Where Does the <span style="color:var(--danger)">Data</span> Come From?</h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),#f59e0b)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">Before a model exists, its data is collected and cleaned — but <b style="color:var(--ink)">from where, and by whom?</b> The answer is a security story most organisations can't tell.</div>
+        <div class="crows">
+          <div class="crow">
+            <div class="cr-t">🌐 Four sources</div>
+            <div class="cr-b">A model needs so much text it can't be hand-picked, so it is pulled from four buckets of differing trust: <b>web scraping</b> (public internet, no curator — lowest trust), <b>licensed</b> data (bought from platforms), <b>synthetic</b> (AI-generated, ~12% of fine-tuning data) and <b>internal</b> corpora (the company's own). <b>Common Crawl</b>, a free web-crawl archive, underpins nearly every major model. <span class="sec">Risk:</span> low-trust sources enter as "trusted" with no vetting.</div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">❓ The provenance problem</div>
+            <div class="cr-b"><b>Provenance</b> means knowing three things about data: where it came from, when, and whether it has changed. Models train on "datasets of datasets" where that trail is lost — an audit found over <b>70%</b> of dataset licences marked simply "unspecified". <span class="sec">Fix:</span> an <b>ML-BOM</b> — an ingredients label of sources, licences and filtering decisions, like a software SBOM.</div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">🔑 PII in the pipeline</div>
+            <div class="cr-b">Large-scale scraping sweeps up personal data (<b>PII</b>) and secrets, which get baked into the model's weights. One Common Crawl archive held nearly <b>12,000 live API keys and passwords</b>. <span class="sec">Risk:</span> no patch removes them — the right prompt can surface training data near-verbatim — and it clashes with GDPR's rule to collect only what you need.</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span><b>Training Data</b> · Sowat Hossain Rafi</span><span>07</span></div>
+    </section>
+
+    <!-- ===== SLIDE 8 · Building the Model ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="Building the Model"><span class="dot"></span>Building the Model · 8 of 8</div>
+        <h1 class="title">Building the <span style="color:var(--danger)">Model</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),#f59e0b)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">Between raw data and a deployed model sit a few engineering choices — and <b style="color:var(--ink)">each one quietly becomes a security property</b>.</div>
+        <div class="crows">
+          <div class="crow">
+            <div class="cr-t">🔁 Epochs &amp; overfitting</div>
+            <div class="cr-b">An <b>epoch</b> is one full pass of training through the dataset; models train for many. But too many passes cause <b>overfitting</b> — the model stops learning general patterns and starts <b>memorising</b> the training data. <span class="sec">Security:</span> an overfit model is more likely to reproduce sensitive data it memorised when prompted.</div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">✅ Model validation</div>
+            <div class="cr-b">A slice of data is held back and never trained on — the <b>validation set</b>. Testing on it during training exposes overfitting in real time: training accuracy keeps climbing while validation accuracy stalls. <span class="sec">Security:</span> validation is the quality gate — skip it and the model's real-world behaviour, including bias from bad data, stays unknown until deployment.</div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">🗜️ Pruning &amp; quantisation</div>
+            <div class="cr-b">Post-training compression so a model runs on limited hardware. <b>Pruning</b> removes parameters that barely affect predictions (shrinks size); <b>quantisation</b> lowers weight precision, e.g. 32-bit → 8-bit, to cut memory. <span class="sec">Security:</span> both change behaviour and are rarely documented — quantisation can silently degrade safety defences, so a backdoor caught in the full model may slip through the compressed one.</div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">🕸️ Federated learning</div>
+            <div class="cr-b">Instead of pooling data centrally, the model trains across many devices — each trains locally and sends back only <b>weight updates</b>, never the raw data (a hospital shares updates, not patient records). <span class="sec">Trade-off:</span> integrity is harder to verify — any participant can submit <b>poisoned updates</b> to skew the shared model, and that is hard to catch at aggregation.</div>
+          </div>
+        </div>
+        <div class="takeaway"><span class="ti">💡</span><p><b>The takeaway:</b> a model's behaviour is a direct product of its data and these build choices — an invisible, exploitable supply chain. <b>You can't secure what you can't see.</b></p></div>
+      </div>
+      <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
+    </section>
+
     <div class="nav">
       <button onclick="go(cur-1)" aria-label="Previous">‹</button>
-      <span class="count"><span id="cur">1</span> / <span id="tot">6</span></span>
+      <span class="count"><span id="cur">1</span> / <span id="tot">8</span></span>
       <button onclick="go(cur+1)" aria-label="Next">›</button>
     </div>
   </div>
@@ -370,7 +439,7 @@
   const tot=slides.length; let cur=1;
   document.getElementById('tot').textContent=tot;
   // auto-number each slide's eyebrow so slides can be added without hand-renumbering
-  slides.forEach(function(s,i){var eb=s.querySelector('.eyebrow'); var sec=(eb&&eb.getAttribute('data-sec'))||'AI Foundations'; if(eb) eb.innerHTML='<span class="dot"></span>'+sec+' · '+(i+1)+' of '+tot; var fb=s.querySelector('.foot b'); if(fb) fb.textContent=sec;});
+  slides.forEach(function(s,i){var eb=s.querySelector('.eyebrow'); var sec=(eb&&eb.getAttribute('data-sec'))||'AI Foundations'; if(eb) eb.innerHTML='<span class="dot"></span>'+sec+' · '+(i+1)+' of '+tot; var fb=s.querySelector('.foot b'); if(fb) fb.textContent=sec; var fn=s.querySelector('.foot span:last-child'); if(fn) fn.textContent=('0'+(i+1)).slice(-2);});
   function fitBody(){
     const s=slides[cur-1]; if(!s) return;
     const body=s.querySelector('.body'), bi=s.querySelector('.body-inner');
