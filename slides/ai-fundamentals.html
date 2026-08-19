@@ -321,6 +321,32 @@
   .ctxbar .drop{flex:0 0 26%;background:var(--danger-soft);color:var(--danger);border-right:2px dashed var(--danger)}
   .ctxbar .keep{flex:1;background:var(--violet-soft);color:var(--violet)}
 
+
+  /* "try it yourself" parameter boxes (slides 7-8) */
+  .trybox{border:1px solid #d9c9f7;border-radius:11px;overflow:hidden;background:#fff}
+  .try-h{background:var(--violet-soft);color:var(--violet);font-family:var(--mono);font-weight:700;
+    font-size:clamp(6.5px,.75vw,9.5px);letter-spacing:.06em;
+    padding:clamp(3px,.38vw,5px) clamp(9px,1.05vw,14px)}
+  .try-in{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(8px,1.1vw,18px);
+    padding:clamp(5px,.7vw,10px) clamp(9px,1.05vw,14px)}
+  .try-in.one{grid-template-columns:1fr}
+  .try-p{display:inline-block;font-family:var(--mono);font-weight:700;background:var(--panel2);
+    border-radius:6px;padding:.2em .55em;font-size:clamp(7.5px,.84vw,11px);color:var(--ink)}
+  .try-s{font-size:clamp(7.5px,.83vw,10.5px);color:var(--sub);line-height:1.4;margin-top:.3em}
+  .try-s b{color:var(--violet);font-weight:800}
+  .try-w{font-size:clamp(7.5px,.83vw,10.5px);color:var(--muted);line-height:1.4;margin-top:.2em}
+  .try-w b{color:var(--ink);font-weight:700}
+  .apirow{display:grid;grid-template-columns:minmax(52px,.26fr) 1fr;gap:.5em;align-items:baseline;
+    font-size:clamp(6.5px,.76vw,9.5px);color:var(--sub);line-height:1.45;padding:.06em 0}
+  .apirow .an{font-weight:800;color:var(--ink);text-align:right}
+  .apirow code{font-family:var(--mono);color:var(--violet);background:var(--violet-soft);
+    border-radius:4px;padding:0 .28em}
+  .apirow.warn .an{color:var(--danger)}
+  .apirow.warn b{color:var(--danger);font-weight:700}
+  .try-f{background:var(--amber-soft);border-top:1px solid #f5e3c4;color:var(--amber);font-weight:600;
+    font-size:clamp(6.5px,.76vw,9.5px);line-height:1.35;
+    padding:clamp(3px,.38vw,5px) clamp(9px,1.05vw,14px)}
+
   /* ===== Slides 11-12 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
   .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
@@ -737,13 +763,12 @@
         <h1 class="title">Controlling the <span class="vio-em">Randomness</span></h1>
         <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
       </div>
-      <div class="body">
-        <div class="def" style="text-align:center">You are not typing into a black box — you are steering a <b>probability machine</b>. Two parameters reshape that spread of candidate tokens, from rigid precision to wild creativity.</div>
+      <div class="body" style="gap:9px">
+        <div class="def" style="text-align:center">You are not typing into a black box — you are steering a <b>probability machine</b>. Two parameters reshape that spread of candidate tokens.</div>
 
         <div class="tscale">
           <div class="ts-bar"></div>
           <div class="ts-lab"><span>0.0</span><span>0.5</span><span>1.0</span><span>1.5</span><span>2.0</span></div>
-          <div class="ts-cap"><span><b>Precise</b> · repeatable</span><span><b>Creative</b> · unpredictable</span></div>
         </div>
 
         <div class="split" style="grid-template-columns:1.32fr .68fr;align-items:start">
@@ -761,7 +786,24 @@
           </div>
         </div>
 
-        <div class="warnstrip"><span class="wi">⚠️</span><p><b>Adjust temperature OR top-p — not both.</b> Stacking two randomness controls creates unpredictable interactions. <b>Temperature</b> is simpler, more intuitive and right for most tasks; <b>top-p</b> is the better choice when you want the model's creativity to adapt to context. Note that ranges differ between providers — always check the one you are using.</p></div>
+        <div class="warnstrip"><span class="wi">⚠️</span><p><b>Change temperature OR top-p — never both.</b> Two stacked randomness controls interact unpredictably. Temperature is the simpler default; top-p suits work where creativity should track context.</p></div>
+        <div class="trybox">
+          <div class="try-h">🧪 TRY IT YOURSELF — ONE PROMPT, THREE TEMPERATURES</div>
+          <div class="try-in">
+            <div>
+              <span class="try-p">"Give me a name for a coffee shop."</span>
+              <div class="try-s">Send it <b>three times at 0.0</b>, three times at <b>1.0</b>, then three times at <b>1.8</b>. Then reset temperature and try <b>top-p 0.5</b> against <b>top-p 0.95</b>.</div>
+              <div class="try-w"><b>Watch for:</b> near-identical answers → three genuinely different names → names that stop making sense.</div>
+            </div>
+            <div>
+              <div class="apirow"><span class="an">OpenAI</span><span><code>temperature</code> 0–2 · <code>top_p</code> 0–1</span></div>
+              <div class="apirow"><span class="an">Gemini</span><span><code>temperature</code> · <code>topP</code> — inside <code>generationConfig</code></span></div>
+              <div class="apirow warn"><span class="an">Claude</span><span>current models <b>reject both</b> — depth is set with <code>effort</code> (<code>low</code> → <code>max</code>)</span></div>
+              <div class="try-w" style="margin-top:.35em">Even the <b>parameters</b> differ, not just the ranges — always check the provider you are on.</div>
+            </div>
+          </div>
+          <div class="try-f">⚠️ The chat apps don't expose these — use the provider's API or its playground (Anthropic Console, OpenAI Playground, Google AI Studio).</div>
+        </div>
       </div>
       <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>07</span></div>
     </section>
@@ -774,7 +816,7 @@
         <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
       </div>
       <div class="body">
-        <div class="def" style="text-align:center">Two more limits are counted in tokens: how much the model may <b>say</b>, and how much it can still <b>see</b>. Confusing the two is one of the most common mistakes people make with LLMs.</div>
+        <div class="def" style="text-align:center">Two more limits are counted in tokens: how much the model may <b>say</b>, and how much it can still <b>see</b>.</div>
 
         <div class="grid g2">
           <div class="lcard">
@@ -786,7 +828,6 @@
               <div class="brow"><b>500 – 1,000</b><span>Detailed explanations</span></div>
               <div class="brow"><b>2,000 +</b><span>Full articles and reports</span></div>
             </div>
-            <p>It is a <b>ceiling, not a target</b> — the model will not necessarily use them all.</p>
           </div>
           <div class="lcard">
             <h4>Context window</h4>
@@ -805,9 +846,26 @@
           <div class="drop">earliest turns — silently dropped</div>
           <div class="keep">still inside the context window — everything the model can actually see</div>
         </div>
-        <div class="sub" style="text-align:center">Go past the limit and the earliest context is <b>truncated without warning</b>. The model does not tell you it forgot the start of the conversation — it simply answers as though that part never happened.</div>
+        <div class="sub" style="text-align:center">Go past the limit and the earliest context is <b>truncated without warning</b>. The model answers as though the start of the conversation never happened.</div>
 
-        <div class="takeaway vio"><span class="ti">💡</span><p><b>In short:</b> <b>max tokens</b> bounds the answer, the <b>context window</b> bounds the memory — and because both are counted in tokens, the tokeniser you met first quietly decides how much of each you actually get.</p></div>
+        <div class="trybox">
+          <div class="try-h">🧪 TRY IT YOURSELF — THE SAME ANSWER AT TWO LENGTH CAPS</div>
+          <div class="try-in">
+            <div>
+              <span class="try-p">"Explain how HTTPS works."</span>
+              <div class="try-s">Ask for it with a cap of <b>50</b> tokens, then again with <b>300</b>.</div>
+              <div class="try-w"><b>Watch for:</b> the short one is cut off <b>mid-sentence</b>. The model does not shorten its answer to fit the cap — it simply stops writing.</div>
+            </div>
+            <div>
+              <div class="apirow"><span class="an">OpenAI</span><span><code>max_tokens</code> (newer models: <code>max_completion_tokens</code>)</span></div>
+              <div class="apirow"><span class="an">Gemini</span><span><code>maxOutputTokens</code> — inside <code>generationConfig</code></span></div>
+              <div class="apirow"><span class="an">Claude</span><span><code>max_tokens</code> — <b>required on every request</b></span></div>
+              <div class="try-w" style="margin-top:.35em">A cap is a <b>ceiling, not a target</b> — and to shorten an answer, <b>ask for one</b>. The cap is a guillotine, not an editor.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="takeaway vio"><span class="ti">💡</span><p><b>In short:</b> <b>max tokens</b> bounds the answer, the <b>context window</b> bounds the memory — and the tokeniser you met first quietly decides how much of each you get.</p></div>
       </div>
       <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
