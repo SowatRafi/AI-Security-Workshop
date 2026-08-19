@@ -85,8 +85,8 @@
   .tcard .ex b{color:var(--danger);font-weight:600}
   .tcard.safe{border-left-color:var(--green)}
   .tcard.safe .tn{color:var(--green)}
-  .eyebrow[data-sec="AI Security Threats"],.eyebrow[data-sec="Training Data"],.eyebrow[data-sec="Building the Model"]{color:var(--danger)}
-  .eyebrow[data-sec="AI Security Threats"] .dot,.eyebrow[data-sec="Training Data"] .dot,.eyebrow[data-sec="Building the Model"] .dot{background:var(--danger)}
+  .eyebrow[data-sec="AI Security Threats"],.eyebrow[data-sec="Training Data"],.eyebrow[data-sec="Building the Model"],.eyebrow[data-sec="The Inheritance Problem"],.eyebrow[data-sec="The Black Box Problem"]{color:var(--danger)}
+  .eyebrow[data-sec="AI Security Threats"] .dot,.eyebrow[data-sec="Training Data"] .dot,.eyebrow[data-sec="Building the Model"] .dot,.eyebrow[data-sec="The Inheritance Problem"] .dot,.eyebrow[data-sec="The Black Box Problem"] .dot{background:var(--danger)}
 
   /* explained concept rows (training data / building the model) */
   .crows{display:flex;flex-direction:column;gap:clamp(6px,.8vw,11px)}
@@ -97,6 +97,22 @@
   .crow .cr-b{font-size:clamp(10px,1.05vw,14px);color:var(--sub);line-height:1.4}
   .crow .cr-b b{color:var(--ink);font-weight:700}
   .crow .cr-b .sec{color:var(--danger);font-weight:700}
+
+  /* fine-tuning changes vs doesn't (inheritance slide) */
+  .ftchg{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,16px)}
+  .ftchg > div{border:1px solid var(--line);border-radius:10px;padding:clamp(7px,.85vw,12px) clamp(10px,1.1vw,15px);
+    font-size:clamp(9.5px,1vw,13.5px);line-height:1.35;color:var(--sub)}
+  .ftchg .chg{border-left:3px solid var(--green)} .ftchg .chg b{color:var(--green)}
+  .ftchg .keep{border-left:3px solid var(--danger)} .ftchg .keep b{color:var(--danger)}
+
+  /* model card visual (black-box slide) */
+  .modelcard{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .mc-h{background:var(--danger-soft);color:var(--danger);font-family:var(--mono);font-weight:700;
+    font-size:clamp(8.5px,.95vw,12px);letter-spacing:.04em;padding:clamp(5px,.6vw,9px) clamp(11px,1.2vw,16px)}
+  .mc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+  .mc-cell{background:#fff;padding:clamp(6px,.8vw,11px) clamp(9px,1vw,13px)}
+  .mc-cell b{color:var(--ink);font-size:clamp(10px,1.08vw,14px);font-weight:750}
+  .mc-cell span{display:block;font-size:clamp(8.5px,.92vw,12px);color:var(--muted);line-height:1.3;margin-top:.1em}
   .eyebrow[data-sec="AI in Cyber Security"]{background:linear-gradient(90deg,var(--danger),var(--sky) 55%,var(--green));
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .eyebrow[data-sec="AI in Cyber Security"] .dot{background:var(--danger)}
@@ -419,9 +435,68 @@
       <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
+    <!-- ===== SLIDE 9 · The Inheritance Problem ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="The Inheritance Problem"><span class="dot"></span>The Inheritance Problem · 9 of 10</div>
+        <h1 class="title">Fine-Tuning Inherits <span style="color:var(--danger)">Everything</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),#f59e0b)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">Few teams can train from scratch, so most <b style="color:var(--ink)">fine-tune</b> a pre-trained base — continuing its training on a smaller, task-specific dataset. But everything already inside that base comes with it.</div>
+        <div class="ftchg">
+          <div class="chg"><b>✔ Fine-tuning changes:</b> the model's task-specific behaviour, tone and domain knowledge.</div>
+          <div class="keep"><b>✕ It does not change:</b> the base weights — billions of parameters shaped by data you never saw or audited.</div>
+        </div>
+        <div class="crows">
+          <div class="crow">
+            <div class="cr-t">🩹 Safety erodes, not breaks</div>
+            <div class="cr-b">Alignment is less durable than it looks: researchers undid it with as few as <b>10 crafted examples (under $0.20)</b>, and even <b>benign</b> fine-tuning degraded safety as a side effect. The safe path isn't deleted, just gradually obscured — unsafe answers become likely again. <span class="sec">Defences wear down; they don't snap.</span></div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">🎯 Specialisation widens the attack surface</div>
+            <div class="cr-b">Fine-tuned models are measurably <b>more susceptible to prompt injection</b> than the base they came from — narrowing a model's focus reduces its resilience to unexpected tokens. <span class="sec">A model tuned on financial data is easier to manipulate with a financially-framed prompt.</span></div>
+          </div>
+          <div class="crow">
+            <div class="cr-t">🔖 Version matters, rarely tracked</div>
+            <div class="cr-b">Fine-tuning always targets one <b>checkpoint</b> of a base model. If that checkpoint later proves to hold a backdoor or bad data, <b>every derivative inherits it</b>. <span class="sec">The exact version is rarely recorded, so the exposure can't be assessed after the fact.</span></div>
+          </div>
+        </div>
+        <div class="takeaway"><span class="ti">💡</span><p><b>The inheritance tax:</b> you don't just deploy your team's fine-tuning — you deploy the <b>entire base beneath it</b>, shaped by a process you didn't control, on data you didn't audit. Fine-tuning is powerful, but it doesn't sanitise what came before.</p></div>
+      </div>
+      <div class="foot"><span><b>The Inheritance Problem</b> · Sowat Hossain Rafi</span><span>09</span></div>
+    </section>
+
+    <!-- ===== SLIDE 10 · The Black Box Problem ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="The Black Box Problem"><span class="dot"></span>The Black Box Problem · 10 of 10</div>
+        <h1 class="title">Models Are a <span style="color:var(--danger)">Black Box</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--danger),#f59e0b)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">A trained model is a true <b style="color:var(--ink)">black box ⬛</b> — billions of floating-point numbers with no readable record of how they were shaped. You can't open it to see why it behaves as it does. Testing and red-teaming are <b style="color:var(--ink)">sampling, not auditing</b>: they show how it behaved on inputs you tried, never what it will do on ones you haven't.</div>
+        <div class="sub" style="text-align:center">The fix is a <b>model card</b> — a "nutritional label" for a model (a 2019 format, now the closest thing to a standard) that documents what the weights can't tell you:</div>
+        <div class="modelcard">
+          <div class="mc-h">🏷️ A GOOD MODEL CARD SHOULD TELL YOU</div>
+          <div class="mc-grid">
+            <div class="mc-cell"><b>📊 Training data</b><span>sources, filtering, known gaps</span></div>
+            <div class="mc-cell"><b>🧭 Intended use</b><span>what it's for — and what it isn't</span></div>
+            <div class="mc-cell"><b>📈 Evaluation</b><span>performance across conditions</span></div>
+            <div class="mc-cell"><b>⚠️ Known limits</b><span>where it underperforms</span></div>
+            <div class="mc-cell"><b>⚖️ Bias</b><span>where skew may have crept in</span></div>
+            <div class="mc-cell"><b>📜 Licence</b><span>what you may legally do</span></div>
+          </div>
+        </div>
+        <div class="sub" style="text-align:center">🚩 But there is <b>no rule</b> requiring one — cards stay voluntary and are often sparse, vague or absent (disclosing limits can hurt adoption). A missing or thin card is a <b>warning sign</b>: the downstream user is flying blind.</div>
+        <div class="takeaway"><span class="ti">💡</span><p><b>In short:</b> the model card is your <b>audit trail</b>. Without one, there is no audit trail — just a black box and the hope that whoever built it was thorough. And in security, <b>hope is not a control</b>.</p></div>
+      </div>
+      <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
+    </section>
+
     <div class="nav">
       <button onclick="go(cur-1)" aria-label="Previous">‹</button>
-      <span class="count"><span id="cur">1</span> / <span id="tot">8</span></span>
+      <span class="count"><span id="cur">1</span> / <span id="tot">10</span></span>
       <button onclick="go(cur+1)" aria-label="Next">›</button>
     </div>
   </div>
