@@ -184,6 +184,143 @@
   .hint{position:absolute;top:2.3%;right:4.6%;font-family:var(--mono);font-size:clamp(8px,.9vw,11px);color:#9aa4b4;z-index:40}
 
 
+
+  /* ===== LLM Fundamentals section (violet) ===== */
+  .eyebrow[data-sec="LLM Fundamentals"]{color:var(--violet)}
+  .eyebrow[data-sec="LLM Fundamentals"] .dot{background:var(--violet)}
+  .vio-em{color:var(--violet)}
+  .takeaway.vio{background:linear-gradient(90deg,var(--violet-soft),#fff);border-color:#e3d6fb;border-left-color:var(--violet)}
+  .takeaway.vio p b{color:var(--violet)}
+
+  /* text → tokens → IDs pipeline */
+  .tokbox{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .tb-h{background:var(--violet-soft);color:var(--violet);font-family:var(--mono);font-weight:700;
+    font-size:clamp(8px,.9vw,11.5px);letter-spacing:.04em;padding:clamp(4px,.55vw,8px) clamp(11px,1.2vw,16px)}
+  .tb-in{padding:clamp(7px,.85vw,13px) clamp(11px,1.2vw,16px);display:flex;flex-direction:column;gap:clamp(3px,.4vw,6px)}
+  .tb-row{display:grid;grid-template-columns:minmax(74px,.155fr) 1fr;gap:clamp(8px,1vw,16px);align-items:center}
+  .tb-l{font-family:var(--mono);font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;line-height:1.2}
+  .tb-txt{font-size:clamp(11px,1.28vw,17px);font-weight:750;color:var(--ink)}
+  .tb-step{font-family:var(--mono);font-size:clamp(7.5px,.82vw,10.5px);color:var(--violet);font-weight:700}
+  .chips{display:flex;gap:clamp(3px,.4vw,6px);flex-wrap:wrap;align-items:center}
+  .chips i{font-style:normal;font-family:var(--mono);font-size:clamp(9px,1vw,13px);font-weight:700;
+    background:var(--violet-soft);color:var(--violet);border:1px solid #e3d6fb;border-radius:7px;padding:.14em .55em}
+  .chips.num i{background:var(--panel2);color:var(--sub);border-color:var(--line2)}
+
+  /* one word, its pieces */
+  .tokw{background:var(--panel);border:1px solid var(--line);border-radius:11px;text-align:center;
+    padding:clamp(6px,.8vw,11px) clamp(6px,.7vw,10px);display:flex;flex-direction:column;gap:.28em;align-items:center}
+  .tokw .tw{font-size:clamp(10.5px,1.2vw,15px);font-weight:800;color:var(--ink);line-height:1.1}
+  .tokw .tp{display:flex;gap:.25em;align-items:center;flex-wrap:wrap;justify-content:center}
+  .tokw .tp i{font-style:normal;font-family:var(--mono);font-size:clamp(8px,.9vw,11.5px);font-weight:700;
+    background:#fff;border:1px solid #e3d6fb;color:var(--violet);border-radius:6px;padding:.08em .4em}
+  .tokw .tp b{color:var(--muted);font-weight:800;font-size:clamp(7.5px,.85vw,10.5px)}
+  .tokw .tn{font-family:var(--mono);font-size:clamp(7px,.78vw,9.5px);color:var(--muted)}
+
+  /* next-token probability spread */
+  .probbox{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .pb-h{background:var(--violet-soft);color:var(--violet);font-family:var(--mono);font-weight:700;
+    font-size:clamp(8px,.9vw,11.5px);letter-spacing:.04em;padding:clamp(4px,.55vw,8px) clamp(11px,1.2vw,16px)}
+  .pb-in{padding:clamp(7px,.85vw,13px) clamp(11px,1.2vw,16px);display:flex;flex-direction:column;gap:clamp(2px,.32vw,4px)}
+  .pb-prompt{font-size:clamp(10.5px,1.2vw,15px);font-weight:750;color:var(--ink);margin-bottom:.25em}
+  .pb-prompt em{font-style:normal;color:var(--violet);font-weight:800}
+  .pb{display:grid;grid-template-columns:minmax(50px,.105fr) 1fr minmax(30px,.055fr);
+    gap:clamp(6px,.8vw,12px);align-items:center}
+  .pb .pw{font-family:var(--mono);font-size:clamp(8.5px,.95vw,12px);font-weight:700;color:var(--ink);text-align:right}
+  .pb .bar{height:clamp(7px,.82vw,12px);background:var(--panel2);border-radius:999px;overflow:hidden}
+  .pb .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--violet),#a78bfa)}
+  .pb .pv{font-family:var(--mono);font-size:clamp(7.5px,.84vw,10.5px);color:var(--muted)}
+  .pb.dim .pw{color:var(--muted)} .pb.dim .bar i{background:var(--line2)}
+  .pb-note{font-size:clamp(8.5px,.92vw,12px);color:var(--sub);line-height:1.4;margin-top:.4em}
+  .pb-note b{color:var(--violet);font-weight:800}
+
+  /* deterministic vs nondeterministic */
+  .vs2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.1vw,16px)}
+  .vs2 > div{background:#fff;border:1px solid var(--line);border-radius:11px;
+    padding:clamp(7px,.9vw,13px) clamp(10px,1.15vw,16px)}
+  .vs2 .lbl{font-family:var(--mono);font-size:clamp(7px,.78vw,9.5px);letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted)}
+  .vs2 h4{font-size:clamp(11px,1.2vw,16px);font-weight:800;line-height:1.15;margin-top:.05em}
+  .vs2 p{font-size:clamp(8.5px,.94vw,12.5px);color:var(--sub);line-height:1.4;margin-top:.3em}
+  .vs2 p b{color:var(--ink);font-weight:700}
+  .vs2 .det{border-left:3px solid var(--green)} .vs2 .det h4{color:var(--green)}
+  .vs2 .non{border-left:3px solid var(--violet)} .vs2 .non h4{color:var(--violet)}
+
+  /* red security call-out */
+  .secban{display:flex;gap:.7em;align-items:flex-start;border-radius:12px;
+    background:linear-gradient(90deg,var(--danger-soft),#fff);border:1px solid #f3c9c9;border-left:4px solid var(--danger);
+    padding:clamp(8px,1vw,14px) clamp(12px,1.4vw,20px)}
+  .secban .si{font-size:clamp(15px,1.75vw,24px);line-height:1.15;flex:0 0 auto}
+  .secban p{font-size:clamp(9.5px,1.05vw,14px);color:var(--sub);line-height:1.4}
+  .secban p b{color:var(--danger);font-weight:800}
+
+  /* temperature scale */
+  .tscale{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+    padding:clamp(6px,.8vw,11px) clamp(10px,1.2vw,16px)}
+  .ts-bar{height:clamp(9px,1vw,14px);border-radius:999px;
+    background:linear-gradient(90deg,#0284c7 0%,#059669 24%,#eab308 56%,#f97316 78%,#dc2626 100%)}
+  .ts-lab{display:flex;justify-content:space-between;font-family:var(--mono);
+    font-size:clamp(7px,.78vw,10px);color:var(--muted);margin-top:.28em}
+  .ts-cap{display:flex;justify-content:space-between;font-size:clamp(8px,.88vw,11.5px);color:var(--sub);margin-top:.05em}
+  .ts-cap b{font-weight:700;color:var(--ink)}
+
+  /* temperature range rows */
+  .trows{display:flex;flex-direction:column;gap:clamp(3px,.45vw,6px)}
+  .trow{display:grid;grid-template-columns:minmax(54px,.145fr) 1fr minmax(74px,.3fr);gap:clamp(6px,.85vw,13px);
+    align-items:center;background:#fff;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:9px;
+    padding:clamp(4px,.55vw,8px) clamp(8px,1vw,13px)}
+  .trow .tr{font-family:var(--mono);font-weight:800;font-size:clamp(8px,.9vw,11.5px);color:var(--c)}
+  .trow .tb{font-size:clamp(8px,.88vw,11.5px);color:var(--sub);line-height:1.32}
+  .trow .tu{font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);line-height:1.28}
+  .trow.c1{--c:#0284c7} .trow.c2{--c:#059669} .trow.c3{--c:#d97706} .trow.c4{--c:#dc2626}
+
+  /* top-p */
+  .tpbox{background:var(--violet-soft);border:1px solid #e3d6fb;border-radius:11px;
+    padding:clamp(8px,.95vw,14px) clamp(10px,1.15vw,16px);display:flex;flex-direction:column;gap:.35em}
+  .tpbox h4{font-size:clamp(10.5px,1.18vw,15px);font-weight:800;color:var(--violet);line-height:1.15}
+  .tpbox p{font-size:clamp(8px,.88vw,11.5px);color:var(--sub);line-height:1.4}
+  .tpbox p b{color:var(--ink);font-weight:700}
+  .nucleus{display:flex;gap:.28em;align-items:center;flex-wrap:wrap}
+  .nucleus i{font-style:normal;font-family:var(--mono);font-size:clamp(7.5px,.84vw,10.5px);font-weight:700;
+    background:#fff;border:1px solid #d9c9f7;color:var(--violet);border-radius:6px;padding:.1em .45em}
+  .nucleus i.cut{background:transparent;border-style:dashed;border-color:var(--line2);
+    color:var(--muted);text-decoration:line-through}
+  .nucleus span{font-family:var(--mono);font-size:clamp(7px,.76vw,9.5px);color:var(--muted)}
+
+  /* amber warning strip */
+  .warnstrip{display:flex;gap:.7em;align-items:center;background:var(--amber-soft);border:1px solid #f5e3c4;
+    border-left:4px solid var(--amber);border-radius:11px;padding:clamp(7px,.88vw,13px) clamp(11px,1.3vw,18px)}
+  .warnstrip .wi{font-size:clamp(14px,1.6vw,22px);flex:0 0 auto}
+  .warnstrip p{font-size:clamp(9px,1vw,13.5px);color:var(--sub);line-height:1.4}
+  .warnstrip p b{color:var(--amber);font-weight:800}
+
+  /* generic violet concept card */
+  .lcard{background:#fff;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:11px;
+    padding:clamp(8px,.95vw,14px) clamp(10px,1.15vw,16px);display:flex;flex-direction:column;gap:.3em}
+  .lcard h4{font-size:clamp(10.5px,1.2vw,15.5px);font-weight:800;color:var(--violet);line-height:1.15}
+  .lcard .lsub{font-family:var(--mono);font-size:clamp(7px,.78vw,9.5px);color:var(--muted);
+    text-transform:uppercase;letter-spacing:.07em;margin-top:-.2em}
+  .lcard p{font-size:clamp(8.5px,.92vw,12px);color:var(--sub);line-height:1.42}
+  .lcard p b{color:var(--ink);font-weight:700}
+
+  /* token budgets */
+  .blist{display:flex;flex-direction:column;gap:clamp(2px,.32vw,4px);margin-top:.15em}
+  .brow{display:grid;grid-template-columns:minmax(62px,.27fr) 1fr;gap:clamp(6px,.8vw,12px);align-items:baseline;
+    font-size:clamp(8px,.88vw,11.5px);color:var(--sub);line-height:1.35}
+  .brow b{font-family:var(--mono);font-weight:800;color:var(--violet);text-align:right}
+
+  /* context window sizes + truncation bar */
+  .ctxchips{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(4px,.55vw,8px);margin-top:.2em}
+  .ctxchip{background:var(--panel);border:1px solid var(--line);border-radius:9px;text-align:center;
+    padding:.3em .35em;font-size:clamp(7.5px,.8vw,10px);color:var(--muted);line-height:1.25}
+  .ctxchip b{display:block;font-family:var(--mono);font-weight:800;color:var(--violet);
+    font-size:clamp(9px,1vw,12.5px);line-height:1.15}
+  .ctxbar{display:flex;height:clamp(19px,2.1vw,30px);border:1px solid var(--line2);border-radius:9px;overflow:hidden}
+  .ctxbar > div{display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.15;
+    font-family:var(--mono);font-weight:700;font-size:clamp(7px,.78vw,10px);padding:0 .5em}
+  .ctxbar .drop{flex:0 0 26%;background:var(--danger-soft);color:var(--danger);border-right:2px dashed var(--danger)}
+  .ctxbar .keep{flex:1;background:var(--violet-soft);color:var(--violet)}
+
   /* ===== Slides 11-12 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
   .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
@@ -515,7 +652,167 @@
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>04</span></div>
     </section>
 
-    <!-- ===== SLIDE 5 · Vulnerabilities in AI Models ===== -->
+    <!-- ===== SLIDE 5 · Understanding Tokens ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="LLM Fundamentals"><span class="dot"></span>LLM Fundamentals · 5 of 16</div>
+        <h1 class="title">Understanding <span class="vio-em">Tokens</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">An LLM never reads your sentence. It first cuts the text into <b>tokens</b> — the smallest units it can handle — then swaps every token for a <b>number</b>. From that point on the model is doing arithmetic on numbers; it has no idea what a "word" is.</div>
+
+        <div class="tokbox">
+          <div class="tb-h">🔤 FROM YOUR TEXT TO THE MODEL'S NUMBERS</div>
+          <div class="tb-in">
+            <div class="tb-row"><span class="tb-l">You type</span><span class="tb-txt">“Hello, how are you”</span></div>
+            <div class="tb-row"><span class="tb-l"></span><span class="tb-step">↓ split into tokens</span></div>
+            <div class="tb-row"><span class="tb-l">Model sees</span><span class="chips"><i>Hello</i><i>,</i><i>how</i><i>are</i><i>you</i></span></div>
+            <div class="tb-row"><span class="tb-l"></span><span class="tb-step">↓ look up each token's ID</span></div>
+            <div class="tb-row"><span class="tb-l">Model works with</span><span class="chips num"><i>15496</i><i>11</i><i>703</i><i>527</i><i>499</i></span></div>
+          </div>
+        </div>
+
+        <div class="grid g4">
+          <div class="tokw"><span class="tw">the</span><span class="tp"><i>the</i></span><span class="tn">1 token · common word</span></div>
+          <div class="tokw"><span class="tw">cat</span><span class="tp"><i>cat</i></span><span class="tn">1 token · common word</span></div>
+          <div class="tokw"><span class="tw">butterfly</span><span class="tp"><i>butter</i><b>+</b><i>fly</i></span><span class="tn">2 tokens · split into pieces</span></div>
+          <div class="tokw"><span class="tw">ChatGPT</span><span class="tp"><i>Chat</i><b>+</b><i>GPT</i></span><span class="tn">2 tokens · uncommon word</span></div>
+        </div>
+
+        <div class="acrokey">1 token ≈ <b>3–4 characters</b> ≈ <b>¾ of a word</b> · most English words are <b>1–2 tokens</b> · 100 tokens ≈ <b>75 words</b></div>
+
+        <div class="sub" style="text-align:center">Every model cuts differently: <b>GPT</b> uses <b>Byte-Pair Encoding (BPE)</b>, <b>BERT</b> uses <b>WordPiece</b>. The same sentence becomes a <b>different sequence of numbers</b> depending on which model you send it to.</div>
+
+        <div class="takeaway vio"><span class="ti">💡</span><p><b>Why it matters:</b> the token is the unit the model actually works in — so it is also the unit that <b>limits, costs and filters</b> are counted in. Everything that follows in this section is measured in tokens, not words.</p></div>
+      </div>
+      <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>05</span></div>
+    </section>
+
+    <!-- ===== SLIDE 6 · Determinism vs Nondeterminism ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="LLM Fundamentals"><span class="dot"></span>LLM Fundamentals · 6 of 16</div>
+        <h1 class="title">Same Prompt, <span class="vio-em">Different Answer</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">Ask an LLM the same question twice and you will likely get two different answers. That is <b>nondeterminism</b>: identical input, varying output — and it comes straight from how the next token is chosen.</div>
+
+        <div class="probbox">
+          <div class="pb-h">🎲 CHOOSING THE NEXT TOKEN — ILLUSTRATIVE</div>
+          <div class="pb-in">
+            <div class="pb-prompt">“The cat sat on the <em>___</em>”</div>
+            <div class="pb"><span class="pw">mat</span><span class="bar"><i style="width:62%"></i></span><span class="pv">62%</span></div>
+            <div class="pb"><span class="pw">floor</span><span class="bar"><i style="width:18%"></i></span><span class="pv">18%</span></div>
+            <div class="pb"><span class="pw">sofa</span><span class="bar"><i style="width:12%"></i></span><span class="pv">12%</span></div>
+            <div class="pb dim"><span class="pw">roof</span><span class="bar"><i style="width:5%"></i></span><span class="pv">5%</span></div>
+            <div class="pb dim"><span class="pw">…</span><span class="bar"><i style="width:3%"></i></span><span class="pv">3%</span></div>
+            <div class="pb-note">The model does not simply take the winner — it <b>samples</b> from this spread. Run the same prompt again and a different token can come out on top.</div>
+          </div>
+        </div>
+
+        <div class="vs2">
+          <div class="det">
+            <div class="lbl">Traditional software</div>
+            <h4>Deterministic</h4>
+            <p>The same input always produces the same output. A piece of <b>malware executes identically on every run</b> — which is exactly why a signature written once keeps catching it.</p>
+          </div>
+          <div class="non">
+            <div class="lbl">An LLM</div>
+            <h4>Nondeterministic</h4>
+            <p>The next token is <b>sampled from a probability distribution</b>. Settings such as temperature can narrow the spread, but <b>no setting removes the randomness entirely</b> — the major providers say so themselves.</p>
+          </div>
+        </div>
+
+        <div class="secban"><span class="si">🚩</span><p><b>Why this sits at the heart of AI security:</b> a defence that blocks a malicious prompt today can let the <b>identical</b> prompt through tomorrow. You cannot test an LLM control once and call it working — it has to be measured over many runs, and "it only failed once in fifty" is still a failure. Every mitigation later in this workshop has to survive that fact.</p></div>
+      </div>
+      <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>06</span></div>
+    </section>
+
+    <!-- ===== SLIDE 7 · Controlling the randomness (temperature / top-p) ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="LLM Fundamentals"><span class="dot"></span>LLM Fundamentals · 7 of 16</div>
+        <h1 class="title">Controlling the <span class="vio-em">Randomness</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">You are not typing into a black box — you are steering a <b>probability machine</b>. Two parameters reshape that spread of candidate tokens, from rigid precision to wild creativity.</div>
+
+        <div class="tscale">
+          <div class="ts-bar"></div>
+          <div class="ts-lab"><span>0.0</span><span>0.5</span><span>1.0</span><span>1.5</span><span>2.0</span></div>
+          <div class="ts-cap"><span><b>Precise</b> · repeatable</span><span><b>Creative</b> · unpredictable</span></div>
+        </div>
+
+        <div class="split" style="grid-template-columns:1.32fr .68fr;align-items:start">
+          <div class="trows">
+            <div class="trow c1"><span class="tr">0.0 – 0.3</span><span class="tb">Always picks the most probable token — as close to deterministic as you can get</span><span class="tu">Code generation, data extraction, factual Q&amp;A</span></div>
+            <div class="trow c2"><span class="tr">0.7 – 1.0</span><span class="tb">Samples from a wider distribution — more variety and creativity</span><span class="tu">Brainstorming, storytelling, marketing copy</span></div>
+            <div class="trow c3"><span class="tr">1.2 – 1.5</span><span class="tb">Coherence begins to break down; outputs turn unpredictable</span><span class="tu">Experimental use only</span></div>
+            <div class="trow c4"><span class="tr">1.5 +</span><span class="tb">Low-probability tokens dominate; the output starts to feel "drunk"</span><span class="tu">Avoid for most tasks</span></div>
+          </div>
+          <div class="tpbox">
+            <h4>Top-p — the shortlist</h4>
+            <p><b>Nucleus sampling.</b> Rather than dialling randomness across every candidate, top-p keeps only the most likely words whose probabilities <b>add up to p</b>, and discards the tail completely.</p>
+            <div class="nucleus"><span>p = 0.9 keeps</span><i>mat</i><i>floor</i><i>sofa</i><span>· cuts</span><i class="cut">roof</i><i class="cut">the rest</i></div>
+            <p>Higher p = a bigger shortlist. Lower p = a more restricted model.</p>
+          </div>
+        </div>
+
+        <div class="warnstrip"><span class="wi">⚠️</span><p><b>Adjust temperature OR top-p — not both.</b> Stacking two randomness controls creates unpredictable interactions. <b>Temperature</b> is simpler, more intuitive and right for most tasks; <b>top-p</b> is the better choice when you want the model's creativity to adapt to context. Note that ranges differ between providers — always check the one you are using.</p></div>
+      </div>
+      <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>07</span></div>
+    </section>
+
+    <!-- ===== SLIDE 8 · Max tokens & the context window ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="LLM Fundamentals"><span class="dot"></span>LLM Fundamentals · 8 of 16</div>
+        <h1 class="title">Length and <span class="vio-em">Memory Limits</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--violet),#a78bfa)"></div>
+      </div>
+      <div class="body">
+        <div class="def" style="text-align:center">Two more limits are counted in tokens: how much the model may <b>say</b>, and how much it can still <b>see</b>. Confusing the two is one of the most common mistakes people make with LLMs.</div>
+
+        <div class="grid g2">
+          <div class="lcard">
+            <h4>Max tokens</h4>
+            <div class="lsub">The length limiter — what comes out</div>
+            <p>Caps how long the <b>response</b> can be. At roughly ¾ of a word per token, 100 tokens ≈ 75 words. Set it too low and the model is cut off mid-sentence; set it too high and you pay for rambling you never needed — paid APIs <b>charge per token</b>, so length is a cost control.</p>
+            <div class="blist">
+              <div class="brow"><b>50 – 150</b><span>Quick answers, tight summaries</span></div>
+              <div class="brow"><b>500 – 1,000</b><span>Detailed explanations</span></div>
+              <div class="brow"><b>2,000 +</b><span>Full articles and reports</span></div>
+            </div>
+            <p>It is a <b>ceiling, not a target</b> — the model will not necessarily use them all.</p>
+          </div>
+          <div class="lcard">
+            <h4>Context window</h4>
+            <div class="lsub">The working memory — what it can see</div>
+            <p>The maximum the model can hold at once, covering <b>the whole conversation</b>: your prompt, the documents you pasted and everything said so far.</p>
+            <div class="ctxchips">
+              <div class="ctxchip"><b>8k</b>older GPT-3.5</div>
+              <div class="ctxchip"><b>200k</b>Claude 3.5 Sonnet</div>
+              <div class="ctxchip"><b>1M+</b>Gemini 1.5 Pro</div>
+            </div>
+            <p>200k tokens is around <b>150,000 words</b>, or roughly <b>500 pages</b> of text.</p>
+          </div>
+        </div>
+
+        <div class="ctxbar">
+          <div class="drop">earliest turns — silently dropped</div>
+          <div class="keep">still inside the context window — everything the model can actually see</div>
+        </div>
+        <div class="sub" style="text-align:center">Go past the limit and the earliest context is <b>truncated without warning</b>. The model does not tell you it forgot the start of the conversation — it simply answers as though that part never happened.</div>
+
+        <div class="takeaway vio"><span class="ti">💡</span><p><b>In short:</b> <b>max tokens</b> bounds the answer, the <b>context window</b> bounds the memory — and because both are counted in tokens, the tokeniser you met first quietly decides how much of each you actually get.</p></div>
+      </div>
+      <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>08</span></div>
+    </section>
+
+    <!-- ===== SLIDE 9 · Vulnerabilities in AI Models ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI Security Threats"><span class="dot"></span>AI Security Threats · 5 of 5</div>
@@ -545,7 +842,7 @@
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>05</span></div>
     </section>
 
-    <!-- ===== SLIDE 6 · AI in Cyber Security (attack / defend / secure) ===== -->
+    <!-- ===== SLIDE 10 · AI in Cyber Security (attack / defend / secure) ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI in Cyber Security"><span class="dot"></span>AI in Cyber Security · 6 of 6</div>
@@ -582,7 +879,7 @@
       <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
     </section>
 
-    <!-- ===== SLIDE 7 · Training Data ===== -->
+    <!-- ===== SLIDE 11 · Training Data ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Training Data"><span class="dot"></span>Training Data · 7 of 8</div>
@@ -609,7 +906,7 @@
       <div class="foot"><span><b>Training Data</b> · Sowat Hossain Rafi</span><span>07</span></div>
     </section>
 
-    <!-- ===== SLIDE 8 · Building the Model ===== -->
+    <!-- ===== SLIDE 12 · Building the Model ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Building the Model"><span class="dot"></span>Building the Model · 8 of 8</div>
@@ -641,7 +938,7 @@
       <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
-    <!-- ===== SLIDE 9 · The Inheritance Problem ===== -->
+    <!-- ===== SLIDE 13 · The Inheritance Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Inheritance Problem"><span class="dot"></span>The Inheritance Problem · 9 of 10</div>
@@ -673,7 +970,7 @@
       <div class="foot"><span><b>The Inheritance Problem</b> · Sowat Hossain Rafi</span><span>09</span></div>
     </section>
 
-    <!-- ===== SLIDE 10 · The Black Box Problem ===== -->
+    <!-- ===== SLIDE 14 · The Black Box Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Black Box Problem"><span class="dot"></span>The Black Box Problem · 10 of 10</div>
@@ -700,7 +997,7 @@
       <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 11 · Practical lab — audit a third-party model ===== -->
+    <!-- ===== SLIDE 15 · Practical lab — audit a third-party model ===== -->
     <section class="slide" data-nofit>
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 12</div>
@@ -863,7 +1160,7 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
     </section>
 
-    <!-- ===== SLIDE 12 · Answer key for the lab ===== -->
+    <!-- ===== SLIDE 16 · Answer key for the lab ===== -->
     <section class="slide">
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 12 of 12</div>
