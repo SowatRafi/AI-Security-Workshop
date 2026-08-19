@@ -182,6 +182,174 @@
   .nav button:hover{background:var(--panel2)}
   .nav .count{font-family:var(--mono);font-size:clamp(10px,1.05vw,13px);color:var(--muted);min-width:3.2em;text-align:center}
   .hint{position:absolute;top:2.3%;right:4.6%;font-family:var(--mono);font-size:clamp(8px,.9vw,11px);color:#9aa4b4;z-index:40}
+
+  /* ===== Slide 11 · practical lab — third-party model audit ===== */
+  .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
+  .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
+  .hd.row{flex-direction:row;align-items:baseline;gap:clamp(8px,1vw,16px);margin-bottom:.45em;flex-wrap:wrap}
+  .hd.row .title{font-size:clamp(15px,2.05vw,28px)}
+  .labhint{margin-left:auto;font-family:var(--mono);font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);line-height:1.35}
+  .labhint b{color:var(--danger)}
+  .slide[data-nofit] .body-inner{flex:1;min-height:0;justify-content:stretch}
+
+  .lab{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;background:#fff;
+    border:1px solid var(--line2);border-radius:12px;overflow:hidden;text-align:left;
+    box-shadow:0 6px 22px rgba(15,23,42,.08)}
+
+  /* browser chrome */
+  .hfnav{display:flex;align-items:center;gap:.9em;background:#0b1020;color:#fff;
+    padding:clamp(4px,.55vw,8px) clamp(9px,1vw,15px);flex:0 0 auto}
+  .hfnav .brand{display:flex;align-items:center;gap:.4em;font-weight:800;font-size:clamp(9.5px,1vw,13px)}
+  .hfnav .search{flex:0 1 30%;background:#1c2438;border-radius:999px;color:#77869f;margin-left:auto;
+    padding:.28em .9em;font-size:clamp(7.5px,.8vw,10.5px);white-space:nowrap;overflow:hidden}
+  .hfban{display:flex;gap:.55em;background:#fdf2e2;border-bottom:1px solid #f0dcb8;flex:0 0 auto;
+    padding:clamp(4px,.6vw,9px) clamp(9px,1vw,15px);color:#8a5a12;font-size:clamp(8px,.86vw,11px);line-height:1.4}
+  .hfban b{color:#9a3412;font-weight:800}
+  .hfban code{font-family:var(--mono);background:#f6e2be;padding:0 .3em;border-radius:4px;color:#7c2d12}
+
+  .hfscroll{flex:1;min-height:0;overflow-y:auto;outline:none;
+    padding:clamp(8px,1vw,15px) clamp(9px,1.1vw,18px) clamp(42px,4.6vw,60px)}
+
+  .hfcrumb{display:flex;align-items:center;gap:.4em;font-size:clamp(8px,.86vw,11px);color:#64748b}
+  .hfcrumb b{color:#0f172a;font-weight:600}
+  .org{display:inline-flex;align-items:center;gap:.35em;color:#0f172a;font-weight:600}
+  .orgav{width:1.3em;height:1.3em;border-radius:4px;background:#7c3aed;color:#fff;font-size:.8em;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .hftitle{display:flex;align-items:center;justify-content:space-between;gap:1em;margin-top:.3em}
+  .hftitle h2{font-size:clamp(12px,1.4vw,19px);font-weight:800;color:#0f172a;letter-spacing:-.015em}
+  .hfbtns{display:flex;gap:.35em;flex:0 0 auto}
+  .hfbtn{border:1px solid #d7dee9;border-radius:7px;background:#fff;color:#334155;
+    padding:.22em .7em;font-size:clamp(7.5px,.8vw,10.5px);font-weight:600}
+  .hftags{display:flex;gap:.3em;margin-top:.4em}
+  .hftag{background:#eef2f9;border-radius:6px;padding:.12em .55em;font-size:clamp(7.5px,.8vw,10.5px);color:#475569}
+  .hftabs{display:flex;gap:1.3em;border-bottom:1px solid var(--line);margin-top:.55em}
+  .hftab{padding:.4em 0;font-size:clamp(8.5px,.92vw,12px);color:#64748b;cursor:pointer;font-weight:600;
+    border-bottom:2px solid transparent;margin-bottom:-1px}
+  .hftab:hover{color:#0f172a}
+  .hftab.on{color:#0f172a;border-bottom-color:#0f172a}
+
+  .hfcols{display:grid;grid-template-columns:1fr clamp(140px,16vw,225px);gap:clamp(10px,1.4vw,22px);
+    margin-top:clamp(7px,.9vw,14px);align-items:start}
+  .hfmain h3{font-size:clamp(9.5px,1.02vw,13.5px);font-weight:800;color:#0f172a;margin:.95em 0 .3em}
+  .hfh1{font-size:clamp(11px,1.22vw,16px);font-weight:800;color:#0f172a}
+  .hfmain p{font-size:clamp(8px,.9vw,11.5px);color:#475569;line-height:1.5;margin-top:.3em}
+  .hfmain ul{margin:.3em 0 0 1.05em;display:flex;flex-direction:column;gap:.24em}
+  .hfmain li{font-size:clamp(8px,.9vw,11.5px);color:#475569;line-height:1.45}
+  .hfmain li b{color:#0f172a;font-weight:700}
+  .hfcode{background:#0d1117;color:#c9d1d9;border-radius:8px;margin-top:.4em;overflow-x:auto;white-space:pre;
+    padding:clamp(7px,.85vw,13px) clamp(9px,1vw,15px);font-family:var(--mono);
+    font-size:clamp(7px,.78vw,10px);line-height:1.6}
+  .hfcode .k{color:#ff7b72}.hfcode .s{color:#a5d6ff}.hfcode .c{color:#8b949e}.hfcode .f{color:#d2a8ff}
+
+  .hffile{display:flex;align-items:center;gap:.5em;border-bottom:1px solid var(--line);
+    padding:.5em .15em;font-size:clamp(8px,.88vw,11.5px);color:#334155}
+  .hffile .fn{flex:1;display:flex;align-items:center;gap:.4em;min-width:0}
+  .hffile .lfs{background:#eef2f9;border-radius:4px;padding:.02em .4em;font-size:.85em;color:#64748b;font-family:var(--mono)}
+  .hffile .sz{color:#64748b;font-family:var(--mono);flex:0 0 auto}
+
+  .hfcard{border:1px solid var(--line);border-radius:10px;background:#fff;
+    padding:clamp(7px,.85vw,13px);margin-bottom:clamp(6px,.8vw,11px)}
+  .hfcard .ch{font-family:var(--mono);font-size:clamp(6.5px,.72vw,9px);letter-spacing:.1em;
+    text-transform:uppercase;color:#94a3b8;margin-bottom:.5em}
+  .hfrow{display:flex;justify-content:space-between;gap:.6em;padding:.16em 0;
+    font-size:clamp(7.5px,.83vw,10.5px);color:#64748b;line-height:1.35}
+  .hfrow b{color:#0f172a;font-weight:600;text-align:right}
+  .orgblk{display:flex;gap:.5em;align-items:center}
+  .orgblk .orgav{width:2em;height:2em;font-size:.95em;border-radius:6px}
+  .orgblk .on{font-size:clamp(8.5px,.92vw,11.5px);font-weight:700;color:#0f172a;line-height:1.2}
+  .unver{color:#dc2626;font-size:clamp(7px,.78vw,10px);font-weight:700}
+
+  /* hotspots */
+  .hs{cursor:pointer;border-radius:3px;padding:0 .14em;margin:0 -.14em;transition:background .12s,box-shadow .12s}
+  .hs:hover{background:#fef08a;box-shadow:inset 0 -2px 0 #ca8a04}
+  .hs.on{background:#d7f96a;box-shadow:inset 0 -2px 0 #7cb305;color:#1a2233;font-weight:600}
+  .hs.on:hover{background:#c8f043}
+  .hs.missed{background:#fee2e2;box-shadow:inset 0 -2px 0 #dc2626;color:#7f1d1d;font-weight:600}
+
+  /* severity popover */
+  .sevpop{position:absolute;z-index:30;width:clamp(148px,16.5vw,215px);display:none;
+    background:#0f172a;color:#e2e8f0;border:1px solid #2b3a56;border-radius:10px;
+    padding:clamp(7px,.8vw,12px);box-shadow:0 14px 34px rgba(2,6,23,.4)}
+  .sevpop.show{display:block}
+  .sevpop .sp-t{font-family:var(--mono);font-size:clamp(6.5px,.72vw,9px);letter-spacing:.1em;
+    text-transform:uppercase;color:#94a3b8}
+  .sevpop .sp-q{font-size:clamp(8px,.86vw,11px);margin:.3em 0 .55em;line-height:1.35;color:#e2e8f0}
+  .sevbtns{display:flex;gap:.3em}
+  .sevbtns button{flex:1;border:1px solid #2b3a56;background:#16223a;border-radius:6px;cursor:pointer;
+    padding:.35em .2em;font-size:clamp(7px,.78vw,10px);font-weight:800;font-family:var(--mono)}
+  .sevbtns button[data-s="Low"]{color:#86efac}
+  .sevbtns button[data-s="Medium"]{color:#fcd34d}
+  .sevbtns button[data-s="High"]{color:#fca5a5}
+  .sevbtns button:hover{border-color:#7cb305;background:#1d2c47}
+  .sevbtns button.sel{border-color:#d7f96a;background:#243418}
+  .sp-x{margin-top:.5em;font-size:clamp(7px,.76vw,9.5px);color:#7c8aa5;cursor:pointer;text-align:center}
+  .sp-x:hover{color:#d7f96a}
+
+  /* bottom bar */
+  .labbar{position:absolute;left:0;right:0;bottom:0;z-index:26;display:flex;align-items:center;gap:.6em;
+    background:#0f172a;border-top:1px solid #1e293b;padding:clamp(4px,.6vw,9px) clamp(9px,1.1vw,16px)}
+  .labbar .lt{font-size:clamp(8.5px,.95vw,12.5px);font-weight:800;color:#d7f96a}
+  .labbar .pill{background:#1e293b;color:#94a3b8;border-radius:999px;font-family:var(--mono);
+    padding:.14em .7em;font-size:clamp(7px,.76vw,9.5px)}
+  .labbar .sp{flex:1}
+  .labbtn{border:1px solid #2b3a56;background:#16223a;color:#e2e8f0;border-radius:7px;cursor:pointer;
+    padding:.3em .8em;font-size:clamp(7px,.8vw,10.5px);font-weight:700;display:inline-flex;gap:.35em;align-items:center}
+  .labbtn:hover{border-color:#7cb305}
+  .labbtn.go{background:#d7f96a;border-color:#d7f96a;color:#182207}
+  .labbtn.go:hover{background:#c8f043}
+
+  /* results panel */
+  .labpanel{position:absolute;inset:0;z-index:25;background:#0f172a;display:none;overflow-y:auto;
+    padding:clamp(9px,1.1vw,16px) clamp(9px,1.1vw,16px) clamp(40px,4.4vw,58px)}
+  .labpanel.show{display:block}
+  .scorebox{border:1px solid #2b3a56;border-radius:10px;background:#131f36;text-align:center;
+    padding:clamp(8px,.95vw,14px);font-size:clamp(9px,.98vw,13px);color:#cbd5e1;margin-bottom:clamp(7px,.85vw,12px)}
+  .scorebox b{color:#d7f96a;font-weight:800}
+  .codebox{display:flex;align-items:center;justify-content:center;gap:.7em;border:1px dashed #3f5b1a;
+    border-radius:9px;background:#16210b;padding:clamp(7px,.85vw,12px);margin-bottom:clamp(7px,.85vw,12px)}
+  .codebox code{font-family:var(--mono);font-size:clamp(9px,1vw,13px);color:#d7f96a;font-weight:700}
+  .codebox button{border:1px solid #3f5b1a;background:transparent;color:#a3e635;border-radius:6px;cursor:pointer;
+    padding:.2em .6em;font-size:clamp(7px,.76vw,9.5px);font-weight:700}
+  .fcard{background:#131f36;border:1px solid #24324a;border-radius:10px;
+    padding:clamp(8px,.95vw,14px);margin-bottom:clamp(6px,.75vw,11px)}
+  .fcard.miss{border-color:#7f1d1d;background:#1c1418}
+  .fcard .ft{font-size:clamp(8.5px,.93vw,12px);color:#e2e8f0;font-weight:650;line-height:1.4}
+  .fcard .ft code{font-family:var(--mono);color:#d7f96a}
+  .badge{display:inline-block;border-radius:5px;font-family:var(--mono);font-weight:800;letter-spacing:.05em;
+    padding:.08em .55em;font-size:clamp(6.5px,.74vw,9px);margin-top:.45em}
+  .badge.High{background:#7f1d1d;color:#fecaca}
+  .badge.Medium{background:#78350f;color:#fed7aa}
+  .badge.Low{background:#14532d;color:#bbf7d0}
+  .fstat{font-size:clamp(7px,.8vw,10.5px);font-weight:800;margin-top:.4em}
+  .fstat.ok{color:#a3e635}.fstat.part{color:#fbbf24}.fstat.no{color:#f87171}
+  .fwhy{font-size:clamp(7.5px,.85vw,11px);color:#94a3b8;line-height:1.55;margin-top:.4em;font-style:italic}
+  .tkbox{border:1px solid #3f5b1a;background:#16210b;border-radius:10px;padding:clamp(8px,.95vw,14px)}
+  .tkbox .ft{color:#d7f96a}
+  .tklist{margin:.5em 0 0 1.15em;display:grid;grid-template-columns:1fr 1fr;gap:.25em clamp(10px,1.3vw,20px)}
+  .tklist li{font-size:clamp(7.5px,.85vw,11px);color:#cbd5e1;line-height:1.45}
+  .tklist li b{color:#d7f96a;font-weight:700}
+
+  /* intro overlay */
+  .labintro{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+    background:rgba(8,12,24,.74);padding:3%}
+  .labintro.hide{display:none}
+  .introbox{width:min(84%,560px);max-height:100%;overflow-y:auto;background:#0f172a;border:1px solid #2b3a56;
+    border-radius:14px;padding:clamp(10px,1.3vw,20px);color:#cbd5e1;box-shadow:0 20px 50px rgba(2,6,23,.5)}
+  .introbox .ih{display:flex;align-items:center;gap:.55em;font-size:clamp(11px,1.2vw,16px);
+    font-weight:800;color:#d7f96a;margin-bottom:.6em}
+  .introbox .ih .sh{width:1.6em;height:1.6em;border-radius:8px;background:#1d2c17;display:inline-flex;
+    align-items:center;justify-content:center;font-size:.8em}
+  .introbox p{font-size:clamp(8.5px,.92vw,12px);line-height:1.55}
+  .introbox p code{font-family:var(--mono);color:#d7f96a}
+  .introbox .il{font-family:var(--mono);font-size:clamp(6.5px,.72vw,9px);letter-spacing:.12em;
+    text-transform:uppercase;color:#7c8aa5;margin:.85em 0 .4em}
+  .introbox .ii{display:flex;gap:.55em;align-items:flex-start;background:#16223a;border:1px solid #24324a;
+    border-radius:8px;padding:clamp(6px,.7vw,10px) clamp(8px,.9vw,13px);margin-bottom:.35em;
+    font-size:clamp(8px,.88vw,11.5px);line-height:1.4}
+  .introbox .ii.warn{background:#1f1a10;border-color:#4a3a16;color:#fcd34d}
+  .introbox .ib{width:100%;margin-top:.7em;border:0;border-radius:9px;background:#d7f96a;color:#182207;
+    cursor:pointer;padding:.55em;font-size:clamp(9px,.98vw,13px);font-weight:800}
+  .introbox .ib:hover{background:#c8f043}
 </style>
 </head>
 <body>
@@ -494,6 +662,157 @@
       <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
+    <!-- ===== SLIDE 11 · Practical lab — audit a third-party model ===== -->
+    <section class="slide" data-nofit>
+      <div class="hd row">
+        <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 11</div>
+        <h1 class="title">Practical: <span style="color:var(--danger)">Audit a Model</span></h1>
+        <div class="labhint">Hover the page to reveal hotspots<br>Click one to flag it and rate severity → <b>Finish audit</b></div>
+      </div>
+      <div class="body">
+        <div class="lab" id="lab">
+
+          <div class="hfnav">
+            <span class="brand">🤗 <span>Hugging Face</span></span>
+            <span class="search">Search models, datasets, users…</span>
+          </div>
+
+          <div class="hfban">
+            <span>📋</span>
+            <span><b>Exercise: Model Card Security Audit</b> — review the model card for
+              <code>trustedai-lab/enterprise-classifier-v2</code> and flag every security concern before sign-off.</span>
+          </div>
+
+          <div class="hfscroll" id="hfscroll" tabindex="0">
+            <div class="hfcrumb"><span class="org"><span class="orgav">T</span>trustedai-lab</span> / <b>enterprise-classifier-v2</b></div>
+            <div class="hftitle">
+              <h2>enterprise-classifier-v2</h2>
+              <div class="hfbtns"><span class="hfbtn">♡ 3</span><span class="hfbtn">Follow</span></div>
+            </div>
+            <div class="hftags"><span class="hftag">text-classification</span><span class="hftag">enterprise</span></div>
+            <div class="hftabs">
+              <span class="hftab on" data-tab="card">Model card</span>
+              <span class="hftab" data-tab="files">Files</span>
+            </div>
+
+            <div class="hfcols">
+              <div class="hfmain">
+
+                <div id="tabcard">
+                  <div class="hfh1">enterprise-classifier-v2</div>
+                  <p>A text classification model designed for enterprise document routing and categorisation.
+                    Fine-tuned from enterprise-base-v1.1, this model sorts incoming documents into organisational
+                    categories such as support tickets, procurement requests, compliance queries and internal
+                    communications. Built for integration into automated document-processing pipelines.</p>
+
+                  <h3>How to Use</h3>
+<div class="hfcode"><span class="k">from</span> transformers <span class="k">import</span> pipeline
+
+classifier = <span class="f">pipeline</span>(<span class="s">"text-classification"</span>, model=<span class="s">"trustedai-lab/enterprise-classifier-v2"</span>)
+result = <span class="f">classifier</span>(<span class="s">"Please update the billing address on account #4417."</span>)
+<span class="f">print</span>(result)
+<span class="c"># [{'label': 'support_ticket', 'score': 0.94}]</span></div>
+
+                  <h3>Training Data</h3>
+                  <p>Model trained on data curated from <span class="hs" data-f="prov">publicly available web sources</span>
+                    including <span class="hs" data-f="pii">forums, Q&amp;A sites</span> and public documentation. The training
+                    corpus was assembled to cover a broad range of enterprise communication styles and domain-specific
+                    terminology. Approximately 1.2 million text samples were used across all classification categories.</p>
+
+                  <h3>Training Procedure</h3>
+                  <p>Fine-tuned from <span class="hs" data-f="base">enterprise-base-v1.1</span> (approximately 440 MB) using
+                    standard cross-entropy loss. Training ran for 8 epochs with a learning rate of 2e-5 and a batch size of 32.
+                    Early stopping was applied based on training loss convergence. The final model checkpoint was selected
+                    at epoch 7.</p>
+
+                  <h3>Intended Uses</h3>
+                  <ul>
+                    <li><b>Document routing:</b> automatically classify and route incoming enterprise documents to the appropriate department or workflow</li>
+                    <li><b>Support triage:</b> categorise support tickets by type and urgency to streamline response pipelines</li>
+                    <li><span class="hs" data-f="scope"><b>Compliance filtering:</b></span> flag documents that may require compliance review based on content classification</li>
+                    <li><b>Internal communications:</b> sort and tag internal messages for archival and search indexing</li>
+                  </ul>
+
+                  <h3>Evaluation</h3>
+                  <p>Evaluated on a held-out test set of 10,000 samples. The model achieved a
+                    <span class="hs" data-f="eval">macro-averaged F1 score of 0.91</span> across all classification categories.</p>
+
+                  <h3>Licence</h3>
+                  <p><span class="hs" data-f="lic">Custom licence. Contact trustedai-lab for terms.</span></p>
+                </div>
+
+                <div id="tabfiles" style="display:none">
+                  <div class="hffile"><span class="fn">📄 README.md</span><span class="sz">2.4 KB</span></div>
+                  <div class="hffile"><span class="fn">📄 config.json</span><span class="sz">712 B</span></div>
+                  <div class="hffile"><span class="fn">📄 <span class="hs" data-f="pkl">enterprise-classifier-v2.pkl</span> <span class="lfs">LFS</span></span><span class="sz"><span class="hs" data-f="size">268 MB</span></span></div>
+                  <div class="hffile"><span class="fn">📄 tokenizer.json</span><span class="sz">436 KB</span></div>
+                  <div class="hffile"><span class="fn">📄 tokenizer_config.json</span><span class="sz">1.1 KB</span></div>
+                </div>
+
+              </div>
+
+              <div class="hfaside">
+                <div class="hfcard">
+                  <div class="ch">Model stats</div>
+                  <div class="hfrow"><span>⤓ Downloads (last month)</span><b>127</b></div>
+                  <div class="hfrow"><span>🗓 Created</span><b>14 Mar 2026</b></div>
+                </div>
+                <div class="hfcard">
+                  <div class="ch">Organisation</div>
+                  <div class="orgblk">
+                    <span class="orgav">T</span>
+                    <div><div class="on">trustedai-lab</div><div class="unver"><span class="hs" data-f="pub">Not verified</span></div></div>
+                  </div>
+                  <div class="hfrow" style="margin-top:.45em"><span>Joined March 2026 · 2 models</span></div>
+                </div>
+                <div class="hfcard">
+                  <div class="ch">Model info</div>
+                  <div class="hfrow"><span>Licence</span><b>Custom</b></div>
+                  <div class="hfrow"><span>Base model</span><b>enterprise-base-v1.1</b></div>
+                  <div class="hfrow"><span>Tags</span><b>text-classification · enterprise</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="labbar">
+            <span class="lt">Audit Checklist</span>
+            <span class="pill" id="labPill">0 / 9 flagged</span>
+            <span class="sp"></span>
+            <button class="labbtn" id="labToggle" style="display:none">▾ Findings</button>
+            <button class="labbtn go" id="labFinish">Finish audit</button>
+          </div>
+
+          <div class="labpanel" id="labPanel"></div>
+
+          <div class="sevpop" id="sevPop">
+            <div class="sp-t">Flag this finding</div>
+            <div class="sp-q">How serious is it?</div>
+            <div class="sevbtns">
+              <button data-s="Low">LOW</button><button data-s="Medium">MED</button><button data-s="High">HIGH</button>
+            </div>
+            <div class="sp-x" id="sevClear">remove flag / cancel</div>
+          </div>
+
+          <div class="labintro" id="labIntro">
+            <div class="introbox">
+              <div class="ih"><span class="sh">🛡️</span>Introduction</div>
+              <p>You are a security analyst. Your team has been asked to evaluate whether
+                <code>trustedai-lab/enterprise-classifier-v2</code> is safe to integrate into internal tooling.
+                Complete a security review of the repository and flag any concerns before sign-off.</p>
+              <div class="il">Your task</div>
+              <div class="ii"><span>🔍</span><span>Read the model card, the <b>Files</b> tab and the sidebar details carefully</span></div>
+              <div class="ii"><span>📋</span><span>Hover over text to reveal hotspots — click one to flag it and rate its severity</span></div>
+              <div class="ii warn"><span>⚠️</span><span>There is no time limit. <b>Nine</b> concerns are hidden in this repository.</span></div>
+              <button class="ib" id="labBegin">Begin Audit</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
+    </section>
+
     <div class="nav">
       <button onclick="go(cur-1)" aria-label="Previous">‹</button>
       <span class="count"><span id="cur">1</span> / <span id="tot">10</span></span>
@@ -519,7 +838,8 @@
     const s=slides[cur-1]; if(!s) return;
     const body=s.querySelector('.body'), bi=s.querySelector('.body-inner');
     if(!body||!bi) return;
-    bi.style.transform='none';
+    bi.style.transform="none";
+    if(s.hasAttribute("data-nofit")) return;
     const avail=body.clientHeight, need=bi.scrollHeight;
     if(need>avail+0.5) bi.style.transform='scale('+(avail/need).toFixed(4)+')';
   }
@@ -535,11 +855,177 @@
   window.addEventListener('load',fitBody);
   window.addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(1));if(n&&n!==cur)go(n);});
   document.addEventListener('keydown',e=>{
+    var inLab=e.target&&e.target.closest&&e.target.closest("#lab");
+    if(inLab&&["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," ","PageUp","PageDown"].indexOf(e.key)>-1) return;
     if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(cur+1);}
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
     else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
   });
-  document.getElementById('stage').addEventListener('click',e=>{if(!e.target.closest('.nav'))go(cur+1);});
+  document.getElementById('stage').addEventListener('click',e=>{if(!e.target.closest(".nav")&&!e.target.closest("#lab"))go(cur+1);});
+
+  /* ===== Slide 11 · model-audit lab ===== */
+  (function(){
+    var lab=document.getElementById('lab'); if(!lab) return;
+    var CODE='AISW{m0del_c4rd_4ud1t}';
+    var FIND=[
+      {id:'prov',sev:'High',
+       t:'Training data provenance is vague — no named datasets, no collection dates, no checksums.',
+       why:'"Publicly available web sources" names nothing you can go and check. Without dataset names, dates or hashes there is no way to verify what the model actually learned from, and no way to tell whether the corpus was tampered with upstream. Unverifiable provenance is where data poisoning hides.'},
+      {id:'pii',sev:'High',
+       t:'Scraped forum and Q&amp;A data with no mention of PII filtering.',
+       why:'Forums and Q&amp;A sites are full of names, email addresses, phone numbers and pasted support tickets, and large-scale scraping sweeps all of it up by default. With no documented filtering step you cannot know what personal data is baked into these weights — and weights cannot be un-learned on request.'},
+      {id:'pkl',sev:'High',
+       t:'Weights shipped as a Python pickle (<code>.pkl</code>) instead of safetensors.',
+       why:'Loading a pickle executes arbitrary Python. pickle.load will run whatever the file tells it to, on your machine, with your credentials, before a single document has been classified. The safetensors format exists precisely to remove this. From an unverified publisher, a .pkl is remote code execution waiting for you to press play.'},
+      {id:'base',sev:'Medium',
+       t:'Fine-tuned from a specific base version, enterprise-base-v1.1, that is documented nowhere.',
+       why:'A fine-tuned model inherits everything beneath it — the base model’s data, its biases and any backdoor planted in it. Naming an exact version tells you the version matters; providing no card, no link and no known-issues list then refuses to say why.'},
+      {id:'eval',sev:'Medium',
+       t:'One headline metric — no bias evaluation, no limitations, no adversarial or red-team testing.',
+       why:'A single macro-averaged F1 on the publisher’s own held-out split reports how the model did on data that looked like its training data. It says nothing about how it fails, who it fails for, or how it behaves under adversarial input. Absence of red-team evidence is not evidence of a problem — it means you can conclude almost nothing.'},
+      {id:'scope',sev:'Medium',
+       t:'No out-of-scope uses or limitations, despite advertising compliance filtering.',
+       why:'The card lists four things the model is for and nothing it is not for. One of those four — flagging documents for compliance review — is the highest-consequence use on the list and the one with the least evidence behind it. A card that only markets the upside is not documentation.'},
+      {id:'size',sev:'Medium',
+       t:'Published model is 268 MB against a 440 MB base, with no explanation of what was removed.',
+       why:'Roughly 40% of the base has gone somewhere. Pruning and quantisation are legitimate techniques, but they change behaviour after training and can quietly degrade safety-relevant behaviour that the evaluation never re-checks. Undocumented compression is an undocumented modification.'},
+      {id:'pub',sev:'Medium',
+       t:'Unverified publisher with almost no history — 2 models, 127 downloads, account only months old.',
+       why:'Anyone can register an organisation and pick a reassuring name; "trustedai-lab" is not verified. Two models and 127 downloads means essentially no community scrutiny has happened. Reputation is not proof of safety, but its complete absence removes the one cheap signal you had.'},
+      {id:'lic',sev:'Medium',
+       t:'Licence listed as "Custom" with no terms, no link and no contact beyond an organisation name.',
+       why:'A licence you cannot read is a licence you cannot comply with. It may be an oversight rather than a trap, but you cannot assess redistribution rights, commercial use or liability without the actual terms — and unresolved legal exposure is an operational risk like any other.'}
+    ];
+    var CHECK=['Provenance — can I name the datasets, dates and hashes?',
+               'Personal data — is there a documented PII filtering step?',
+               'Lineage — is the base model identified <b>and</b> documented?',
+               'Evaluation — bias, limits and adversarial results, not one metric?',
+               'Scope — does it say what the model must <b>not</b> be used for?',
+               'Modifications — is post-training pruning or quantisation declared?',
+               'Format — safetensors rather than pickle?',
+               'Publisher — verified, with history and community scrutiny?',
+               'Licence — can I actually read the terms?'];
+
+    var picks={}, done=false, activeEl=null;
+    var pill=document.getElementById('labPill'), panel=document.getElementById('labPanel');
+    var pop=document.getElementById('sevPop'), finish=document.getElementById('labFinish');
+    var toggle=document.getElementById('labToggle'), scroll=document.getElementById('hfscroll');
+    var spots=[].slice.call(lab.querySelectorAll('.hs'));
+    function byId(id){for(var i=0;i<FIND.length;i++) if(FIND[i].id===id) return FIND[i]; return null;}
+    function count(){return Object.keys(picks).length;}
+    function refresh(){ if(!done) pill.textContent=count()+' / '+FIND.length+' flagged'; }
+
+    function closePop(){pop.classList.remove('show'); activeEl=null;}
+    function openPop(el){
+      activeEl=el; var cur=picks[el.getAttribute('data-f')]||null;
+      [].forEach.call(pop.querySelectorAll('.sevbtns button'),function(b){
+        b.classList.toggle('sel',b.getAttribute('data-s')===cur);});
+      pop.classList.add('show');
+      var lr=lab.getBoundingClientRect(), r=el.getBoundingClientRect();
+      var left=r.left-lr.left; left=Math.max(6,Math.min(left,lab.clientWidth-pop.offsetWidth-6));
+      var top=r.bottom-lr.top+6;
+      if(top+pop.offsetHeight>lab.clientHeight-42) top=Math.max(6,r.top-lr.top-pop.offsetHeight-6);
+      pop.style.left=left+'px'; pop.style.top=top+'px';
+    }
+    spots.forEach(function(el){
+      el.addEventListener('click',function(e){e.stopPropagation(); if(done) return; openPop(el);});
+    });
+    [].forEach.call(pop.querySelectorAll('.sevbtns button'),function(b){
+      b.addEventListener('click',function(e){
+        e.stopPropagation(); if(!activeEl) return;
+        picks[activeEl.getAttribute('data-f')]=b.getAttribute('data-s');
+        activeEl.classList.add('on'); closePop(); refresh();
+      });
+    });
+    document.getElementById('sevClear').addEventListener('click',function(e){
+      e.stopPropagation();
+      if(activeEl){delete picks[activeEl.getAttribute('data-f')]; activeEl.classList.remove('on');}
+      closePop(); refresh();
+    });
+    pop.addEventListener('click',function(e){e.stopPropagation();});
+    lab.addEventListener('click',function(){closePop();});
+    scroll.addEventListener('scroll',closePop);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closePop();});
+
+    [].forEach.call(lab.querySelectorAll('.hftab'),function(t){
+      t.addEventListener('click',function(e){
+        e.stopPropagation(); closePop();
+        [].forEach.call(lab.querySelectorAll('.hftab'),function(x){x.classList.remove('on');});
+        t.classList.add('on');
+        var files=t.getAttribute('data-tab')==='files';
+        document.getElementById('tabcard').style.display=files?'none':'';
+        document.getElementById('tabfiles').style.display=files?'':'none';
+      });
+    });
+
+    document.getElementById('labBegin').addEventListener('click',function(e){
+      e.stopPropagation(); document.getElementById('labIntro').classList.add('hide');
+    });
+
+    function render(){
+      var correct=0,partial=0,missed=0,html='';
+      FIND.forEach(function(f){var p=picks[f.id]; if(!p)missed++; else if(p===f.sev)correct++; else partial++;});
+      var verdict = correct===FIND.length ? 'a perfect score'
+                  : correct>=7 ? 'a strong audit'
+                  : correct>=4 ? 'a solid start — read the ones you missed'
+                  : 'worth another pass';
+      html+='<div class="scorebox">You flagged <b>'+(correct+partial)+'</b> of <b>'+FIND.length+
+            '</b> concerns, <b>'+correct+'</b> at the correct severity — '+verdict+'.</div>';
+      html+='<div class="codebox"><span style="color:#7c8aa5;font-size:.85em">Audit complete · completion code</span>'+
+            '<code id="labCode">'+CODE+'</code><button id="labCopy">Copy</button></div>';
+      FIND.forEach(function(f){
+        var p=picks[f.id], st, cls;
+        if(!p){st='✗ Missed — you did not flag this'; cls='no';}
+        else if(p===f.sev){st='✓ Correct severity'; cls='ok';}
+        else {st=(p==='High'?'↓':'↑')+' You rated it '+p+' — it belongs at '+f.sev; cls='part';}
+        html+='<div class="fcard'+(p?'':' miss')+'"><div class="ft">'+f.t+'</div>'+
+              '<span class="badge '+f.sev+'">'+f.sev.toUpperCase()+'</span>'+
+              '<div class="fstat '+cls+'">'+st+'</div><div class="fwhy">'+f.why+'</div></div>';
+      });
+      html+='<div class="tkbox"><div class="ft">📋 Take this with you — nine questions to ask of any third-party model</div><ol class="tklist">';
+      CHECK.forEach(function(c){html+='<li>'+c+'</li>';});
+      html+='</ol><div class="fwhy">Nothing on this card rated Low. That is itself the finding: this is not one weak section, it is a card that documents the marketing and omits the evidence.</div></div>';
+      panel.innerHTML=html;
+      var cp=document.getElementById('labCopy');
+      cp.addEventListener('click',function(e){
+        e.stopPropagation();
+        var ok=function(){cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy';},1400);};
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(CODE).then(ok,fallback);}
+        else fallback();
+        function fallback(){
+          var r=document.createRange(); r.selectNodeContents(document.getElementById('labCode'));
+          var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          try{document.execCommand('copy'); ok();}catch(err){}
+        }
+      });
+      return correct;
+    }
+
+    finish.addEventListener('click',function(e){
+      e.stopPropagation(); closePop();
+      if(!done){
+        done=true;
+        var correct=render();
+        spots.forEach(function(el){if(!picks[el.getAttribute('data-f')]) el.classList.add('missed');});
+        pill.textContent=correct+' / '+FIND.length+' correct';
+        panel.classList.add('show'); panel.scrollTop=0;
+        toggle.style.display=''; toggle.textContent='▾ Hide findings';
+        finish.textContent='↺ Audit again';
+      } else {
+        done=false; picks={};
+        spots.forEach(function(el){el.classList.remove('on','missed');});
+        panel.classList.remove('show'); panel.innerHTML='';
+        toggle.style.display='none'; finish.textContent='Finish audit';
+        refresh();
+      }
+    });
+    toggle.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=panel.classList.toggle('show');
+      toggle.textContent=(open?'▾ Hide findings':'▴ Show findings');
+    });
+    refresh();
+  })();
   go(parseInt(location.hash.slice(1))||1);
 </script>
 </body>
