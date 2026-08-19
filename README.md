@@ -22,7 +22,7 @@ way to auditing a third-party model you did not build.
 | # | Section | Slide |
 |---|---------|-------|
 | 1–4 | AI Foundations | Machine learning and the four learning types · neural networks and deep learning · large language models · how LLMs learn |
-| 5–8 | LLM Fundamentals | Tokens and token IDs · nondeterminism and the next-token spread · temperature and top-p · max tokens and the context window |
+| 5–8 | LLM Fundamentals | Tokens and token IDs · nondeterminism and the next-token spread · temperature and top-p · max tokens and the context window. Slides 7 and 8 carry runnable "try it yourself" examples with the parameter names for each provider |
 | 9 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
 | 10 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
 | 11 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
@@ -83,7 +83,7 @@ itself rather than the deck, so reviewing the repository never skips a slide.
 ## Topics covered
 
 - AI fundamentals — machine learning, neural networks, LLMs and how they are trained
-- LLM fundamentals — tokens, nondeterminism, temperature and top-p, context windows
+- LLM fundamentals — tokens, nondeterminism, temperature and top-p, max tokens, context windows
 - Prompt security — prompt injection, jailbreaks and mitigations
 - Data poisoning attacks and defences
 - AI supply chain security — provenance, model cards and third-party model review
