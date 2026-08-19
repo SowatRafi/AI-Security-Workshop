@@ -1,0 +1,22 @@
+# Personal study notes (kept local only)
+AI1 Notes/
+
+# Environment / secrets
+.env
+.env.*
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
