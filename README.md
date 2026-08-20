@@ -122,10 +122,13 @@ that, double-click the launcher for your system instead:
 | **macOS** | `Start-Workshop.command` |
 | **Linux** | `labs/start-workshop.sh` |
 
-It starts Ollama, downloads the model the first time, builds the practice assistant, and opens the
-deck with the chat working. Requirements: [Ollama](https://ollama.com/download), plus Python 3 on
-macOS and Linux (both normally have it; Windows falls back to PowerShell). No accounts, no API keys,
-no admin rights, no Ollama configuration.
+It checks what the machine already has and **asks before downloading anything** — if Ollama is
+missing it explains what Ollama is and offers to fetch it; if the model is missing it names it and
+its size and asks first. Decline either and every slide still works; only the live chat needs them.
+
+Requirements: [Ollama](https://ollama.com/download), plus Python 3 on macOS and Linux (both normally
+have it; Windows falls back to PowerShell). No accounts, no API keys, no admin rights, no Ollama
+configuration.
 
 Browsers deliberately stop a page opened off disk from reaching a local server, so the launcher
 serves the workshop at `http://localhost:8000` and passes the deck's requests through to Ollama on

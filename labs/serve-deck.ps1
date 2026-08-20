@@ -42,6 +42,26 @@ Write-Host '  AI Security Workshop' -ForegroundColor Cyan
 Write-Host '  ====================' -ForegroundColor Cyan
 
 # --- Ollama ----------------------------------------------------------------
+$MODEL         = 'llama3.2'
+$MODEL_DESC    = "Meta's Llama 3.2 (3B parameters), about 2.0 GB"
+$DOWNLOAD_PAGE = 'https://ollama.com/download'
+
+function Ask-YesNo($question, $defaultYes = $true) {
+  $suffix = if ($defaultYes) { '[Y/n]' } else { '[y/N]' }
+  try {
+    $answer = (Read-Host "  $question $suffix").Trim().ToLower()
+  } catch {
+    Warn 'No console to answer on - assuming no.'
+    return $false
+  }
+  if ([string]::IsNullOrWhiteSpace($answer)) { return $defaultYes }
+  return @('y', 'yes') -contains $answer
+}
+
+Write-Host ''
+Say 'Checking what you have...'
+Write-Host ''
+
 $ollama = (Get-Command ollama -ErrorAction SilentlyContinue).Source
 if (-not $ollama) {
   $guess = "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe"
@@ -49,11 +69,28 @@ if (-not $ollama) {
 }
 
 $modelReady = $false
+
 if (-not $ollama) {
-  Warn 'Ollama is not installed - the slides will work, but the live chat will not.'
-  Say  'Install it from https://ollama.com/download and run this again.'
+  Write-Host ''
+  Warn 'Ollama is not installed - and the live chat needs it.'
+  Write-Host ''
+  Say 'Ollama is the free, open-source runner that hosts the model on this'
+  Say 'machine. Nothing you type in the workshop ever leaves your computer.'
+  Write-Host ''
+  Say "Download it from  $DOWNLOAD_PAGE"
+  Write-Host ''
+  if (Ask-YesNo 'Open that page in your browser now?' $true) {
+    Start-Process $DOWNLOAD_PAGE
+    Say 'Install Ollama, then run this launcher again.'
+  } else {
+    Say 'No problem - install it whenever you like, then run this again.'
+  }
+  Write-Host ''
+  Warn 'Continuing without the live chat. Every slide still works.'
 } else {
+  Good 'Ollama is installed'
   $appExe = "$env:LOCALAPPDATA\Programs\Ollama\ollama app.exe"
+
   function Wait-ForOllama ($seconds) {
     for ($i = 0; $i -lt $seconds; $i++) {
       try { Invoke-WebRequest "$ollamaU/" -TimeoutSec 2 -UseBasicParsing | Out-Null; return $true }
@@ -72,24 +109,42 @@ if (-not $ollama) {
     Good 'Ollama is running'
     $have = (& $ollama list 2>$null) -join "`n"
 
-    if ($have -notmatch 'llama3\.2') {
-      Say 'Downloading the model (llama3.2, about 2 GB). First run only...'
-      & $ollama pull llama3.2 | Out-Host
+    $haveModel = $have -match [regex]::Escape($MODEL)
+    if (-not $haveModel) {
+      Write-Host ''
+      Warn 'The model is not downloaded yet.'
+      Write-Host ''
+      Say 'The live chat needs one open-source model:'
+      Say "    $MODEL  -  $MODEL_DESC"
+      Say 'It downloads once, then runs entirely offline on this machine.'
+      Write-Host ''
+      if (Ask-YesNo 'Download it now?' $true) {
+        Say 'Downloading. This is the slow part, and it only happens once...'
+        & $ollama pull $MODEL | Out-Host
+        $have = (& $ollama list 2>$null) -join "`n"
+        $haveModel = $have -match [regex]::Escape($MODEL)
+        if ($haveModel) { Good 'Model downloaded' } else { Bad 'Download failed - check your connection and run this again.' }
+      } else {
+        Say 'Skipped. Every slide still works - only the live chat needs the model.'
+      }
+    } else {
+      Good "Model $MODEL is downloaded"
     }
 
-    if ($have -notmatch 'atlasbot') {
-      Say 'Building the practice assistant...'
-      Push-Location $lab
-      & $ollama create atlasbot      -f ./Modelfile          | Out-Null
-      & $ollama create atlasbot-hard -f ./Modelfile.hardened | Out-Null
-      Pop-Location
+    if ($haveModel) {
+      if ($have -notmatch 'atlasbot') {
+        Say 'Building AtlasBot, the practice assistant...'
+        Push-Location $lab
+        & $ollama create atlasbot      -f ./Modelfile          | Out-Null
+        & $ollama create atlasbot-hard -f ./Modelfile.hardened | Out-Null
+        Pop-Location
+      }
+      $check = (& $ollama list 2>$null) -join "`n"
+      if ($check -match 'atlasbot') { $modelReady = $true; Good 'AtlasBot is ready' }
+      else { Warn 'Could not build AtlasBot - see labs\prompt-injection-in-action\README.md' }
     }
-
-    $check = (& $ollama list 2>$null) -join "`n"
-    if ($check -match 'atlasbot') { $modelReady = $true; Good 'AtlasBot is ready' }
-    else { Warn 'Could not build AtlasBot - see labs\prompt-injection-in-action\README.md' }
   } else {
-    Warn 'Ollama did not start - the slides work, but the live chat will not.'
+    Warn 'Ollama would not start - every slide still works, but the live chat will not.'
   }
 }
 

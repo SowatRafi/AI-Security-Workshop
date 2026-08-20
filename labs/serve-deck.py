@@ -121,19 +121,114 @@ def run(exe, *args, quiet=True):
         return False, str(e)
 
 
+MODEL = "llama3.2"
+MODEL_DESC = "Meta's Llama 3.2 (3B parameters), about 2.0 GB"
+DOWNLOAD_PAGE = "https://ollama.com/download"
+LINUX_INSTALL = "curl -fsSL https://ollama.com/install.sh | sh"
+
+
+def ask_yes_no(question, default_yes=True):
+    """Ask permission. Never assume yes when there is nobody to answer."""
+    suffix = "[Y/n]" if default_yes else "[y/N]"
+    if not sys.stdin or not sys.stdin.isatty():
+        say(f"{question} {suffix}")
+        warn("No console to answer on - assuming no. Run the launcher by double-clicking it.")
+        return False
+    try:
+        answer = input(f"  {question} {suffix} ").strip().lower()
+    except (EOFError, KeyboardInterrupt):
+        print(flush=True)
+        return False
+    if not answer:
+        return default_yes
+    return answer in ("y", "yes")
+
+
+def offer_ollama_install():
+    """Ollama is missing. Explain, ask, and only then do anything."""
+    print(flush=True)
+    warn("Ollama is not installed - and the live chat needs it.")
+    print(flush=True)
+    say("Ollama is the free, open-source runner that hosts the model on this")
+    say("machine. Nothing you type in the workshop ever leaves your computer.")
+    print(flush=True)
+
+    if sys.platform.startswith("linux"):
+        say("It can be installed with Ollama's own official installer:")
+        say(f"    {_c('96', LINUX_INSTALL)}")
+        print(flush=True)
+        if ask_yes_no("Run that now?", default_yes=False):
+            say("Installing - you may be asked for your password...")
+            try:
+                subprocess.run(LINUX_INSTALL, shell=True, timeout=1800)
+            except Exception as e:
+                bad(f"Install failed: {e}")
+                return False
+            if find_ollama():
+                good("Ollama installed")
+                return True
+            bad("Ollama still not found - install it yourself and run this again.")
+            return False
+        say(f"Skipped. You can install it later from {DOWNLOAD_PAGE}")
+        return False
+
+    say(f"Download it from  {_c('96', DOWNLOAD_PAGE)}")
+    print(flush=True)
+    if ask_yes_no("Open that page in your browser now?"):
+        webbrowser.open(DOWNLOAD_PAGE)
+        say("Install Ollama, then run this launcher again.")
+    else:
+        say("No problem - install it whenever you like, then run this again.")
+    return False
+
+
+def offer_model_download(exe):
+    """The 2 GB download. Always ask first."""
+    print(flush=True)
+    warn(f"The model is not downloaded yet.")
+    print(flush=True)
+    say(f"The live chat needs one open-source model:")
+    say(f"    {_c('96', MODEL)}  -  {MODEL_DESC}")
+    say("It downloads once, then runs entirely offline on this machine.")
+    print(flush=True)
+    if not ask_yes_no("Download it now?"):
+        say("Skipped. Every slide still works - only the live chat needs the model.")
+        return False
+    say("Downloading. This is the slow part, and it only happens once...")
+    try:
+        result = subprocess.run([exe, "pull", MODEL], cwd=LAB, timeout=7200)
+    except Exception as e:
+        bad(f"Download failed: {e}")
+        return False
+    if result.returncode != 0:
+        bad("Download failed - check your internet connection and run this again.")
+        return False
+    good("Model downloaded")
+    return True
+
+
 def prepare_model():
-    """Returns True when atlasbot is ready to talk to."""
+    """Check what is present, ask before downloading anything, then set up."""
+    print(flush=True)
+    say("Checking what you have...")
+    print(flush=True)
+
     exe = find_ollama()
     if not exe:
-        warn("Ollama is not installed - every slide still works, but the live chat will not.")
-        say("Install it from https://ollama.com/download, then run this again.")
-        return False
+        offer_ollama_install()
+        exe = find_ollama()
+        if not exe:
+            print(flush=True)
+            warn("Continuing without the live chat. Every slide still works.")
+            return False
+    good("Ollama is installed")
 
     if not ollama_up():
         say("Starting Ollama...")
         start_ollama(exe)
         if not wait_for_ollama(30):
-            warn("Ollama did not start - every slide still works, but the live chat will not.")
+            warn("Ollama would not start - every slide still works, but the live chat will not.")
+            say(f"Try starting Ollama yourself, then run this again.")
             return False
     good("Ollama is running")
 
@@ -141,18 +236,19 @@ def prepare_model():
     if not ok:
         listing = ""
 
-    if "llama3.2" not in listing:
-        say("Downloading the model (llama3.2, about 2 GB). First run only, please wait...")
-        try:
-            subprocess.run([exe, "pull", "llama3.2"], cwd=LAB, timeout=3600)
-        except Exception as e:
-            warn(f"Download failed: {e}")
+    if MODEL not in listing:
+        if not offer_model_download(exe):
             return False
+    else:
+        good(f"Model {MODEL} is downloaded")
 
     if "atlasbot" not in listing:
-        say("Building the practice assistant...")
-        run(exe, "create", "atlasbot", "-f", "./Modelfile")
+        say("Building AtlasBot, the practice assistant...")
+        ok1, _ = run(exe, "create", "atlasbot", "-f", "./Modelfile")
         run(exe, "create", "atlasbot-hard", "-f", "./Modelfile.hardened")
+        if not ok1:
+            warn("Could not build AtlasBot - see labs/prompt-injection-in-action/README.md")
+            return False
 
     ok, listing = run(exe, "list")
     if ok and "atlasbot" in listing:
