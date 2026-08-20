@@ -66,9 +66,30 @@ leaving the slides.
 | **macOS** | `Start-Workshop.command` |
 | **Linux** | `labs/start-workshop.sh` (or run it from a terminal) |
 
-Each one starts Ollama if it is not running, downloads the model the first time, builds AtlasBot,
-serves the workshop and opens the deck with the chat working. Then a student clicks **Open the live
+Each one checks what the machine already has, **asks before downloading anything**, then starts
+Ollama, builds AtlasBot, serves the workshop and opens the deck. A student clicks **Open the live
 chat** and starts attacking — nothing else to do.
+
+A first run on a bare machine looks like this:
+
+```
+  Checking what you have...
+
+  [ok]   Ollama is installed
+  [ok]   Ollama is running
+  [warn] The model is not downloaded yet.
+
+  The live chat needs one open-source model:
+      llama3.2  -  Meta's Llama 3.2 (3B parameters), about 2.0 GB
+  It downloads once, then runs entirely offline on this machine.
+
+  Download it now? [Y/n]
+```
+
+Say **n** and nothing is downloaded — every slide still works, only the live chat is unavailable.
+If **Ollama itself** is missing, it explains what Ollama is, and offers to open the official
+download page (on Linux, to run Ollama's own official install script instead). Nothing is installed
+or downloaded without an explicit yes.
 
 Requirements: **Ollama** (<https://ollama.com/download>), and **Python 3** on macOS and Linux, which
 both normally have. Windows needs neither — it falls back to PowerShell, which ships with the OS. No

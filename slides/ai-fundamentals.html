@@ -2464,9 +2464,11 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
           '<b>Fix:</b> close this, open the workshop folder and double-click <code>'+LAUNCHER+'</code>. '+
           'It sets everything up and reopens the deck with the chat working. '+
           'Every slide works fine from a file — only this chat needs it.</li>'):'')+
-        '<li>Is Ollama running? Check <code>http://localhost:11434</code> says “Ollama is running”.</li>'+
-        '<li>Is the model built? <code>ollama create '+esc(model)+' -f ./Modelfile</code> from '+
-        '<code>labs/prompt-injection-in-action/</code>.</li>'+
+        (SERVED?('<li><b>Is the model set up?</b> Close the deck, run <code>'+LAUNCHER+'</code> again and '+
+          'say <b>yes</b> when it offers to download the model. It will tell you exactly what it needs '+
+          '— Ollama, and one open-source model of about 2 GB — and ask before downloading anything.</li>'):'')+
+        '<li>Is Ollama running? Open <code>http://localhost:11434</code>; it should say '+
+        '“Ollama is running”. If not, start Ollama and reload this page.</li>'+
         '</ol>'+
         '<div style="margin-top:.5em;opacity:.75">'+esc(err)+'</div>';
       body.appendChild(d); scroll();
