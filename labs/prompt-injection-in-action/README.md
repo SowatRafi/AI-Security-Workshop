@@ -67,19 +67,18 @@ allow-list, so the request is refused with a 403 before it ever reaches the mode
 
 Two ways round it:
 
-**① Serve the deck locally — recommended, and needs no Ollama changes**
+**① Start the deck with the launcher — recommended, and needs no Ollama changes**
 
-Double-click [`labs/serve-deck.cmd`](../serve-deck.cmd) (it runs `python -m http.server 8000
---bind 127.0.0.1` from the repository root), then open:
+Double-click **`Start Workshop.cmd`** in the workshop folder instead of opening the HTML. It serves
+the folder at `http://localhost:8000` and opens the deck for you. That origin is already on Ollama's
+allow-list, so the chat works immediately.
 
-```
-http://localhost:8000/slides/ai-fundamentals.html
-```
+It uses only what ships with Windows — [`labs/serve-deck.ps1`](../serve-deck.ps1), a small
+`HttpListener` server. No Python, no install, no admin rights, and it binds to localhost only, so
+nothing is exposed to the network. Keep the console window open while you present; closing it stops
+the server. Verified end to end in Chrome.
 
-That origin is already allowed, so the chat works immediately. Verified end to end in Chrome.
-The server binds to localhost only — nothing is exposed to the network.
-
-**② Open the file directly and widen Ollama's allow-list**
+**② Or open the HTML directly and widen Ollama's allow-list**
 
 Set `OLLAMA_ORIGINS=*` as a user environment variable and restart Ollama. The chat then works from
 `file://` too.
