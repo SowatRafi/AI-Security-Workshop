@@ -15,6 +15,7 @@
     --amber:#b45309; --amber-soft:#fdf2e2;
     --violet:#7c3aed; --violet-soft:#f2ecfe;
     --slate:#3b4a63; --slate-soft:#eff2f7;
+    --teal:#0f766e; --teal-soft:#e6f4f1;
     --danger:#dc2626; --danger-soft:#fde7e7;
     --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
@@ -455,7 +456,67 @@
   .mo.good{--c:var(--green)} .mo.good b{color:var(--green);font-weight:800}
   .mo.bad{--c:var(--danger);background:#fffafa} .mo.bad b{color:var(--danger);font-weight:800}
 
-  /* ===== Slides 17-18 · practical lab — third-party model audit ===== */
+
+  /* ===== Advanced Prompting section (teal) ===== */
+  .eyebrow[data-sec="Advanced Prompting"]{color:var(--teal)}
+  .eyebrow[data-sec="Advanced Prompting"] .dot{background:var(--teal)}
+  .teal-em{color:var(--teal)}
+  .takeaway.teal{background:linear-gradient(90deg,var(--teal-soft),#fff);border-color:#c7e6df;border-left-color:var(--teal)}
+  .takeaway.teal p b{color:var(--teal)}
+
+  /* shared prompt-example block + use-when line */
+  .px{font-family:var(--mono);font-size:clamp(7px,.8vw,10.5px);line-height:1.45;color:var(--sub);
+    background:#0d1117;border-radius:7px;padding:.4em .6em;white-space:pre-wrap}
+  .px{color:#c9d1d9}
+  .px .k{color:#7ee787}.px .s{color:#a5d6ff}.px .c{color:#8b949e}.px .r{color:#ff7b72}
+  .uw{font-size:clamp(6.5px,.75vw,9.5px);line-height:1.35;color:var(--sub);
+    background:var(--teal-soft);border-radius:6px;padding:.25em .5em}
+  .uw b{color:var(--teal);font-weight:800;font-family:var(--mono);letter-spacing:.03em}
+
+  /* the shot spectrum */
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,.85vw,13px)}
+  .shot{background:#fff;border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:11px;
+    padding:clamp(6px,.75vw,11px) clamp(7px,.85vw,12px);display:flex;flex-direction:column;gap:.28em}
+  .sh-h{display:flex;align-items:center;gap:.45em}
+  .sh-b{flex:0 0 auto;background:var(--teal);color:#fff;border-radius:6px;padding:.12em .45em;
+    font-family:var(--mono);font-weight:800;font-size:clamp(7px,.8vw,10.5px);line-height:1.2}
+  .sh-t{font-size:clamp(9.5px,1.05vw,13.5px);font-weight:800;color:var(--teal);line-height:1.1}
+  .sh-d{font-size:clamp(7px,.79vw,10px);color:var(--sub);line-height:1.35}
+  .sh-d b{color:var(--ink);font-weight:700}
+  .shot .uw{margin-top:auto}
+
+  /* chain-of-thought */
+  .cot{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .cot-h{background:var(--teal);color:#fff;font-family:var(--mono);font-weight:700;
+    font-size:clamp(6.5px,.75vw,9.5px);letter-spacing:.05em;
+    padding:clamp(3px,.4vw,6px) clamp(10px,1.1vw,15px);display:flex;justify-content:space-between;gap:1em}
+  .cot-h span{font-weight:600;opacity:.85;letter-spacing:.02em;text-transform:none}
+  .cot-b{padding:clamp(5px,.7vw,10px) clamp(10px,1.1vw,15px);
+    display:flex;flex-direction:column;gap:clamp(4px,.5vw,7px)}
+  .cot-row{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(6px,.85vw,13px);align-items:stretch}
+  .cot-a{--c:var(--danger);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:9px;
+    padding:clamp(4px,.55vw,8px) clamp(7px,.85vw,12px);display:flex;flex-direction:column;gap:.2em}
+  .cot-a.yes{--c:var(--green)}
+  .cot-a .lab{font-size:clamp(7px,.79vw,10px);font-weight:800;color:var(--c);line-height:1.2}
+  .cot-a .txt{font-family:var(--mono);font-size:clamp(6.5px,.73vw,9px);line-height:1.45;color:var(--sub)}
+  .cot-x{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,.85vw,13px)}
+  .cx{border-radius:9px;padding:clamp(4px,.55vw,8px) clamp(7px,.85vw,12px);
+    font-size:clamp(6.5px,.76vw,9.5px);line-height:1.4;color:var(--sub)}
+  .cx.zero{background:var(--teal-soft);border:1px solid #c7e6df}
+  .cx.warn{background:var(--amber-soft);border:1px solid #f5e3c4}
+  .cx b{color:var(--teal);font-weight:800}
+  .cx.warn b{color:var(--amber)}
+  .cx code{font-family:var(--mono);background:#fff;border-radius:4px;padding:0 .3em;color:var(--ink);font-weight:700}
+
+  /* prompt templates */
+  .tpl{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(7px,.9vw,14px);
+    border:1px solid var(--line2);border-radius:12px;background:#fff;
+    padding:clamp(6px,.75vw,11px) clamp(9px,1.05vw,14px);align-items:center}
+  .tpl-t{font-size:clamp(9.5px,1.05vw,13.5px);font-weight:800;color:var(--teal);line-height:1.15}
+  .tpl-p{font-size:clamp(7px,.79vw,10px);color:var(--sub);line-height:1.4;margin-top:.15em}
+  .tpl-p b{color:var(--ink);font-weight:700}
+
+  /* ===== Slides 19-20 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
   .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
   .hd.row{flex-direction:row;align-items:baseline;gap:clamp(8px,1vw,16px);margin-bottom:.45em;flex-wrap:wrap}
@@ -1044,7 +1105,101 @@
       <div class="foot"><span><b>Prompt Engineering</b> · Sowat Hossain Rafi</span><span>09</span></div>
     </section>
 
-    <!-- ===== SLIDE 10 · System vs User Prompts ===== -->
+    <!-- ===== SLIDE 10 · The Shot Spectrum ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="Advanced Prompting"><span class="dot"></span>Advanced Prompting · 10 of 20</div>
+        <h1 class="title">The <span class="teal-em">Shot</span> Spectrum</h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--teal),#2dd4bf)"></div>
+      </div>
+      <div class="body" style="gap:9px">
+        <div class="def" style="text-align:center">A <b>"shot"</b> is an example you put inside the prompt itself. The model picks the pattern up from your prompt rather than from training — this is <b>in-context learning</b> — and how many you give changes what it can do.</div>
+
+        <div class="shots">
+          <div class="shot">
+            <div class="sh-h"><span class="sh-b">0</span><span class="sh-t">Zero-shot</span></div>
+            <div class="sh-d">No examples at all — the model works from <b>pre-trained knowledge</b> alone.</div>
+<div class="px">Classify this log entry as INFO, WARN, or ERROR:
+<span class="s">"2025-02-17 14:23:11 Failed to connect to database after 3 retries"</span></div>
+            <div class="sh-d">It already knows log severity. Struggles on domain-specific patterns and nuance.</div>
+            <div class="uw"><b>USE WHEN</b> the task is simple and well defined, and the instruction speaks for itself.</div>
+          </div>
+          <div class="shot">
+            <div class="sh-h"><span class="sh-b">1</span><span class="sh-t">One-shot</span></div>
+            <div class="sh-d">A single example pins down <b>style and format</b>.</div>
+<div class="px">Extract vulnerability info as JSON:
+Example: <span class="s">"SQL injection in login.php line 47"</span>
+  <span class="k">→ {"type":"SQL injection","file":"login.php","line":47}</span>
+Now extract: <span class="s">"XSS vulnerability in search.js line 203"</span></div>
+            <div class="sh-d">Big accuracy gain when the output shape matters — but edge cases can still slip.</div>
+            <div class="uw"><b>USE WHEN</b> you need the answer to come back in a consistent shape.</div>
+          </div>
+          <div class="shot">
+            <div class="sh-h"><span class="sh-b">2–5</span><span class="sh-t">Few-shot</span></div>
+            <div class="sh-d">Several examples teach a <b>pattern</b>, not just a format.</div>
+<div class="px">Classify these authentication events:
+- <span class="s">"User admin logged in from 192.168.1.100"</span> <span class="k">→ NORMAL</span>
+- <span class="s">"Failed login for root from 203.0.113.42"</span> <span class="k">→ SUSPICIOUS</span>
+- <span class="s">"5 failed logins for user bob in 10 seconds"</span> <span class="r">→ ATTACK</span>
+Now classify: <span class="s">"User guest logged in from 10.0.0.5 at 3:47 AM"</span></div>
+            <div class="sh-d">It infers three rules at once: internal vs external IP, failed vs successful, and <b>rate</b>.</div>
+            <div class="uw"><b>USE WHEN</b> patterns are complex, domain-specific, or full of edge cases.</div>
+          </div>
+        </div>
+
+        <div class="cx zero" style="text-align:center">✅ <b>Best practice</b> — use <b>2–3 diverse</b> examples that between them cover the edge cases, and keep an <b>identical structure</b> across every one. Inconsistent example formatting is itself a source of ambiguity.</div>
+
+        <div class="takeaway teal"><span class="ti">💡</span><p><b>Start at zero and let the output tell you what to add:</b> wrong format → give it one example; wrong pattern or missed edge cases → give it a few. Examples are not free — every one of them is re-sent, and re-paid for, on <b>every single call</b>.</p></div>
+      </div>
+      <div class="foot"><span><b>Advanced Prompting</b> · Sowat Hossain Rafi</span><span>10</span></div>
+    </section>
+
+    <!-- ===== SLIDE 11 · Chain-of-Thought & Templates ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="Advanced Prompting"><span class="dot"></span>Advanced Prompting · 11 of 20</div>
+        <h1 class="title"><span class="teal-em">Chains</span> and <span class="teal-em">Templates</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--teal),#2dd4bf)"></div>
+      </div>
+      <div class="body" style="gap:9px">
+        <div class="def" style="text-align:center">Two more techniques: one changes how the model <b>reasons</b>, the other changes how <b>you</b> work.</div>
+
+        <div class="cot">
+          <div class="cot-h">🔗 CHAIN-OF-THOUGHT — ASK FOR THE REASONING, NOT JUST THE ANSWER<span>Google Research, 2022</span></div>
+          <div class="cot-b">
+<div class="px"><span class="c">Q:</span> A user downloaded <span class="s">"invoice.pdf.exe"</span> from an email. Should this be flagged?</div>
+            <div class="cot-row">
+              <div class="cot-a"><span class="lab">✗ Without CoT</span><span class="txt">A: Yes, suspicious.</span></div>
+              <div class="cot-a yes"><span class="lab">✓ With CoT — you write the reasoning into the example</span><span class="txt">A: Let me analyse this: the file has a <b>double extension</b> (.pdf.exe), a common way to disguise an executable; it arrived <b>by email</b>, a frequent malware vector; and legitimate PDFs never carry .exe. Two red flags — masquerading and suspicious origin. <b>Answer: Yes, flag as high-priority.</b></span></div>
+            </div>
+            <div class="cot-x">
+              <div class="cx zero"><b>Zero-shot CoT</b> — no examples needed at all, just add <code>Let's think step by step</code>: <i>"Analyse this security incident and explain your reasoning step by step: user downloaded ransomware.exe, antivirus quarantined it, but 3 hours later 50 files were encrypted."</i> The model reconstructs the timeline and the quarantine failure.</div>
+              <div class="cx warn">⚠️ <b>Only reliable above ~100B parameters.</b> Smaller models write chains that look perfectly coherent and still land on the wrong answer. Today's reasoning models build this in.</div>
+            </div>
+            <div class="uw"><b>USE WHEN</b> the task needs multi-step reasoning — security analysis that must justify itself, or debugging complex logic.</div>
+          </div>
+        </div>
+
+        <div class="tpl">
+<div class="px">Review this <span class="k">[LANGUAGE]</span> code for <span class="k">[VULNERABILITY_TYPES]</span>:
+Context: <span class="k">[PURPOSE]</span>
+Code: <span class="k">[CODE_BLOCK]</span>
+Output format:
+1. Vulnerabilities found (severity: critical/high/medium/low)
+2. Affected lines   3. Remediation steps   4. Example secure code</div>
+          <div>
+            <div class="tpl-t">📋 Prompt templates</div>
+            <div class="tpl-p">Once a prompt has been iterated on and <b>proven</b>, save it. A library of them gives <b>consistency across the team</b>, less cognitive load, and best practice baked in — log analysis, threat-intel extraction, incident documentation, vulnerability assessment.</div>
+            <div class="uw" style="margin-top:.3em"><b>USE WHEN</b> the task repeats, or the team needs one standard and reliable quality.</div>
+          </div>
+        </div>
+
+        <div class="takeaway teal"><span class="ti">💡</span><p><b>Match the technique to the task:</b> <b>examples</b> when the pattern matters, <b>reasoning</b> when the logic matters, <b>templates</b> when the work repeats. Reaching for the heaviest technique every time costs tokens and clarity for nothing.</p></div>
+      </div>
+      <div class="foot"><span><b>Advanced Prompting</b> · Sowat Hossain Rafi</span><span>11</span></div>
+    </section>
+
+    <!-- ===== SLIDE 12 · System vs User Prompts ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Instruction Hierarchy"><span class="dot"></span>Instruction Hierarchy · 10 of 18</div>
@@ -1098,7 +1253,7 @@
       <div class="foot"><span><b>Instruction Hierarchy</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 11 · Vulnerabilities in AI Models ===== -->
+    <!-- ===== SLIDE 13 · Vulnerabilities in AI Models ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI Security Threats"><span class="dot"></span>AI Security Threats · 5 of 5</div>
@@ -1128,7 +1283,7 @@
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>05</span></div>
     </section>
 
-    <!-- ===== SLIDE 12 · AI in Cyber Security (attack / defend / secure) ===== -->
+    <!-- ===== SLIDE 14 · AI in Cyber Security (attack / defend / secure) ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI in Cyber Security"><span class="dot"></span>AI in Cyber Security · 6 of 6</div>
@@ -1165,7 +1320,7 @@
       <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
     </section>
 
-    <!-- ===== SLIDE 13 · Training Data ===== -->
+    <!-- ===== SLIDE 15 · Training Data ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Training Data"><span class="dot"></span>Training Data · 7 of 8</div>
@@ -1192,7 +1347,7 @@
       <div class="foot"><span><b>Training Data</b> · Sowat Hossain Rafi</span><span>07</span></div>
     </section>
 
-    <!-- ===== SLIDE 14 · Building the Model ===== -->
+    <!-- ===== SLIDE 16 · Building the Model ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Building the Model"><span class="dot"></span>Building the Model · 8 of 8</div>
@@ -1224,7 +1379,7 @@
       <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
-    <!-- ===== SLIDE 15 · The Inheritance Problem ===== -->
+    <!-- ===== SLIDE 17 · The Inheritance Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Inheritance Problem"><span class="dot"></span>The Inheritance Problem · 9 of 10</div>
@@ -1256,7 +1411,7 @@
       <div class="foot"><span><b>The Inheritance Problem</b> · Sowat Hossain Rafi</span><span>09</span></div>
     </section>
 
-    <!-- ===== SLIDE 16 · The Black Box Problem ===== -->
+    <!-- ===== SLIDE 18 · The Black Box Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Black Box Problem"><span class="dot"></span>The Black Box Problem · 10 of 10</div>
@@ -1283,7 +1438,7 @@
       <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 17 · Practical lab — audit a third-party model ===== -->
+    <!-- ===== SLIDE 19 · Practical lab — audit a third-party model ===== -->
     <section class="slide" data-nofit>
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 12</div>
@@ -1446,7 +1601,7 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
     </section>
 
-    <!-- ===== SLIDE 18 · Answer key for the lab ===== -->
+    <!-- ===== SLIDE 20 · Answer key for the lab ===== -->
     <section class="slide">
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 12 of 12</div>
