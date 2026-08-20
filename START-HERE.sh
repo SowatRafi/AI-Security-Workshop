@@ -5,14 +5,14 @@
 #  Finds a Python 3 and hands over to labs/serve-deck.py, which does the real
 #  work. Nothing to install beyond Ollama and Python 3.
 #
-#  Linux: run  ./labs/start-workshop.sh   (or double-click if your file manager
+#  Linux: run  ./START-HERE.sh   (or double-click if your file manager
 #  is set to run executables).
-#  macOS: double-click "Start-Workshop.command" in the folder above.
+#  macOS: double-click "START-HERE.command".
 # ---------------------------------------------------------------------------
 set -u
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-server="$here/serve-deck.py"
+server="$here/labs/serve-deck.py"
 
 py=""
 for candidate in python3 python /usr/bin/python3 /usr/local/bin/python3 /opt/homebrew/bin/python3; do

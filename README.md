@@ -14,7 +14,7 @@ and it works with no internet and nothing to install.
 | [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (26 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
 | [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–18) |
-| [`Start-Workshop.cmd`](Start-Workshop.cmd) · [`.command`](Start-Workshop.command) · [`.sh`](labs/start-workshop.sh) | **Start here** — Windows, macOS, Linux. One double-click sets up the model and opens the decks with the live chat working |
+| [`START-HERE.cmd`](START-HERE.cmd) · [`.command`](START-HERE.command) · [`.sh`](START-HERE.sh) | **Start here** — Windows, macOS, Linux. Run once per machine: it sets up the model and makes the live chat work however you open the slides afterwards |
 | [`labs/serve-deck.py`](labs/serve-deck.py) | The launcher itself: builds the practice model, serves the workshop, proxies the deck through to Ollama (`serve-deck.ps1` is the Windows fallback when Python is absent) |
 
 ## Deck B — AI Fundamentals
@@ -118,9 +118,9 @@ that, double-click the launcher for your system instead:
 
 | System | Double-click |
 |---|---|
-| **Windows** | `Start-Workshop.cmd` |
-| **macOS** | `Start-Workshop.command` |
-| **Linux** | `labs/start-workshop.sh` |
+| **Windows** | `START-HERE.cmd` |
+| **macOS** | `START-HERE.command` |
+| **Linux** | `START-HERE.sh` |
 
 It checks what the machine already has and **asks before downloading anything** — if Ollama is
 missing it explains what Ollama is and offers to fetch it; if the model is missing it names it and

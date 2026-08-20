@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 #  AI Security Workshop - launcher.
 #
-#  Double-click "Start-Workshop.cmd" in the folder above; it runs this.
+#  Double-click "START-HERE.cmd" in the folder above; it runs this.
 #
 #  What this does:
 #    1. finds Ollama and starts it if it is not already running
@@ -58,6 +58,65 @@ function Ask-YesNo($question, $defaultYes = $true) {
   return @('y', 'yes') -contains $answer
 }
 
+function Wait-ForOllama ($seconds) {
+  for ($i = 0; $i -lt $seconds; $i++) {
+    try { Invoke-WebRequest "$ollamaU/" -TimeoutSec 2 -UseBasicParsing | Out-Null; return $true }
+    catch { Start-Sleep -Seconds 1 }
+  }
+  return $false
+}
+
+function Test-OriginsAllowFilePages {
+  # A page opened off disk sends "Origin: null". Ollama refuses that by default,
+  # which is the single reason the live chat fails when you double-click the HTML.
+  try {
+    $r = Invoke-WebRequest -Uri "$ollamaU/api/chat" -Method Options -TimeoutSec 5 -UseBasicParsing `
+      -Headers @{ 'Origin' = 'null'; 'Access-Control-Request-Method' = 'POST'; 'Access-Control-Request-Headers' = 'content-type' }
+    return ($r.StatusCode -eq 200 -or $r.StatusCode -eq 204)
+  } catch { return $false }
+}
+
+function Enable-FilePageAccess($exe, $appExe) {
+  if (Test-OriginsAllowFilePages) {
+    Good 'The slides can reach the model even when opened directly'
+    return $true
+  }
+
+  Write-Host ''
+  Say 'One more thing, and then you never have to think about this again.'
+  Write-Host ''
+  Say 'Right now Ollama refuses requests from a page opened straight off disk,'
+  Say 'so double-clicking the slides gives you a chat that cannot connect.'
+  Say 'Allowing it sets OLLAMA_ORIGINS=* and restarts Ollama.'
+  Write-Host ''
+  Warn 'Worth knowing: that lets any web page you visit talk to your local'
+  Say 'Ollama while it is set. On a workshop machine that is a fair trade; on'
+  Say 'your daily driver, undo it afterwards - the README says how.'
+  Write-Host ''
+
+  if (-not (Ask-YesNo 'Allow it?' $true)) {
+    Say 'Skipped. The chat still works through this launcher - just keep'
+    Say 'using it rather than opening the HTML directly.'
+    return $false
+  }
+
+  [Environment]::SetEnvironmentVariable('OLLAMA_ORIGINS', '*', 'User')
+  $env:OLLAMA_ORIGINS = '*'
+  Say 'Restarting Ollama...'
+  Get-Process -Name 'ollama app' -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+  Get-Process -Name 'ollama'     -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+  Start-Sleep -Seconds 3
+  if (Test-Path $appExe) { Start-Process $appExe } else { Start-Process $exe -ArgumentList 'serve' -WindowStyle Hidden }
+  [void](Wait-ForOllama 40)
+
+  if (Test-OriginsAllowFilePages) {
+    Good 'Done - you can now just double-click the slides and the chat works'
+    return $true
+  }
+  Warn 'Could not enable it. The chat still works through this launcher.'
+  return $false
+}
+
 Write-Host ''
 Say 'Checking what you have...'
 Write-Host ''
@@ -90,14 +149,6 @@ if (-not $ollama) {
 } else {
   Good 'Ollama is installed'
   $appExe = "$env:LOCALAPPDATA\Programs\Ollama\ollama app.exe"
-
-  function Wait-ForOllama ($seconds) {
-    for ($i = 0; $i -lt $seconds; $i++) {
-      try { Invoke-WebRequest "$ollamaU/" -TimeoutSec 2 -UseBasicParsing | Out-Null; return $true }
-      catch { Start-Sleep -Seconds 1 }
-    }
-    return $false
-  }
 
   if (-not (Wait-ForOllama 2)) {
     Say 'Starting Ollama...'
@@ -140,7 +191,11 @@ if (-not $ollama) {
         Pop-Location
       }
       $check = (& $ollama list 2>$null) -join "`n"
-      if ($check -match 'atlasbot') { $modelReady = $true; Good 'AtlasBot is ready' }
+      if ($check -match 'atlasbot') {
+        $modelReady = $true
+        Good 'AtlasBot is ready'
+        Enable-FilePageAccess $ollama $appExe
+      }
       else { Warn 'Could not build AtlasBot - see labs\prompt-injection-in-action\README.md' }
     }
   } else {

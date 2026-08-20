@@ -15,7 +15,7 @@
 #
 #  If macOS refuses to open this ("unidentified developer" or no permission),
 #  right-click it and choose Open, or run in Terminal:
-#      chmod +x "Start-Workshop.command"
+#      chmod +x "START-HERE.command"
 # ---------------------------------------------------------------------------
 cd "$(dirname "$0")" || exit 1
-exec bash "labs/start-workshop.sh"
+exec bash "START-HERE.sh"

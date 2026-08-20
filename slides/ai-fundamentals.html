@@ -2435,7 +2435,7 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
     // request, and browsers gate each of those; a same-origin path is neither.
     var SERVED=(location.protocol==='http:'||location.protocol==='https:');
     var UA=navigator.userAgent;
-    var LAUNCHER=/Mac/i.test(UA)?'Start-Workshop.command':(/Win/i.test(UA)?'Start-Workshop.cmd':'labs/start-workshop.sh');
+    var LAUNCHER=/Mac/i.test(UA)?'START-HERE.command':(/Win/i.test(UA)?'START-HERE.cmd':'START-HERE.sh');
     var API=SERVED?'/ollama/api/chat':'http://127.0.0.1:11434/api/chat';
     var body=document.getElementById('pcBody'), inp=document.getElementById('pcIn'),
         send=document.getElementById('pcSend'), clr=document.getElementById('pcClear'),
@@ -2458,12 +2458,11 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       var isFile=(location.protocol==='file:'||location.origin==='null');
       d.innerHTML='<b>Can’t reach the model.</b> Nothing is broken — the chat just has nothing to talk to yet.'+
         '<ol>'+
-        (!SERVED?('<li><b>This is it, almost certainly.</b> The deck was opened straight from a file. '+
-          'Browsers block a page opened that way from reaching a local server — the request never leaves, '+
-          'whatever Ollama is configured to allow.<br><br>'+
-          '<b>Fix:</b> close this, open the workshop folder and double-click <code>'+LAUNCHER+'</code>. '+
-          'It sets everything up and reopens the deck with the chat working. '+
-          'Every slide works fine from a file — only this chat needs it.</li>'):'')+
+        (!SERVED?('<li><b>This is it, almost certainly.</b> The slides were opened straight from a file, '+
+          'and Ollama has not been told to accept requests from a page opened that way.<br><br>'+
+          '<b>Fix, once per machine:</b> open the workshop folder and double-click '+
+          '<code>'+LAUNCHER+'</code>. Say <b>yes</b> to both questions it asks. After that you can '+
+          'open these slides however you like — the chat will just work.</li>'):'')+
         (SERVED?('<li><b>Is the model set up?</b> Close the deck, run <code>'+LAUNCHER+'</code> again and '+
           'say <b>yes</b> when it offers to download the model. It will tell you exactly what it needs '+
           '— Ollama, and one open-source model of about 2 GB — and ask before downloading anything.</li>'):'')+
