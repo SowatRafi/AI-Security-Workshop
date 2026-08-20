@@ -16,6 +16,7 @@
     --violet:#7c3aed; --violet-soft:#f2ecfe;
     --slate:#3b4a63; --slate-soft:#eff2f7;
     --teal:#0f766e; --teal-soft:#e6f4f1;
+    --plum:#a21caf; --plum-soft:#fbeafc;
     --danger:#dc2626; --danger-soft:#fde7e7;
     --sans:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
@@ -465,6 +466,9 @@
   .takeaway.teal p b{color:var(--teal)}
 
   /* shared prompt-example block + use-when line */
+  /* literal glyphs: Cascadia Code ligatures would render <| |> as arrows, and the deck
+     must look identical on machines that only have Consolas */
+  .px,.sep-d code{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"calt" 0}
   .px{font-family:var(--mono);font-size:clamp(7px,.8vw,10.5px);line-height:1.45;color:var(--sub);
     background:#0d1117;border-radius:7px;padding:.4em .6em;white-space:pre-wrap}
   .px{color:#c9d1d9}
@@ -515,6 +519,88 @@
   .tpl-t{font-size:clamp(9.5px,1.05vw,13.5px);font-weight:800;color:var(--teal);line-height:1.15}
   .tpl-p{font-size:clamp(7px,.79vw,10px);color:var(--sub);line-height:1.4;margin-top:.15em}
   .tpl-p b{color:var(--ink);font-weight:700}
+
+
+  /* ===== How LLMs Follow Instructions section (plum) ===== */
+  .eyebrow[data-sec="How LLMs Follow Instructions"]{color:var(--plum)}
+  .eyebrow[data-sec="How LLMs Follow Instructions"] .dot{background:var(--plum)}
+  .plum-em{color:var(--plum)}
+  .takeaway.plum{background:linear-gradient(90deg,var(--plum-soft),#fff);border-color:#eecdf3;border-left-color:var(--plum)}
+  .takeaway.plum p b{color:var(--plum)}
+
+  /* the context window: five sources, two trust levels */
+  .ctxw{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .cw-h{background:var(--plum);color:#fff;font-family:var(--mono);font-weight:700;
+    font-size:clamp(6.5px,.75vw,9.5px);letter-spacing:.06em;
+    padding:clamp(3px,.4vw,6px) clamp(10px,1.1vw,15px);display:flex;justify-content:space-between;gap:1em}
+  .cw-h span{font-weight:600;opacity:.85;letter-spacing:.02em;text-transform:none}
+  .cw-b{padding:clamp(5px,.68vw,10px) clamp(9px,1vw,14px);
+    display:flex;flex-direction:column;gap:clamp(4px,.5vw,7px)}
+  .cw-g{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(5px,.65vw,10px)}
+  .src{--c:var(--accent);background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--c);
+    border-radius:9px;padding:clamp(4px,.52vw,8px) clamp(5px,.68vw,10px);
+    display:flex;flex-direction:column;gap:.18em}
+  .src.un{--c:var(--danger);background:#fffbfb}
+  .src-n{font-size:clamp(7.8px,.88vw,11.2px);font-weight:800;color:var(--c);line-height:1.15}
+  .src-c{align-self:flex-start;font-family:var(--mono);font-size:clamp(5.2px,.6vw,7.2px);font-weight:800;
+    letter-spacing:.05em;color:#fff;background:var(--c);border-radius:4px;padding:.12em .3em}
+  .src-d{font-size:clamp(6.4px,.73vw,9.3px);color:var(--sub);line-height:1.33}
+  .src-d b{color:var(--ink);font-weight:700}
+  .src-s{margin-top:auto;padding-top:.28em;border-top:1px dashed var(--line2);
+    font-size:clamp(5.8px,.67vw,8.4px);color:var(--muted);line-height:1.3}
+  .src-s b{color:var(--c);font-weight:800}
+  .cw-i{font-size:clamp(6.8px,.77vw,9.8px);color:var(--sub);line-height:1.35;text-align:center}
+  .cw-i b{color:var(--plum);font-weight:800}
+
+  /* how providers try to keep the sources apart */
+  .seps{display:grid;grid-template-columns:1.12fr .92fr 1.06fr;gap:clamp(6px,.8vw,12px)}
+  .sep{background:#fff;border:1px solid var(--line);border-top:3px solid var(--plum);border-radius:11px;
+    padding:clamp(5px,.62vw,10px) clamp(7px,.82vw,12px);display:flex;flex-direction:column;gap:.26em}
+  .sep-h{display:flex;align-items:baseline;gap:.4em;flex-wrap:wrap}
+  .sep-t{font-size:clamp(8.8px,.98vw,12.8px);font-weight:800;color:var(--plum);line-height:1.1}
+  .sep-k{font-size:clamp(6.2px,.7vw,8.8px);color:var(--muted);line-height:1.2}
+  .sep-d{font-size:clamp(6.6px,.75vw,9.6px);color:var(--sub);line-height:1.34}
+  .sep-d b{color:var(--ink);font-weight:700}
+  .sep-d code{font-family:var(--mono);background:var(--panel2);border-radius:4px;padding:0 .25em;color:var(--ink);font-weight:700}
+  .sep .uw{margin-top:auto}
+  .uw.plum{background:var(--plum-soft)} .uw.plum b{color:var(--plum)}
+  .hier{display:flex;align-items:center;gap:.22em;flex-wrap:wrap;justify-content:center;
+    background:var(--plum-soft);border-radius:7px;padding:.32em .3em}
+  .hier .hn{font-family:var(--mono);font-weight:800;font-size:clamp(5.6px,.65vw,8.4px);letter-spacing:.02em;
+    border-radius:4px;padding:.2em .32em;background:var(--plum);color:#fff}
+  .hier .hn.d2{opacity:.82}.hier .hn.d3{opacity:.64}.hier .hn.d4{opacity:.46}.hier .hn.d5{opacity:.3}
+  .hier .hg{color:var(--plum);font-weight:800;font-size:clamp(6px,.7vw,9px);opacity:.6}
+  .bey{display:flex;flex-direction:column;gap:.2em}
+  .bey div{font-size:clamp(6.4px,.73vw,9.3px);color:var(--sub);line-height:1.32}
+  .bey div b{color:var(--ink);font-weight:800}
+
+  .trust{display:grid;grid-template-columns:1fr 1fr;gap:clamp(7px,.9vw,14px)}
+  .tru{--c:var(--accent);background:#fff;border:1px solid var(--line);border-left:3px solid var(--c);
+    border-radius:10px;padding:clamp(5px,.65vw,10px) clamp(9px,1vw,14px);
+    display:flex;gap:clamp(6px,.75vw,12px);align-items:center}
+  .tru.risk{--c:var(--danger);background:#fffafa}
+  .tru-n{font-family:var(--mono);font-weight:800;font-size:clamp(13px,1.55vw,22px);color:var(--c);
+    line-height:1;flex:0 0 auto}
+  .tru-n small{font-size:.55em;opacity:.6}
+  .tru-t{font-size:clamp(7px,.79vw,10px);color:var(--sub);line-height:1.35}
+  .tru-t b{color:var(--c);font-weight:800}
+
+  /* one big ol' stream of text: the reality */
+  .reality{border:1px solid #f3c9c9;border-radius:12px;overflow:hidden;background:#fffafa}
+  .rl-h{background:var(--danger);color:#fff;font-family:var(--mono);font-weight:700;
+    font-size:clamp(6.5px,.75vw,9.5px);letter-spacing:.06em;
+    padding:clamp(3px,.4vw,6px) clamp(10px,1.1vw,15px)}
+  .rl-b{padding:clamp(5px,.62vw,9px) clamp(10px,1.1vw,15px);
+    display:flex;flex-direction:column;gap:clamp(4px,.5vw,7px)}
+  .rl-l{font-size:clamp(7px,.79vw,10px);color:var(--sub);line-height:1.36;text-align:center}
+  .rl-l b{color:var(--danger);font-weight:800}
+  .rl-g{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,.8vw,12px)}
+  .rl-c{background:#fff;border:1px solid var(--line);border-left:3px solid var(--danger);border-radius:9px;
+    padding:clamp(4px,.52vw,8px) clamp(7px,.82vw,12px);
+    font-size:clamp(6.8px,.77vw,9.8px);color:var(--sub);line-height:1.34}
+  .rl-c b{color:var(--danger);font-weight:800}
+  .rl-c i{font-family:var(--mono);font-style:normal;color:#7f1d1d;background:var(--danger-soft);
+    border-radius:4px;padding:.05em .28em}
 
   /* ===== Slides 19-20 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
@@ -1253,7 +1339,125 @@ Output format:
       <div class="foot"><span><b>Instruction Hierarchy</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 13 · Vulnerabilities in AI Models ===== -->
+    <!-- ===== SLIDE 13 · Inside the context window ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="How LLMs Follow Instructions"><span class="dot"></span>How LLMs Follow Instructions · 13 of 22</div>
+        <h1 class="title">Five Sources, <span class="plum-em">One</span> Context Window</h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--plum),var(--danger))"></div>
+      </div>
+      <div class="body" style="gap:10px">
+        <div class="def" style="text-align:center">A system prompt is only one of the things reaching the model. Everything it factors into a reply — hidden rules, your message, fetched documents, tool results — arrives together in the <b>context window</b>. Each part is meant to stay logically separate.</div>
+
+        <div class="ctxw">
+          <div class="cw-h">🧠 THE CONTEXT WINDOW — EVERYTHING THAT INFORMS THE NEXT REPLY<span>five sources, two trust levels</span></div>
+          <div class="cw-b">
+            <div class="cw-g">
+              <div class="src">
+                <div class="src-n">🛡️ System prompt</div>
+                <div class="src-c">OPERATOR</div>
+                <div class="src-d">Hidden instructions that define the AI's <b>role, behaviour and restrictions</b> — policies, tone, safety rules. Users never see them.</div>
+                <div class="src-s">Written by <b>the model or app provider</b></div>
+              </div>
+              <div class="src">
+                <div class="src-n">🧩 Developer prompt</div>
+                <div class="src-c">OPERATOR</div>
+                <div class="src-d">Further hidden instructions that <b>refine behaviour or add guardrails</b> at application level. Often grouped with the system prompt.</div>
+                <div class="src-s">Written by <b>the app developer</b></div>
+              </div>
+              <div class="src un">
+                <div class="src-n">💬 User prompt</div>
+                <div class="src-c">UNTRUSTED</div>
+                <div class="src-d">Your input — the request the model is expected to <b>respond to or fulfil</b>. The only part a user is supposed to control.</div>
+                <div class="src-s">Typed by <b>whoever is at the keyboard</b></div>
+              </div>
+              <div class="src un">
+                <div class="src-n">📚 Retrieved context</div>
+                <div class="src-c">UNTRUSTED</div>
+                <div class="src-d">Content fetched from knowledge bases or documents by <b>RAG</b> (Retrieval-Augmented Generation) to help inform the answer.</div>
+                <div class="src-s">Written by <b>whoever authored the document</b></div>
+              </div>
+              <div class="src un">
+                <div class="src-n">🔧 Tool output</div>
+                <div class="src-c">UNTRUSTED</div>
+                <div class="src-d">Results fed back from <b>tools</b> (web search, code execution) or <b>agents</b> that reason across several steps.</div>
+                <div class="src-s">Filled in by <b>whatever the tool fetched</b></div>
+              </div>
+            </div>
+            <div class="cw-i">↓ &nbsp;<b>Intended handling:</b> rank operator instructions above user instructions, and treat retrieved text and tool output as <b>material to read, never commands to obey</b>.</div>
+          </div>
+        </div>
+
+        <div class="trust">
+          <div class="tru"><span class="tru-n">2<small>/5</small></span><span class="tru-t"><b>You write these.</b> The system and developer prompts are authored once, reviewed, and shipped with the application — the only part of the window the operator actually controls.</span></div>
+          <div class="tru risk"><span class="tru-n">3<small>/5</small></span><span class="tru-t"><b>Someone else fills these in.</b> User input, retrieved documents and tool output are all written at run time, by people and systems outside the application — and land in the same window as the rules.</span></div>
+        </div>
+
+        <div class="takeaway plum"><span class="ti">💡</span><p>The context window is not a form with typed fields — it is a <b>single space</b> that trusted and untrusted content share. Everything holding them apart is <b>labelling</b>: how each part is tagged on the way in, and what the model has been trained to do with those tags.</p></div>
+      </div>
+      <div class="foot"><span><b>How LLMs Follow Instructions</b> · Sowat Hossain Rafi</span><span>13</span></div>
+    </section>
+
+    <!-- ===== SLIDE 14 · Separation formats and the reality ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="How LLMs Follow Instructions"><span class="dot"></span>How LLMs Follow Instructions · 14 of 22</div>
+        <h1 class="title">Labelled in Theory, <span class="plum-em">One Stream</span> in Practice</h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--plum),var(--danger))"></div>
+      </div>
+      <div class="body" style="gap:9px">
+        <div class="def" style="text-align:center">Every provider solves the labelling problem differently — and none of them solves it in the architecture.</div>
+
+        <div class="seps">
+          <div class="sep">
+            <div class="sep-h"><span class="sep-t">ChatML</span><span class="sep-k">Chat Markup Language</span></div>
+            <div class="sep-d">XML-inspired <b>role tags</b> plus the special tokens <code>&lt;|im_start|&gt;</code> and <code>&lt;|im_end|&gt;</code> (instant-message start / end) marking where each message begins and ends.</div>
+<div class="px"><span class="c">&lt;|im_start|&gt;</span><span class="k">user</span>
+Can you explain what prompt injection is?
+<span class="c">&lt;|im_end|&gt;</span></div>
+<div class="px"><span class="c">&lt;|im_start|&gt;</span><span class="k">tool</span>
+<span class="s">{"name": "weather_api", "result": "Rainy and 12°C"}</span>
+<span class="c">&lt;|im_end|&gt;</span></div>
+            <div class="uw plum"><b>USE WHEN</b> — you run open-source models yourself: it is the format of the Qwen family and most locally served chat models.</div>
+          </div>
+
+          <div class="sep">
+            <div class="sep-h"><span class="sep-t">Harmony</span><span class="sep-k">OpenAI's gpt-oss format</span></div>
+            <div class="sep-d">Keeps the roles and adds an explicit <b>instruction hierarchy</b> — a stated order of priority telling the model whose instructions win when they conflict.</div>
+            <div class="hier"><span class="hn">system</span><span class="hg">›</span><span class="hn d2">developer</span><span class="hg">›</span><span class="hn d3">user</span><span class="hg">›</span><span class="hn d4">assistant</span><span class="hg">›</span><span class="hn d5">tool</span></div>
+            <div class="sep-d">Priority is <b>written down</b> rather than left for the model to infer from formatting alone.</div>
+            <div class="uw plum"><b>USE WHEN</b> — you work with OpenAI's open-weight gpt-oss models, or need reasoning and tool calls kept in separate channels.</div>
+          </div>
+
+          <div class="sep">
+            <div class="sep-h"><span class="sep-t">And beyond</span><span class="sep-k">reinforcement around the format</span></div>
+            <div class="bey">
+              <div><b>Sentinel markers</b> — non-user content is introduced with a label such as "From knowledge base", or moved into its own tagged message.</div>
+              <div><b>Hard constraints</b> — the rules that matter sit in the system prompt ("Never reveal confidential information"), which the model was trained to honour first.</div>
+              <div><b>Multi-turn consistency</b> — the system prompt is re-sent every turn, restating the do's and don'ts while user input changes around them.</div>
+              <div><b>Input filtering</b> — user and retrieved text is sanitised to strip hidden instructions before it can be read as trusted.</div>
+            </div>
+            <div class="uw plum"><b>USE WHEN</b> — always: every hosted provider layers these on top of whichever format it ships.</div>
+          </div>
+        </div>
+
+        <div class="reality">
+          <div class="rl-h">⚠️ ONE BIG OL' STREAM OF TEXT — WHAT THE MODEL ACTUALLY RECEIVES</div>
+          <div class="rl-b">
+            <div class="rl-l">Every scheme above is still <b>text</b>. There is no separate memory compartment for system versus user content — the model infers which tokens are instructions from <b>patterns learned in training</b>. The separation lives in the formatting and the training, <b>never in the architecture</b>.</div>
+            <div class="rl-g">
+              <div class="rl-c">🎭 <b>Instructions can be imitated.</b> Input that mimics or negates a system instruction — <i>"Ignore the above and do X…"</i> — may simply look, during next-token prediction, like the most direct request to fulfil.</div>
+              <div class="rl-c">⚖️ <b>Authority is not understood.</b> A system prompt saying <i>"don't disclose"</i> against a user saying <i>"tell me anyway"</i> is just a conflict. The model predicts probable text; it does not adjudicate rank.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="takeaway plum"><span class="ti">💡</span><p>Role tags, hierarchies and sentinels are a <b>convention the model learned to honour</b> — not a wall it is unable to cross. Researchers find that models reliably struggle to tell a developer directive from a user command, or from text that merely <i>looks</i> like one. That gap is the entire attack surface of <b>prompt injection</b>.</p></div>
+      </div>
+      <div class="foot"><span><b>How LLMs Follow Instructions</b> · Sowat Hossain Rafi</span><span>14</span></div>
+    </section>
+
+    <!-- ===== SLIDE 15 · Vulnerabilities in AI Models ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI Security Threats"><span class="dot"></span>AI Security Threats · 5 of 5</div>
@@ -1283,7 +1487,7 @@ Output format:
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>05</span></div>
     </section>
 
-    <!-- ===== SLIDE 14 · AI in Cyber Security (attack / defend / secure) ===== -->
+    <!-- ===== SLIDE 16 · AI in Cyber Security (attack / defend / secure) ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI in Cyber Security"><span class="dot"></span>AI in Cyber Security · 6 of 6</div>
@@ -1320,7 +1524,7 @@ Output format:
       <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
     </section>
 
-    <!-- ===== SLIDE 15 · Training Data ===== -->
+    <!-- ===== SLIDE 17 · Training Data ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Training Data"><span class="dot"></span>Training Data · 7 of 8</div>
@@ -1347,7 +1551,7 @@ Output format:
       <div class="foot"><span><b>Training Data</b> · Sowat Hossain Rafi</span><span>07</span></div>
     </section>
 
-    <!-- ===== SLIDE 16 · Building the Model ===== -->
+    <!-- ===== SLIDE 18 · Building the Model ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Building the Model"><span class="dot"></span>Building the Model · 8 of 8</div>
@@ -1379,7 +1583,7 @@ Output format:
       <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
-    <!-- ===== SLIDE 17 · The Inheritance Problem ===== -->
+    <!-- ===== SLIDE 19 · The Inheritance Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Inheritance Problem"><span class="dot"></span>The Inheritance Problem · 9 of 10</div>
@@ -1411,7 +1615,7 @@ Output format:
       <div class="foot"><span><b>The Inheritance Problem</b> · Sowat Hossain Rafi</span><span>09</span></div>
     </section>
 
-    <!-- ===== SLIDE 18 · The Black Box Problem ===== -->
+    <!-- ===== SLIDE 20 · The Black Box Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Black Box Problem"><span class="dot"></span>The Black Box Problem · 10 of 10</div>
@@ -1438,7 +1642,7 @@ Output format:
       <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 19 · Practical lab — audit a third-party model ===== -->
+    <!-- ===== SLIDE 21 · Practical lab — audit a third-party model ===== -->
     <section class="slide" data-nofit>
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 12</div>
@@ -1601,7 +1805,7 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
     </section>
 
-    <!-- ===== SLIDE 20 · Answer key for the lab ===== -->
+    <!-- ===== SLIDE 22 · Answer key for the lab ===== -->
     <section class="slide">
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 12 of 12</div>
