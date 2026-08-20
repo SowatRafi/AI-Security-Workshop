@@ -347,6 +347,62 @@
     font-size:clamp(6.5px,.76vw,9.5px);line-height:1.35;
     padding:clamp(3px,.38vw,5px) clamp(9px,1.05vw,14px)}
 
+
+  /* ===== Prompt Engineering section (amber) ===== */
+  .eyebrow[data-sec="Prompt Engineering"]{color:var(--amber)}
+  .eyebrow[data-sec="Prompt Engineering"] .dot{background:var(--amber)}
+  .amb-em{color:var(--amber)}
+  .takeaway.amb{background:linear-gradient(90deg,var(--amber-soft),#fff);border-color:#f5e3c4;border-left-color:var(--amber)}
+  .takeaway.amb p b{color:var(--amber)}
+
+  /* the four pillars — c1 instruction, c2 context, c3 format, c4 constraints */
+  .p4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(7px,.95vw,15px)}
+  .p4card{--c:var(--accent);--cs:var(--accent-soft);background:#fff;border:1px solid var(--line);
+    border-top:3px solid var(--c);border-radius:11px;display:flex;flex-direction:column;gap:.22em;
+    padding:clamp(7px,.85vw,12px) clamp(8px,.95vw,14px)}
+  .p4card.c2{--c:var(--sky);--cs:var(--sky-soft)}
+  .p4card.c3{--c:var(--green);--cs:var(--green-soft)}
+  .p4card.c4{--c:var(--violet);--cs:var(--violet-soft)}
+  .p4h{display:flex;align-items:center;gap:.45em}
+  .pnum{flex:0 0 auto;width:1.45em;height:1.45em;border-radius:50%;background:var(--c);color:#fff;
+    font-family:var(--mono);font-weight:800;font-size:clamp(7.5px,.85vw,11px);
+    display:inline-flex;align-items:center;justify-content:center;line-height:1}
+  .p4t{font-size:clamp(10.5px,1.18vw,15px);font-weight:800;color:var(--c);line-height:1.1}
+  .p4s{font-size:clamp(8px,.88vw,11.5px);color:var(--sub);line-height:1.35}
+  .p4s b{color:var(--ink);font-weight:700}
+  .p4e{font-family:var(--mono);font-size:clamp(7px,.78vw,10px);color:var(--muted);line-height:1.4;
+    background:var(--cs);border-radius:6px;padding:.28em .5em;margin-top:.1em}
+
+  /* the four pillars combined into one worked prompt */
+  .wprompt{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#fff}
+  .wp-h{background:var(--panel2);color:var(--sub);font-family:var(--mono);font-weight:700;
+    font-size:clamp(6.5px,.75vw,9.5px);letter-spacing:.06em;
+    padding:clamp(3px,.4vw,6px) clamp(10px,1.1vw,15px);display:flex;justify-content:space-between;gap:1em}
+  .wp-h span{color:var(--muted);font-weight:600;letter-spacing:.02em;text-transform:none}
+  .wp-b{display:flex;flex-wrap:wrap;gap:clamp(4px,.5vw,8px);
+    padding:clamp(6px,.8vw,12px) clamp(10px,1.1vw,15px)}
+  .wp{--c:var(--accent);--cs:var(--accent-soft);display:inline-flex;align-items:baseline;gap:.4em;
+    background:var(--cs);border-bottom:2px solid var(--c);border-radius:6px;
+    padding:.22em .55em;font-size:clamp(8px,.9vw,12px);color:var(--ink);line-height:1.35}
+  .wp.c2{--c:var(--sky);--cs:var(--sky-soft)}
+  .wp.c3{--c:var(--green);--cs:var(--green-soft)}
+  .wp.c4{--c:var(--violet);--cs:var(--violet-soft)}
+  .wp i{flex:0 0 auto;font-style:normal;font-family:var(--mono);font-weight:800;color:#fff;
+    background:var(--c);border-radius:50%;width:1.25em;height:1.25em;font-size:.72em;
+    display:inline-flex;align-items:center;justify-content:center;align-self:center}
+
+  /* specificity vs verbosity */
+  .spec3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(7px,.95vw,15px)}
+  .sp{--c:var(--danger);background:#fff;border:1px solid var(--line);border-left:3px solid var(--c);
+    border-radius:10px;padding:clamp(6px,.8vw,11px) clamp(8px,.95vw,14px);
+    display:flex;flex-direction:column;gap:.22em}
+  .sp.mid{--c:var(--amber)} .sp.good{--c:var(--green)}
+  .sp-t{font-size:clamp(9px,.98vw,12.5px);font-weight:800;color:var(--c);line-height:1.15}
+  .sp-q{font-family:var(--mono);font-size:clamp(7px,.78vw,10px);color:var(--sub);line-height:1.4;
+    background:var(--panel);border-radius:6px;padding:.28em .5em}
+  .sp-w{font-size:clamp(7.5px,.82vw,10.5px);color:var(--muted);line-height:1.35}
+  .sp-w b{color:var(--ink);font-weight:700}
+
   /* ===== Slides 11-12 · practical lab — third-party model audit ===== */
   .eyebrow[data-sec="Model Supply Chain"]{color:var(--danger)}
   .eyebrow[data-sec="Model Supply Chain"] .dot{background:var(--danger)}
@@ -870,7 +926,73 @@
       <div class="foot"><span><b>LLM Fundamentals</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
-    <!-- ===== SLIDE 9 · Vulnerabilities in AI Models ===== -->
+    <!-- ===== SLIDE 9 · The Anatomy of a Prompt ===== -->
+    <section class="slide">
+      <div class="hd">
+        <div class="eyebrow" data-sec="Prompt Engineering"><span class="dot"></span>Prompt Engineering · 9 of 17</div>
+        <h1 class="title">The Anatomy of a <span class="amb-em">Prompt</span></h1>
+        <div class="rule" style="background:linear-gradient(90deg,var(--amber),#f59e0b)"></div>
+      </div>
+      <div class="body" style="gap:9px">
+        <div class="def" style="text-align:center">A good prompt is not a magic phrase — it is a <b>structured instruction</b>: <b>what</b> you want, <b>how</b> you want it, and <b>what not</b> to do.</div>
+
+        <div class="p4">
+          <div class="p4card c1">
+            <div class="p4h"><span class="pnum">1</span><span class="p4t">Instruction</span></div>
+            <div class="p4s">The task itself, as a <b>clear verb</b>. Removes the ambiguity before anything else can.</div>
+            <div class="p4e">Summarise… · Compare… · Draft a 300-word post…</div>
+          </div>
+          <div class="p4card c2">
+            <div class="p4h"><span class="pnum">2</span><span class="p4t">Context</span></div>
+            <div class="p4s">The <b>background</b>: role, audience, data. Every gap you leave, the model fills by guessing.</div>
+            <div class="p4e">You are an experienced marine biologist…</div>
+          </div>
+          <div class="p4card c3">
+            <div class="p4h"><span class="pnum">3</span><span class="p4t">Output format</span></div>
+            <div class="p4s">What the answer should <b>look like</b> — structure, style, length. What makes it usable as-is.</div>
+            <div class="p4e">bullet points · a table · JSON · under 50 words</div>
+          </div>
+          <div class="p4card c4">
+            <div class="p4h"><span class="pnum">4</span><span class="p4t">Constraints</span></div>
+            <div class="p4s">The <b>boundaries</b>: what to avoid, which rules to follow, where the hard limits sit.</div>
+            <div class="p4e">cite in MLA · no more than 5 bullets · do not speculate</div>
+          </div>
+        </div>
+
+        <div class="wprompt">
+          <div class="wp-h">🧩 THE FOUR, ASSEMBLED INTO ONE PROMPT<span>Order is flexible — completeness is what matters</span></div>
+          <div class="wp-b">
+            <span class="wp c2"><i>2</i>You are a security analyst writing for a non-technical audience.</span>
+            <span class="wp c1"><i>1</i>Summarise these three log samples.</span>
+            <span class="wp c3"><i>3</i>One bullet point each, all under 50 words.</span>
+            <span class="wp c4"><i>4</i>Do not speculate about intent — flag anything you are unsure of.</span>
+          </div>
+        </div>
+
+        <div class="spec3">
+          <div class="sp">
+            <div class="sp-t">✗ Too vague</div>
+            <div class="sp-q">"Write a function to handle user data."</div>
+            <div class="sp-w">Almost no guidance — <b>"handle" could mean anything</b>, so the model picks for you.</div>
+          </div>
+          <div class="sp mid">
+            <div class="sp-t">✗ Too verbose</div>
+            <div class="sp-q">"…validate it but also maybe transform it and handle errors, I don't know what kind — just make it work, etc."</div>
+            <div class="sp-w">The task is <b>buried</b>. The model loses the thread and quietly drops parts of it.</div>
+          </div>
+          <div class="sp good">
+            <div class="sp-t">✓ Just right</div>
+            <div class="sp-q">"Write a JavaScript function that (1) takes a user object with name, email and age, (2) validates the email format, (3) returns the object or throws an error listing the failures."</div>
+            <div class="sp-w"><b>Inputs, checks and outcome</b> all defined — nothing left to guess.</div>
+          </div>
+        </div>
+
+        <div class="takeaway amb"><span class="ti">💡</span><p><b>Structure, not just intent</b> — enough detail to kill the ambiguity, not a word more, then <b>iterate</b>. And note what reaches the model: <b>all four pillars arrive as one block of text</b>, with nothing marking which part came from you. That is the crack <b>prompt injection</b> is built on.</p></div>
+      </div>
+      <div class="foot"><span><b>Prompt Engineering</b> · Sowat Hossain Rafi</span><span>09</span></div>
+    </section>
+
+    <!-- ===== SLIDE 10 · Vulnerabilities in AI Models ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI Security Threats"><span class="dot"></span>AI Security Threats · 5 of 5</div>
@@ -900,7 +1022,7 @@
       <div class="foot"><span><b>AI Foundations</b> · Sowat Hossain Rafi</span><span>05</span></div>
     </section>
 
-    <!-- ===== SLIDE 10 · AI in Cyber Security (attack / defend / secure) ===== -->
+    <!-- ===== SLIDE 11 · AI in Cyber Security (attack / defend / secure) ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="AI in Cyber Security"><span class="dot"></span>AI in Cyber Security · 6 of 6</div>
@@ -937,7 +1059,7 @@
       <div class="foot"><span><b>AI in Cyber Security</b> · Sowat Hossain Rafi</span><span>06</span></div>
     </section>
 
-    <!-- ===== SLIDE 11 · Training Data ===== -->
+    <!-- ===== SLIDE 12 · Training Data ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Training Data"><span class="dot"></span>Training Data · 7 of 8</div>
@@ -964,7 +1086,7 @@
       <div class="foot"><span><b>Training Data</b> · Sowat Hossain Rafi</span><span>07</span></div>
     </section>
 
-    <!-- ===== SLIDE 12 · Building the Model ===== -->
+    <!-- ===== SLIDE 13 · Building the Model ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="Building the Model"><span class="dot"></span>Building the Model · 8 of 8</div>
@@ -996,7 +1118,7 @@
       <div class="foot"><span><b>Building the Model</b> · Sowat Hossain Rafi</span><span>08</span></div>
     </section>
 
-    <!-- ===== SLIDE 13 · The Inheritance Problem ===== -->
+    <!-- ===== SLIDE 14 · The Inheritance Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Inheritance Problem"><span class="dot"></span>The Inheritance Problem · 9 of 10</div>
@@ -1028,7 +1150,7 @@
       <div class="foot"><span><b>The Inheritance Problem</b> · Sowat Hossain Rafi</span><span>09</span></div>
     </section>
 
-    <!-- ===== SLIDE 14 · The Black Box Problem ===== -->
+    <!-- ===== SLIDE 15 · The Black Box Problem ===== -->
     <section class="slide">
       <div class="hd">
         <div class="eyebrow" data-sec="The Black Box Problem"><span class="dot"></span>The Black Box Problem · 10 of 10</div>
@@ -1055,7 +1177,7 @@
       <div class="foot"><span><b>The Black Box Problem</b> · Sowat Hossain Rafi</span><span>10</span></div>
     </section>
 
-    <!-- ===== SLIDE 15 · Practical lab — audit a third-party model ===== -->
+    <!-- ===== SLIDE 16 · Practical lab — audit a third-party model ===== -->
     <section class="slide" data-nofit>
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 11 of 12</div>
@@ -1218,7 +1340,7 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       <div class="foot"><span><b>Model Supply Chain</b> · Sowat Hossain Rafi</span><span>11</span></div>
     </section>
 
-    <!-- ===== SLIDE 16 · Answer key for the lab ===== -->
+    <!-- ===== SLIDE 17 · Answer key for the lab ===== -->
     <section class="slide">
       <div class="hd row">
         <div class="eyebrow" data-sec="Model Supply Chain"><span class="dot"></span>Model Supply Chain · 12 of 12</div>
