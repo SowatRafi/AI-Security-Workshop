@@ -1,11 +1,21 @@
-# AtlasBot (hardened) — use this if the room breaks the standard build too quickly.
+# AtlasBot (hardened) — a teaching EXHIBIT, not a difficulty setting.
 #
 # Build:  ollama create atlasbot-hard -f ./Modelfile.hardened
 # Run:    ollama run atlasbot-hard
 #
-# The extra SECURITY block is a Layer-1 defence (harden the prompt). It raises the
-# bar; it does not close the hole, and students should be told so. Same fictional
-# canary as the standard build.
+# The SECURITY block below is a good-faith Layer-1 defence: harden the system prompt.
+# Tested against llama3.2 it did NOT work. It leaked the canary to documentation
+# framing, to format-example framing and to a fictional handover note -- the last of
+# which the standard build had answered with an invented name. Documentation framing
+# also made it recite this SECURITY block verbatim, handing an attacker the ruleset.
+#
+# Use it to show the room that hardening the prompt alone buys nothing, which is the
+# argument for guardrails, least privilege and output handling. See README.md,
+# "Using the hardened build properly". Same fictional canary as the standard build.
+#
+# Note what this file cannot avoid: to tell the model what to protect, it must name
+# the secret -- so the instruction that guards the value also repeats it. The real
+# fix is to keep the value out of the prompt entirely.
 
 FROM llama3.2
 

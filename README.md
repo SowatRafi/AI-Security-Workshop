@@ -85,9 +85,12 @@ instruction prints, canary included, with no attack at all. **A system prompt is
 the model, not an access-control mechanism.**
 
 The [facilitator runbook](labs/prompt-injection-in-action/README.md) carries the setup, speaker
-notes, the demonstration script, the student brief, the debrief answers, and guidance for making the
-exercise easier or harder — including a tested caveat about how little a hardened system prompt
-actually buys on its own.
+notes, the demonstration script, the student brief, the debrief answers and the instructor notes.
+Every technique in it was run against `llama3.2` and the observed result recorded, including two
+findings that are now taught rather than tidied away: fictional framing tends to make the model
+**invent** a plausible code name rather than leak the real one, and a carefully hardened system
+prompt leaked *more* readily than the plain one — which is the workshop's own argument for
+defence-in-depth, demonstrated live.
 
 ## Deck A — Prompt Security Workshop
 
