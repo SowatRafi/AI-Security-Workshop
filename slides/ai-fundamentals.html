@@ -2434,6 +2434,8 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
     // origin. A direct call to 127.0.0.1:11434 is both cross-origin and a local-network
     // request, and browsers gate each of those; a same-origin path is neither.
     var SERVED=(location.protocol==='http:'||location.protocol==='https:');
+    var UA=navigator.userAgent;
+    var LAUNCHER=/Mac/i.test(UA)?'Start-Workshop.command':(/Win/i.test(UA)?'Start-Workshop.cmd':'labs/start-workshop.sh');
     var API=SERVED?'/ollama/api/chat':'http://127.0.0.1:11434/api/chat';
     var body=document.getElementById('pcBody'), inp=document.getElementById('pcIn'),
         send=document.getElementById('pcSend'), clr=document.getElementById('pcClear'),
@@ -2459,8 +2461,8 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
         (!SERVED?('<li><b>This is it, almost certainly.</b> The deck was opened straight from a file. '+
           'Browsers block a page opened that way from reaching a local server — the request never leaves, '+
           'whatever Ollama is configured to allow.<br><br>'+
-          '<b>Fix:</b> close this, open the workshop folder and double-click '+
-          '<code>Start Workshop.cmd</code>. It sets everything up and reopens the deck so the chat works. '+
+          '<b>Fix:</b> close this, open the workshop folder and double-click <code>'+LAUNCHER+'</code>. '+
+          'It sets everything up and reopens the deck with the chat working. '+
           'Every slide works fine from a file — only this chat needs it.</li>'):'')+
         '<li>Is Ollama running? Check <code>http://localhost:11434</code> says “Ollama is running”.</li>'+
         '<li>Is the model built? <code>ollama create '+esc(model)+' -f ./Modelfile</code> from '+

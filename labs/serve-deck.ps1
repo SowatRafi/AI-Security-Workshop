@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 #  AI Security Workshop - launcher.
 #
-#  Double-click "Start Workshop.cmd" in the folder above; it runs this.
+#  Double-click "Start-Workshop.cmd" in the folder above; it runs this.
 #
 #  What this does:
 #    1. finds Ollama and starts it if it is not already running
