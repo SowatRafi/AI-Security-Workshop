@@ -14,6 +14,7 @@ and it works with no internet and nothing to install.
 | [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (26 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
 | [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–18) |
+| [`labs/serve-deck.cmd`](labs/serve-deck.cmd) | Serves the decks at `http://localhost:8000` so the in-slide chat can reach Ollama |
 
 ## Deck B — AI Fundamentals
 
@@ -80,6 +81,15 @@ The exercise is deliberately built around the attacker's *process* rather than a
 use it normally, observe, probe its instructions, attempt injection, observe again — and slide 17
 carries three progressive hints that open on click, so the room can be nudged without being told.
 
+**Slides 16 and 17 have a chat window built in.** A *"💬 Open the live chat"* button opens a panel
+that talks to Ollama on the participant's own machine, so they can run the whole attack without
+leaving the deck. It keeps conversation history, has a **Reset** button for starting an attempt
+fresh, and switches between the standard and hardened builds for the defence-in-depth
+demonstration. It is the only network call in the deck and it never leaves `localhost`; if Ollama
+is not reachable the panel says exactly what to do rather than failing silently. Run
+[`labs/serve-deck.cmd`](labs/serve-deck.cmd) and open the deck at `http://localhost:8000` for it to
+work with no Ollama configuration at all — the terminal remains a fine alternative either way.
+
 It closes on the point the whole section exists to make: run `/show system` and the entire hidden
 instruction prints, canary included, with no attack at all. **A system prompt is an instruction to
 the model, not an access-control mechanism.**
@@ -102,6 +112,10 @@ with Ollama, so participants break a chatbot before they fix it.
 ## Running the decks
 
 Open either HTML file in any modern browser — double-click it, or drag it onto a browser window.
+
+The one exception is the **live chat on Deck B slides 16–17**, which needs the deck served over
+`http://localhost` (run [`labs/serve-deck.cmd`](labs/serve-deck.cmd)) because Ollama refuses browser
+calls from a `file://` page. Everything else in both decks works offline from a double-click.
 
 | Control | Action |
 |---------|--------|
