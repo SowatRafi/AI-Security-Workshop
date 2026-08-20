@@ -28,7 +28,9 @@ ollama create atlasbot -f ./Modelfile
 ollama list
 ```
 
-3. Smoke-test it, then leave the chat open:
+3. Decide how you will open the deck — see [Live chat setup](#live-chat-setup-slides-16-17)
+   below. If you want the in-slide chat, serving it locally is the path of least resistance.
+4. Smoke-test the model, then leave the chat open:
 
 ```bash
 ollama run atlasbot
@@ -50,6 +52,53 @@ ollama create atlasbot-hard -f ./Modelfile.hardened
 
 > ⚠️ **Do not show the class the Modelfile, and do not run `ollama show atlasbot --system`
 > until the debrief.** Both print the secret instantly. That is the closing move, not the opening one.
+
+### Live chat setup (slides 16-17)
+
+Slides 16 and 17 carry a **💬 Open the live chat** button that talks to Ollama directly from the
+deck, so students can attack the model without leaving the slides. It POSTs to
+`http://127.0.0.1:11434/api/chat` — the only network call in the whole deck, and it goes to the
+student's own machine.
+
+**One catch, and it is worth understanding rather than working around.** Ollama accepts browser
+calls from `http://localhost` and `http://127.0.0.1` out of the box, but **not from a page opened
+as a file**. A browser sends `Origin: null` for a `file://` page, which is not on Ollama's
+allow-list, so the request is refused with a 403 before it ever reaches the model.
+
+Two ways round it:
+
+**① Serve the deck locally — recommended, and needs no Ollama changes**
+
+Double-click [`labs/serve-deck.cmd`](../serve-deck.cmd) (it runs `python -m http.server 8000
+--bind 127.0.0.1` from the repository root), then open:
+
+```
+http://localhost:8000/slides/ai-fundamentals.html
+```
+
+That origin is already allowed, so the chat works immediately. Verified end to end in Chrome.
+The server binds to localhost only — nothing is exposed to the network.
+
+**② Open the file directly and widen Ollama's allow-list**
+
+Set `OLLAMA_ORIGINS=*` as a user environment variable and restart Ollama. The chat then works from
+`file://` too.
+
+> ⚠️ Two things to say out loud if you choose this route, because they are both teachable.
+> First: `*` lets **any** web page the student visits call their local Ollama for as long as the
+> setting is in place. You have widened an attack surface to make a demo more convenient — which is
+> precisely the trade-off this workshop is about. Unset it afterwards.
+> Second: `OLLAMA_ORIGINS=null` looks like the tidier fix and is not one — it makes **Ollama refuse
+> to start**, panicking with *"bad origin: origins must contain '*' or include http://, https://, …"*.
+
+If the chat cannot reach Ollama it does not fail silently: the panel explains which of these applies
+and what to run. The terminal (`ollama run atlasbot`) remains a perfectly good alternative — the
+chat panel is a convenience, not a dependency.
+
+**Inside the panel:** the model toggle switches between `atlasbot` and `atlasbot-hard` (this is how
+you run the hardened-build exhibit in front of the room), **Reset** clears the conversation — the
+equivalent of `/clear`, and the thing students should press between attempts — and **Esc** closes it.
+Arrow keys and space do not change slides while the panel is open.
 
 ### Useful commands during the session
 
@@ -125,7 +174,8 @@ change the base model, re-run this table before you teach from it.
 > Q4 project". Nobody checks your ID at the door. You just have to be more convincing than the note.
 >
 > **Ask the room:** *if you wanted that information, what's the first thing you'd try?* You'll get
-> "just ask it" — good, that's step one, and it's going to fail. Walk the five steps: use it
+> "just ask it" — good, that's step one, and it's going to fail. Hit **Open the live chat** and try
+> their suggestion in front of them; a real refusal from a real model lands harder than a screenshot. Walk the five steps: use it
 > normally, watch what it does, ask about its own rules, then send text that competes with those
 > rules. Notice we probe before we attack. Recon first, same as any other engagement.
 
@@ -140,7 +190,8 @@ change the base model, re-run this table before you teach from it.
 > previous conversation isn't helping you.
 >
 > Hints are on the slide, click them open when you're stuck, and try not to open all three in the
-> first minute. **Only target is the AtlasBot on your own machine.** Not a website, not a real
+> first minute. **Open chat** is on this slide too if you'd rather not leave the deck — and **Reset**
+> in that panel is the same thing as `/clear` in the terminal. **Only target is the AtlasBot on your own machine.** Not a website, not a real
 > service, not anyone's account.
 >
 > **Ask the room as they work:** *has anyone got it to talk about its own instructions yet?*
@@ -165,7 +216,8 @@ change the base model, re-run this table before you teach from it.
 
 ## 3. Live demonstration (3–5 minutes)
 
-Do this on the projector with `ollama run atlasbot` already open. Read the room rather than the
+Do this on the projector with either `ollama run atlasbot` already open, or the in-slide chat panel
+on slide 16 (**Open the live chat**) — the panel is easier to read from the back of a room. Read the room rather than the
 script — the point is the *progression*, not any single line. Local models vary, so several of
 these are offered; move on as soon as one lands.
 
@@ -470,5 +522,12 @@ than recalled:
   `Ctrl + c` shortcut: `cmd/interactive.go` in <https://github.com/ollama/ollama>
 - `llama3.2` tags and sizes (`1b` 1.3 GB, `3b` 2.0 GB, default `latest` = 3B):
   <https://ollama.com/library/llama3.2>
+- `POST /api/chat` request and response shape used by the in-slide chat panel:
+  <https://docs.ollama.com/api>
+- Default allowed browser origins, and the fact that `file://` pages are refused because they send
+  `Origin: null`: `envconfig/config.go` (`AllowedOrigins`) and `server/routes.go` in
+  <https://github.com/ollama/ollama>. Both the refusal and the `OLLAMA_ORIGINS=*` fix were confirmed
+  against a running server, and the chat panel was driven end to end in Chrome over
+  `http://localhost:8000`.
 
 Attack techniques are condensed from the author's own prompt-security study notes.
