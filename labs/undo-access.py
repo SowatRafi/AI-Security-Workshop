@@ -12,7 +12,7 @@ Run it:
     py -3 labs/undo-access.py            (Windows)
 
 The workshop models are left alone. Remove those with:
-    ollama rm atlasbot atlasbot-hard
+    ollama rm nora nora-hard
 """
 
 import subprocess

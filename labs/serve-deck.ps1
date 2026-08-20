@@ -6,7 +6,7 @@
 #  What this does:
 #    1. finds Ollama and starts it if it is not already running
 #    2. downloads the open-source model (llama3.2) the first time only
-#    3. builds AtlasBot, the practice assistant the students attack
+#    3. builds Nora, the practice assistant the students attack
 #    4. serves this folder at http://localhost:8000
 #    5. proxies /ollama/* through to Ollama, so the slides talk to the model
 #       on their OWN origin
@@ -183,20 +183,20 @@ if (-not $ollama) {
     }
 
     if ($haveModel) {
-      if ($have -notmatch 'atlasbot') {
-        Say 'Building AtlasBot, the practice assistant...'
+      if ($have -notmatch 'nora') {
+        Say 'Building Nora, the practice assistant...'
         Push-Location $lab
-        & $ollama create atlasbot      -f ./Modelfile          | Out-Null
-        & $ollama create atlasbot-hard -f ./Modelfile.hardened | Out-Null
+        & $ollama create nora      -f ./Modelfile          | Out-Null
+        & $ollama create nora-hard -f ./Modelfile.hardened | Out-Null
         Pop-Location
       }
       $check = (& $ollama list 2>$null) -join "`n"
-      if ($check -match 'atlasbot') {
+      if ($check -match 'nora') {
         $modelReady = $true
-        Good 'AtlasBot is ready'
+        Good 'Nora is ready'
         Enable-FilePageAccess $ollama $appExe
       }
-      else { Warn 'Could not build AtlasBot - see labs\prompt-injection-in-action\README.md' }
+      else { Warn 'Could not build Nora - see labs\prompt-injection-in-action\README.md' }
     }
   } else {
     Warn 'Ollama would not start - every slide still works, but the live chat will not.'

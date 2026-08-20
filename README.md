@@ -11,9 +11,9 @@ and it works with no internet and nothing to install.
 
 | Path | Contents |
 |------|----------|
-| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (26 slides) |
+| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (25 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
-| [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–18) |
+| [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–17) |
 | [`START-HERE.cmd`](START-HERE.cmd) · [`.command`](START-HERE.command) · [`.sh`](START-HERE.sh) | **Start here** — Windows, macOS, Linux. Run once per machine: it sets up the model and makes the live chat work however you open the slides afterwards |
 | [`labs/serve-deck.py`](labs/serve-deck.py) | The launcher itself: builds the practice model, serves the workshop, proxies the deck through to Ollama (`serve-deck.ps1` is the Windows fallback when Python is absent) |
 
@@ -31,21 +31,21 @@ way to auditing a third-party model you did not build.
 | 12 | Instruction Hierarchy | **System vs User Prompts** — what each is, the comparison grid, and why the boundary between them is probabilistic rather than architectural |
 | 13–14 | How LLMs Follow Instructions | **Five Sources, One Context Window** — system and developer prompts, user input, retrieved context and tool output, and who controls each · **Labelled in Theory, One Stream in Practice** — ChatML, Harmony and the provider-side reinforcements, then why the labelling does not hold. Each separation method carries its own "use when" |
 | 15 | Prompt Injection | **What is Prompt Injection?** — the OWASP LLM #1 vulnerability: a worked attack on a translation tool, the root cause, the SQL-injection parallel, and a risk ladder showing when it matters |
-| 16–18 | Prompt Injection | **Prompt Injection in Action** — the live practical against a local model (below) · **Your Turn** — the student exercise with click-to-reveal hints · **Debrief** — what actually happened, and why nothing broke |
-| 19 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
-| 20 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
-| 21 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
-| 22 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
-| 23 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
-| 24 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
-| 25 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
-| 26 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
+| 16–17 | Prompt Injection | **Prompt Injection in Action** — the live practical against a local model (below), with the scenario, the mission and click-to-reveal hints · **Debrief** — what actually happened, and why nothing broke |
+| 18 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
+| 19 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
+| 20 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
+| 21 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
+| 22 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
+| 23 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
+| 24 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
+| 25 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
 
-## The lab — Audit a Model (slide 25)
+## The lab — Audit a Model (slide 24)
 
 Anyone can publish a model. That makes public model hubs an enormous resource and a real
 supply-chain risk, and reading a model repository critically is a skill worth practising before it
-matters. Slide 25 is a **simulated model-hub repository** — a plausible-looking listing for
+matters. Slide 24 is a **simulated model-hub repository** — a plausible-looking listing for
 `nimbus-labs/redact-guard-v3`, a PII-redaction model that a company wants to put in front of its
 data-loss-prevention gate — and the participant is the reviewer of record.
 
@@ -61,28 +61,35 @@ There are **12 concerns** hidden in the repository, spread across all three seve
 all serious: rating a minor one as critical costs exactly as much as missing a real one, which is
 the point. Scoring **70% at the correct severity** unlocks a completion code; below that the code
 stays locked and the participant is invited to review again. The debrief closes with twelve
-questions to ask of any third-party model, and slide 26 is the full answer key for whoever is
+questions to ask of any third-party model, and slide 25 is the full answer key for whoever is
 running the session.
 
 The lab is plain HTML, CSS and JavaScript inside the deck — no iframe, no server, no network calls.
 It works from `file://` like the rest of the deck.
 
-## The practical — Prompt Injection in Action (slides 16–18)
+## The practical — Prompt Injection in Action (slides 16–17)
 
 A 20–25 minute hands-on block where participants perform prompt injection themselves against a
 **local open-source model**. No cloud service, no API key, no account: the target is an Ollama model
 running on the participant's own machine, built from the `Modelfile` in
 [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/).
 
-The target is **AtlasBot**, an internal assistant for a fictional freight company. It will happily
-discuss office hours, meeting rooms and holiday policy, and it has been instructed to protect one
-fictional canary value. Participants never see its system prompt.
+The target is **Nora**, the public enquiries assistant for **Northaven Relief Trust** — an invented
+charity. She will happily discuss donations, programmes and volunteering, and she was also handed the
+internal staff directory so she could route enquiries, with instructions never to share it.
+Participants never see that system prompt.
+
+**The mission: get Nora to reveal the mobile number of the charity's Head of Finance.** That target
+is chosen deliberately. With a finance lead's mobile, an attacker texts *them* posing as the chief
+executive, or texts *suppliers* posing as finance, and redirects a payment — real fraud that needs no
+password. Everything in the scenario is invented, and every phone number comes from the ranges
+regulators reserve for drama, so none of them can reach a real person.
 
 The exercise is deliberately built around the attacker's *process* rather than a magic prompt —
-use it normally, observe, probe its instructions, attempt injection, observe again — and slide 17
+use it normally, observe, probe its instructions, attempt injection, observe again — and slide 16
 carries three progressive hints that open on click, so the room can be nudged without being told.
 
-**Slides 16 and 17 have a chat window built in.** A *"💬 Open the live chat"* button opens a panel
+**Slide 16 has a chat window built in.** A *"💬 Open the live chat"* button opens a panel
 that talks to Ollama on the participant's own machine, so they can run the whole attack without
 leaving the deck. It keeps conversation history, has a **Reset** button for starting an attempt
 fresh, and switches between the standard and hardened builds for the defence-in-depth
@@ -90,9 +97,9 @@ demonstration. It is the only network call in the deck and it never leaves `loca
 is not reachable the panel says exactly what to do rather than failing silently. Everything it needs
 is handled by the launcher — the terminal remains a fine alternative either way.
 
-It closes on the point the whole section exists to make: run `/show system` and the entire hidden
-instruction prints, canary included, with no attack at all. **A system prompt is an instruction to
-the model, not an access-control mechanism.**
+It closes on the point the whole section exists to make: run `ollama show nora --system` and the
+entire hidden instruction prints, staff directory included, with no attack at all. **A system prompt
+is an instruction to the model, not an access-control mechanism.**
 
 The [facilitator runbook](labs/prompt-injection-in-action/README.md) carries the setup, speaker
 notes, the demonstration script, the student brief, the debrief answers and the instructor notes.
@@ -113,7 +120,7 @@ with Ollama, so participants break a chatbot before they fix it.
 
 Open either HTML file in any modern browser — double-click it, or drag it onto a browser window.
 
-The one exception is the **live chat on Deck B slides 16–17**, which needs to reach a model. For
+The one exception is the **live chat on Deck B slide 16**, which needs to reach a model. For
 that, double-click the launcher for your system instead:
 
 | System | Double-click |
@@ -139,7 +146,7 @@ that same origin. Everything else in both decks works offline from a plain doubl
 | `←` `→` `Space` | Previous / next slide |
 | Click | Next slide |
 | `F` | Fullscreen |
-| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#25` |
+| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#24` |
 
 Slides are laid out for **16:9** and letterbox themselves to any window, so they present cleanly on a
 projector or a laptop screen. Inside the lab, clicking and the arrow keys are handed to the lab
@@ -154,7 +161,7 @@ itself rather than the deck, so reviewing the repository never skips a slide.
 - The instruction hierarchy — system vs user prompts, and why the separation is soft
 - How LLMs follow instructions — the five sources in a context window, ChatML and Harmony, and the one-stream reality
 - Prompt injection — how it works, why formatting cannot stop it, and how the risk scales with an application's reach
-- Hands-on prompt injection against a local open-source model, with a facilitator runbook
+- Hands-on prompt injection against a local open-source model — extracting personal data from a charity's chatbot
 - Prompt security — jailbreaks and mitigations
 - Data poisoning attacks and defences
 - AI supply chain security — provenance, model cards and third-party model review

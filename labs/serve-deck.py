@@ -10,7 +10,7 @@ Double-click the launcher for your system; it runs this:
 What this does:
   1. finds Ollama, and starts it if it is not already running
   2. downloads the open-source model (llama3.2) the first time only
-  3. builds AtlasBot, the practice assistant the students attack
+  3. builds Nora, the practice assistant the students attack
   4. serves this folder at http://localhost:8000
   5. proxies /ollama/* through to Ollama, so the slides reach the model
      on their OWN origin
@@ -328,21 +328,21 @@ def prepare_model():
     else:
         good(f"Model {MODEL} is downloaded")
 
-    if "atlasbot" not in listing:
-        say("Building AtlasBot, the practice assistant...")
-        ok1, _ = run(exe, "create", "atlasbot", "-f", "./Modelfile")
-        run(exe, "create", "atlasbot-hard", "-f", "./Modelfile.hardened")
+    if "nora" not in listing:
+        say("Building Nora, the practice assistant...")
+        ok1, _ = run(exe, "create", "nora", "-f", "./Modelfile")
+        run(exe, "create", "nora-hard", "-f", "./Modelfile.hardened")
         if not ok1:
-            warn("Could not build AtlasBot - see labs/prompt-injection-in-action/README.md")
+            warn("Could not build Nora - see labs/prompt-injection-in-action/README.md")
             return False
 
     ok, listing = run(exe, "list")
-    if ok and "atlasbot" in listing:
-        good("AtlasBot is ready")
+    if ok and "nora" in listing:
+        good("Nora is ready")
         enable_file_page_access(exe)
         return True
 
-    warn("Could not build AtlasBot - see labs/prompt-injection-in-action/README.md")
+    warn("Could not build Nora - see labs/prompt-injection-in-action/README.md")
     return False
 
 
