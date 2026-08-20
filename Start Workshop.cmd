@@ -1,18 +1,20 @@
 @echo off
 REM ---------------------------------------------------------------------------
-REM  AI Security Workshop - start here.
+REM  AI SECURITY WORKSHOP - START HERE
 REM
-REM  Double-click this file. It serves the workshop folder at
-REM  http://localhost:8000 and opens the main deck in your browser.
+REM  Double-click this file. That is the whole setup.
 REM
-REM  Why not just open the HTML? Because the live chat on slides 16-17 talks to
-REM  Ollama, and Ollama refuses browser calls from a page opened straight off
-REM  disk. Served from localhost it works with no Ollama configuration at all.
+REM  It will:
+REM    - start Ollama if it is not already running
+REM    - download the open-source model the first time (about 2 GB)
+REM    - build AtlasBot, the assistant the students attack
+REM    - open the slides in your browser with the live chat working
 REM
-REM  The slides themselves work fine either way - this is only needed for the
-REM  live chat. Nothing is exposed to the network; the server binds to localhost.
+REM  Needs Ollama installed once, from https://ollama.com/download
+REM  Nothing else: no Python, no accounts, no API keys, no admin rights.
 REM
-REM  Keep the window that opens. Closing it stops the server.
+REM  Keep the window that opens - closing it stops the workshop server.
+REM  Nothing is exposed to the network; everything stays on this machine.
 REM ---------------------------------------------------------------------------
 
 title AI Security Workshop
@@ -20,7 +22,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0labs\serve-deck.ps
 
 if errorlevel 1 (
   echo.
-  echo   The server stopped unexpectedly.
+  echo   Something went wrong above.
   echo.
   pause
 )

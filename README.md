@@ -14,8 +14,8 @@ and it works with no internet and nothing to install.
 | [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (26 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
 | [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–18) |
-| [`Start Workshop.cmd`](Start%20Workshop.cmd) | Double-click to serve the decks at `http://localhost:8000` and open the main deck — needed only for the in-slide live chat |
-| [`labs/serve-deck.ps1`](labs/serve-deck.ps1) | The small Windows-only static server behind that launcher |
+| [`Start Workshop.cmd`](Start%20Workshop.cmd) | **Start here.** One double-click sets up the model and opens the decks with the live chat working |
+| [`labs/serve-deck.ps1`](labs/serve-deck.ps1) | The launcher itself: builds the practice model, serves the workshop, proxies the deck through to Ollama |
 
 ## Deck B — AI Fundamentals
 
@@ -87,9 +87,8 @@ that talks to Ollama on the participant's own machine, so they can run the whole
 leaving the deck. It keeps conversation history, has a **Reset** button for starting an attempt
 fresh, and switches between the standard and hardened builds for the defence-in-depth
 demonstration. It is the only network call in the deck and it never leaves `localhost`; if Ollama
-is not reachable the panel says exactly what to do rather than failing silently. Start the deck
-with **`Start Workshop.cmd`** for it to work with no Ollama configuration at all — the terminal
-remains a fine alternative either way.
+is not reachable the panel says exactly what to do rather than failing silently. Everything it needs
+is handled by **`Start Workshop.cmd`** — the terminal remains a fine alternative either way.
 
 It closes on the point the whole section exists to make: run `/show system` and the entire hidden
 instruction prints, canary included, with no attack at all. **A system prompt is an instruction to
@@ -114,10 +113,15 @@ with Ollama, so participants break a chatbot before they fix it.
 
 Open either HTML file in any modern browser — double-click it, or drag it onto a browser window.
 
-The one exception is the **live chat on Deck B slides 16–17**. Ollama refuses browser calls from a
-`file://` page, so for the chat, double-click **`Start Workshop.cmd`** instead — it serves the decks
-at `http://localhost:8000` and opens the main one. It needs nothing installed beyond Windows itself.
-Everything else in both decks works offline from a plain double-click.
+The one exception is the **live chat on Deck B slides 16–17**, which needs to reach a model. For
+that, double-click **`Start Workshop.cmd`** instead: it starts Ollama, downloads the model the first
+time, builds the practice assistant, and opens the deck with the chat working. Nothing to install
+beyond [Ollama](https://ollama.com/download) itself — no Python, no accounts, no API keys, no admin
+rights, and no Ollama configuration.
+
+Browsers deliberately stop a page opened off disk from reaching a local server, so the launcher
+serves the workshop at `http://localhost:8000` and passes the deck's requests through to Ollama on
+that same origin. Everything else in both decks works offline from a plain double-click.
 
 | Control | Action |
 |---------|--------|
