@@ -2430,7 +2430,11 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
      Everything else stays offline. */
   (function(){
     var pc=document.getElementById('pichat'); if(!pc) return;
-    var API='http://127.0.0.1:11434/api/chat';
+    // Served by the workshop launcher? Then talk to the model through the page's OWN
+    // origin. A direct call to 127.0.0.1:11434 is both cross-origin and a local-network
+    // request, and browsers gate each of those; a same-origin path is neither.
+    var SERVED=(location.protocol==='http:'||location.protocol==='https:');
+    var API=SERVED?'/ollama/api/chat':'http://127.0.0.1:11434/api/chat';
     var body=document.getElementById('pcBody'), inp=document.getElementById('pcIn'),
         send=document.getElementById('pcSend'), clr=document.getElementById('pcClear'),
         dot=document.getElementById('pcDot'), model='atlasbot', history=[], busy=false;
@@ -2452,11 +2456,12 @@ spans = <span class="f">redactor</span>(<span class="s">"Please refund the card 
       var isFile=(location.protocol==='file:'||location.origin==='null');
       d.innerHTML='<b>Can’t reach the model.</b> Nothing is broken — the chat just has nothing to talk to yet.'+
         '<ol>'+
-        (isFile?('<li><b>This is almost certainly it.</b> The deck was opened straight from a file, and Ollama '+
-          'refuses browser calls from a <code>file://</code> page — it answers 403 before the model is ever asked. '+
-          'Close this, go to the workshop folder and double-click <code>Start Workshop.cmd</code>. '+
-          'It serves the deck at <code>http://localhost:8000</code>, which Ollama accepts with no configuration. '+
-          'The slides work fine from a file — only this chat needs it.</li>'):'')+
+        (!SERVED?('<li><b>This is it, almost certainly.</b> The deck was opened straight from a file. '+
+          'Browsers block a page opened that way from reaching a local server — the request never leaves, '+
+          'whatever Ollama is configured to allow.<br><br>'+
+          '<b>Fix:</b> close this, open the workshop folder and double-click '+
+          '<code>Start Workshop.cmd</code>. It sets everything up and reopens the deck so the chat works. '+
+          'Every slide works fine from a file — only this chat needs it.</li>'):'')+
         '<li>Is Ollama running? Check <code>http://localhost:11434</code> says “Ollama is running”.</li>'+
         '<li>Is the model built? <code>ollama create '+esc(model)+' -f ./Modelfile</code> from '+
         '<code>labs/prompt-injection-in-action/</code>.</li>'+
