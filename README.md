@@ -11,9 +11,9 @@ and it works with no internet and nothing to install.
 
 | Path | Contents |
 |------|----------|
-| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (25 slides) |
+| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (26 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
-| [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–17) |
+| [`labs/prompt-injection-in-action/`](labs/prompt-injection-in-action/) | Facilitator runbook and Ollama `Modelfile`s for the live prompt-injection practical (Deck B, slides 16–18) |
 | [`START-HERE.cmd`](START-HERE.cmd) · [`.command`](START-HERE.command) · [`.sh`](START-HERE.sh) | **Start here** — Windows, macOS, Linux. Run once per machine: it sets up the model and makes the live chat work however you open the slides afterwards |
 | [`labs/serve-deck.py`](labs/serve-deck.py) | The launcher itself: builds the practice model, serves the workshop, proxies the deck through to Ollama (`serve-deck.ps1` is the Windows fallback when Python is absent) |
 
@@ -31,21 +31,21 @@ way to auditing a third-party model you did not build.
 | 12 | Instruction Hierarchy | **System vs User Prompts** — what each is, the comparison grid, and why the boundary between them is probabilistic rather than architectural |
 | 13–14 | How LLMs Follow Instructions | **Five Sources, One Context Window** — system and developer prompts, user input, retrieved context and tool output, and who controls each · **Labelled in Theory, One Stream in Practice** — ChatML, Harmony and the provider-side reinforcements, then why the labelling does not hold. Each separation method carries its own "use when" |
 | 15 | Prompt Injection | **What is Prompt Injection?** — the OWASP LLM #1 vulnerability: a worked attack on a translation tool, the root cause, the SQL-injection parallel, and a risk ladder showing when it matters |
-| 16–17 | Prompt Injection | **Prompt Injection in Action** — the live practical against a local model (below), with the scenario, the mission and click-to-reveal hints · **Debrief** — what actually happened, and why nothing broke |
-| 18 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
-| 19 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
-| 20 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
-| 21 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
-| 22 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
-| 23 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
-| 24 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
-| 25 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
+| 16–18 | Prompt Injection | **Prompt Injection in Action** — the live practical against a local model (below), with the scenario, the mission and click-to-reveal hints · **Debrief** — what actually happened · **Solution** — the measured answer key: which attacks work, and why hardening the prompt made it worse |
+| 19 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
+| 20 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
+| 21 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
+| 22 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
+| 23 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
+| 24 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
+| 25 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
+| 26 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
 
-## The lab — Audit a Model (slide 24)
+## The lab — Audit a Model (slide 25)
 
 Anyone can publish a model. That makes public model hubs an enormous resource and a real
 supply-chain risk, and reading a model repository critically is a skill worth practising before it
-matters. Slide 24 is a **simulated model-hub repository** — a plausible-looking listing for
+matters. Slide 25 is a **simulated model-hub repository** — a plausible-looking listing for
 `nimbus-labs/redact-guard-v3`, a PII-redaction model that a company wants to put in front of its
 data-loss-prevention gate — and the participant is the reviewer of record.
 
@@ -61,13 +61,13 @@ There are **12 concerns** hidden in the repository, spread across all three seve
 all serious: rating a minor one as critical costs exactly as much as missing a real one, which is
 the point. Scoring **70% at the correct severity** unlocks a completion code; below that the code
 stays locked and the participant is invited to review again. The debrief closes with twelve
-questions to ask of any third-party model, and slide 25 is the full answer key for whoever is
+questions to ask of any third-party model, and slide 26 is the full answer key for whoever is
 running the session.
 
 The lab is plain HTML, CSS and JavaScript inside the deck — no iframe, no server, no network calls.
 It works from `file://` like the rest of the deck.
 
-## The practical — Prompt Injection in Action (slides 16–17)
+## The practical — Prompt Injection in Action (slides 16–18)
 
 A 20–25 minute hands-on block where participants perform prompt injection themselves against a
 **local open-source model**. No cloud service, no API key, no account: the target is an Ollama model
@@ -100,6 +100,13 @@ is handled by the launcher — the terminal remains a fine alternative either wa
 It closes on the point the whole section exists to make: run `ollama show nora --system` and the
 entire hidden instruction prints, staff directory included, with no attack at all. **A system prompt
 is an instruction to the model, not an access-control mechanism.**
+
+**Slide 18 is the answer key**, and it is measured rather than asserted: eight techniques, three runs
+each, against both builds. Demanding the number never works; asking for the *document that contains
+it* works almost every time. It also carries the result worth the whole session — given the same
+polite pretext, the **hardened** build hands over the mobile while the standard one gives only the
+public office line. More rules meant more text, and the directory sits inside the instruction meant
+to guard it.
 
 The [facilitator runbook](labs/prompt-injection-in-action/README.md) carries the setup, speaker
 notes, the demonstration script, the student brief, the debrief answers and the instructor notes.
@@ -146,7 +153,7 @@ that same origin. Everything else in both decks works offline from a plain doubl
 | `←` `→` `Space` | Previous / next slide |
 | Click | Next slide |
 | `F` | Fullscreen |
-| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#24` |
+| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#25` |
 
 Slides are laid out for **16:9** and letterbox themselves to any window, so they present cleanly on a
 projector or a laptop screen. Inside the lab, clicking and the arrow keys are handed to the lab
