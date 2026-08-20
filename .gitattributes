@@ -1,0 +1,11 @@
+# Keep line endings correct per platform. Shell scripts MUST be LF: a CRLF
+# shebang line makes macOS and Linux fail with "bad interpreter: /usr/bin/env
+# bash^M", which would break the launchers for every non-Windows student.
+* text=auto
+
+*.sh        text eol=lf
+*.command   text eol=lf
+*.py        text eol=lf
+
+*.cmd       text eol=crlf
+*.ps1       text eol=crlf

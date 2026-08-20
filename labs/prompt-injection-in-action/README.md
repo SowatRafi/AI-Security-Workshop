@@ -28,8 +28,8 @@ ollama create atlasbot -f ./Modelfile
 ollama list
 ```
 
-3. That is everything the launcher does for you as well — double-clicking **`Start Workshop.cmd`**
-   performs steps 1–2 automatically on any machine that has Ollama.
+3. That is everything the launcher does for you as well — double-clicking the launcher for your
+   system performs steps 1–2 automatically on any machine that has Ollama.
 4. Smoke-test the model, then leave the chat open:
 
 ```bash
@@ -58,10 +58,21 @@ ollama create atlasbot-hard -f ./Modelfile.hardened
 Slides 16 and 17 carry a **💬 Open the live chat** button, so students can attack the model without
 leaving the slides.
 
-**Setup is one double-click: `Start Workshop.cmd` in the workshop folder.** It starts Ollama if
-needed, downloads the model the first time, builds AtlasBot, serves the workshop and opens the deck
-with the chat working. Nothing else to install beyond Ollama itself — no Python, no accounts, no API
-keys, no admin rights, no Ollama configuration.
+**Setup is one double-click.** In the workshop folder:
+
+| System | Double-click |
+|---|---|
+| **Windows** | `Start-Workshop.cmd` |
+| **macOS** | `Start-Workshop.command` |
+| **Linux** | `labs/start-workshop.sh` (or run it from a terminal) |
+
+Each one starts Ollama if it is not running, downloads the model the first time, builds AtlasBot,
+serves the workshop and opens the deck with the chat working. Then a student clicks **Open the live
+chat** and starts attacking — nothing else to do.
+
+Requirements: **Ollama** (<https://ollama.com/download>), and **Python 3** on macOS and Linux, which
+both normally have. Windows needs neither — it falls back to PowerShell, which ships with the OS. No
+accounts, no API keys, no admin rights, no Ollama configuration.
 
 **Why a launcher rather than just opening the HTML.** A browser page that fetches
 `http://127.0.0.1:11434` directly is doing two things browsers now police:
