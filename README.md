@@ -11,7 +11,7 @@ and it works with no internet and nothing to install.
 
 | Path | Contents |
 |------|----------|
-| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (20 slides) |
+| [`slides/ai-fundamentals.html`](slides/ai-fundamentals.html) | **Deck B** — the main primer: machine learning through to AI supply-chain security, ending in a hands-on audit lab (22 slides) |
 | [`slides/ai-security-workshop.html`](slides/ai-security-workshop.html) | **Deck A** — the prompt-security workshop: prompt injection, jailbreaking and a 5-layer defence (20 slides) |
 
 ## Deck B — AI Fundamentals
@@ -26,20 +26,21 @@ way to auditing a third-party model you did not build.
 | 9 | Prompt Engineering | **The Anatomy of a Prompt** — the four pillars (instruction, context, output format, constraints), the four assembled into one prompt, and specificity vs verbosity |
 | 10–11 | Advanced Prompting | **The Shot Spectrum** — zero-, one- and few-shot with worked examples · **Chains and Templates** — chain-of-thought, zero-shot CoT and reusable prompt templates. Each technique carries its own "use when" |
 | 12 | Instruction Hierarchy | **System vs User Prompts** — what each is, the comparison grid, and why the boundary between them is probabilistic rather than architectural |
-| 13 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
-| 14 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
-| 15 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
-| 16 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
-| 17 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
-| 18 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
-| 19 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
-| 20 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
+| 13–14 | How LLMs Follow Instructions | **Five Sources, One Context Window** — system and developer prompts, user input, retrieved context and tool output, and who controls each · **Labelled in Theory, One Stream in Practice** — ChatML, Harmony and the provider-side reinforcements, then why the labelling does not hold. Each separation method carries its own "use when" |
+| 15 | AI Security Threats | Vulnerabilities across the model lifecycle, and MITRE ATT&CK vs ATLAS |
+| 16 | AI in Cyber Security | Attack · Defend · Secure — the three ways AI meets security |
+| 17 | Training Data | Where the data comes from: provenance, ML-BOM, personal data |
+| 18 | Building the Model | Epochs and overfitting, validation, pruning and quantisation, federated learning |
+| 19 | The Inheritance Problem | Fine-tuning inherits everything beneath it |
+| 20 | The Black Box Problem | Why a model cannot be inspected, and what a model card is for |
+| 21 | Model Supply Chain | **Practical: Audit a Model** — the interactive lab (below) |
+| 22 | Model Supply Chain | **Audit Answer Key** — every finding and its severity |
 
-## The lab — Audit a Model (slide 19)
+## The lab — Audit a Model (slide 21)
 
 Anyone can publish a model. That makes public model hubs an enormous resource and a real
 supply-chain risk, and reading a model repository critically is a skill worth practising before it
-matters. Slide 19 is a **simulated model-hub repository** — a plausible-looking listing for
+matters. Slide 21 is a **simulated model-hub repository** — a plausible-looking listing for
 `nimbus-labs/redact-guard-v3`, a PII-redaction model that a company wants to put in front of its
 data-loss-prevention gate — and the participant is the reviewer of record.
 
@@ -55,7 +56,7 @@ There are **12 concerns** hidden in the repository, spread across all three seve
 all serious: rating a minor one as critical costs exactly as much as missing a real one, which is
 the point. Scoring **70% at the correct severity** unlocks a completion code; below that the code
 stays locked and the participant is invited to review again. The debrief closes with twelve
-questions to ask of any third-party model, and slide 20 is the full answer key for whoever is
+questions to ask of any third-party model, and slide 22 is the full answer key for whoever is
 running the session.
 
 The lab is plain HTML, CSS and JavaScript inside the deck — no iframe, no server, no network calls.
@@ -77,7 +78,7 @@ Open either HTML file in any modern browser — double-click it, or drag it onto
 | `←` `→` `Space` | Previous / next slide |
 | Click | Next slide |
 | `F` | Fullscreen |
-| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#19` |
+| `#<n>` | Deep-link to a slide, e.g. `ai-fundamentals.html#21` |
 
 Slides are laid out for **16:9** and letterbox themselves to any window, so they present cleanly on a
 projector or a laptop screen. Inside the lab, clicking and the arrow keys are handed to the lab
@@ -90,6 +91,7 @@ itself rather than the deck, so reviewing the repository never skips a slide.
 - Prompt engineering — the four pillars of a prompt, specificity vs verbosity
 - Advanced prompting — zero/one/few-shot, chain-of-thought, prompt templates
 - The instruction hierarchy — system vs user prompts, and why the separation is soft
+- How LLMs follow instructions — the five sources in a context window, ChatML and Harmony, and the one-stream reality
 - Prompt security — prompt injection, jailbreaks and mitigations
 - Data poisoning attacks and defences
 - AI supply chain security — provenance, model cards and third-party model review
