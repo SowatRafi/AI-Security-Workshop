@@ -3,9 +3,9 @@
 AI Security Workshop - launcher (macOS, Linux, Windows).
 
 Double-click the launcher for your system; it runs this:
-    macOS    Start-Workshop.command
+    macOS    START-HERE.command
     Linux    start-workshop.sh
-    Windows  Start-Workshop.cmd
+    Windows  START-HERE.cmd
 
 What this does:
   1. finds Ollama, and starts it if it is not already running
@@ -207,6 +207,92 @@ def offer_model_download(exe):
     return True
 
 
+def origins_allow_file_pages():
+    """Will Ollama accept a browser call from a page opened off disk?
+
+    Such a page sends "Origin: null". Ollama refuses that by default, which is
+    the single reason the live chat fails when you double-click the HTML.
+    """
+    req = urllib.request.Request(OLLAMA_URL + "/api/chat", method="OPTIONS")
+    req.add_header("Origin", "null")
+    req.add_header("Access-Control-Request-Method", "POST")
+    req.add_header("Access-Control-Request-Headers", "content-type")
+    try:
+        with urllib.request.urlopen(req, timeout=5) as r:
+            return r.status in (200, 204)
+    except Exception:
+        return False
+
+
+def stop_ollama():
+    try:
+        if IS_WIN:
+            subprocess.run(["taskkill", "/F", "/IM", "ollama app.exe"],
+                           capture_output=True, timeout=30)
+            subprocess.run(["taskkill", "/F", "/IM", "ollama.exe"],
+                           capture_output=True, timeout=30)
+        else:
+            subprocess.run(["pkill", "-f", "ollama"], capture_output=True, timeout=30)
+        time.sleep(3)
+    except Exception:
+        pass
+
+
+def persist_origins():
+    """Remember the setting so it survives a reboot. Best effort per platform."""
+    try:
+        if IS_WIN:
+            subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 "[Environment]::SetEnvironmentVariable('OLLAMA_ORIGINS','*','User')"],
+                capture_output=True, timeout=60)
+        elif sys.platform == "darwin":
+            subprocess.run(["launchctl", "setenv", "OLLAMA_ORIGINS", "*"],
+                           capture_output=True, timeout=60)
+    except Exception:
+        pass  # not fatal: this run still works via the environment below
+
+
+def enable_file_page_access(exe):
+    """Ask, then let the deck work when opened straight from the file."""
+    if origins_allow_file_pages():
+        good("The slides can reach the model even when opened directly")
+        return True
+
+    print(flush=True)
+    say("One more thing, and then you never have to think about this again.")
+    print(flush=True)
+    say("Right now Ollama refuses requests from a page opened straight off disk,")
+    say("so double-clicking the slides gives you a chat that cannot connect.")
+    say("Allowing it sets " + _c("96", "OLLAMA_ORIGINS=*") + " and restarts Ollama.")
+    print(flush=True)
+    say(_c("93", "Worth knowing:") + " that lets any web page you visit talk to your local")
+    say("Ollama while it is set. On a workshop machine that is a fair trade; on")
+    say("your daily driver, undo it afterwards - the README says how.")
+    print(flush=True)
+
+    if not ask_yes_no("Allow it?"):
+        say("Skipped. The chat still works through this launcher - just keep")
+        say("using it rather than opening the HTML directly.")
+        return False
+
+    persist_origins()
+    os.environ["OLLAMA_ORIGINS"] = "*"
+    say("Restarting Ollama...")
+    stop_ollama()
+    start_ollama(exe)
+    if not wait_for_ollama(40):
+        warn("Ollama did not come back. Start it yourself, then run this again.")
+        return False
+
+    if origins_allow_file_pages():
+        good("Done - you can now just double-click the slides and the chat works")
+        return True
+
+    warn("Could not enable it. The chat still works through this launcher.")
+    return False
+
+
 def prepare_model():
     """Check what is present, ask before downloading anything, then set up."""
     print(flush=True)
@@ -253,6 +339,7 @@ def prepare_model():
     ok, listing = run(exe, "list")
     if ok and "atlasbot" in listing:
         good("AtlasBot is ready")
+        enable_file_page_access(exe)
         return True
 
     warn("Could not build AtlasBot - see labs/prompt-injection-in-action/README.md")

@@ -55,68 +55,47 @@ ollama create atlasbot-hard -f ./Modelfile.hardened
 
 ### Live chat setup (slides 16-17)
 
-Slides 16 and 17 carry a **💬 Open the live chat** button, so students can attack the model without
+Slides 16 and 17 carry a **💬 Open the live chat** button, so students attack the model without
 leaving the slides.
 
-**Setup is one double-click.** In the workshop folder:
+**Run the launcher once per machine, and that is the end of it.** In the workshop folder:
 
 | System | Double-click |
 |---|---|
-| **Windows** | `Start-Workshop.cmd` |
-| **macOS** | `Start-Workshop.command` |
-| **Linux** | `labs/start-workshop.sh` (or run it from a terminal) |
+| **Windows** | `START-HERE.cmd` |
+| **macOS** | `START-HERE.command` |
+| **Linux** | `START-HERE.sh` |
 
-Each one checks what the machine already has, **asks before downloading anything**, then starts
-Ollama, builds AtlasBot, serves the workshop and opens the deck. A student clicks **Open the live
-chat** and starts attacking — nothing else to do.
+It reports what the machine already has, **asks before downloading anything**, then sets everything
+up and opens the deck. Say yes to its questions and from then on **the slides work however they are
+opened** — double-clicked off a USB stick, served, anything. Students click *Open the live chat* and
+start attacking.
 
-A first run on a bare machine looks like this:
+<details>
+<summary>What the two questions are, and why</summary>
+
+**1. The model.** If `llama3.2` (~2.0 GB) is not downloaded, it names it and asks. Decline and every
+slide still works; only the chat is unavailable.
+
+**2. Access from a file.** A page opened off disk sends `Origin: null`, and Ollama refuses that by
+default — which is the *only* reason double-clicking the slides gives a chat that cannot connect.
+The launcher offers to set `OLLAMA_ORIGINS=*` and restart Ollama, which fixes it permanently.
+
+That second one is a real trade-off and the launcher says so: while it is set, **any** web page the
+student visits can talk to their local Ollama. On a workshop machine that is a fair trade for
+removing all friction; on a daily driver, undo it afterwards with:
 
 ```
-  Checking what you have...
-
-  [ok]   Ollama is installed
-  [ok]   Ollama is running
-  [warn] The model is not downloaded yet.
-
-  The live chat needs one open-source model:
-      llama3.2  -  Meta's Llama 3.2 (3B parameters), about 2.0 GB
-  It downloads once, then runs entirely offline on this machine.
-
-  Download it now? [Y/n]
+python3 labs/undo-access.py      # macOS / Linux
+py -3 labs/undo-access.py        # Windows
 ```
 
-Say **n** and nothing is downloaded — every slide still works, only the live chat is unavailable.
-If **Ollama itself** is missing, it explains what Ollama is, and offers to open the official
-download page (on Linux, to run Ollama's own official install script instead). Nothing is installed
-or downloaded without an explicit yes.
+It is also a genuine teaching moment, and worth thirty seconds in the debrief: *we just widened an
+attack surface to make a demo convenient, and that is exactly the decision this workshop is about.*
 
-Requirements: **Ollama** (<https://ollama.com/download>), and **Python 3** on macOS and Linux, which
-both normally have. Windows needs neither — it falls back to PowerShell, which ships with the OS. No
-accounts, no API keys, no admin rights, no Ollama configuration.
-
-**Why a launcher rather than just opening the HTML.** A browser page that fetches
-`http://127.0.0.1:11434` directly is doing two things browsers now police:
-
-1. **A cross-origin request.** Ollama refuses browser calls from a page opened off disk — a
-   `file://` page sends `Origin: null`, which is not on its allow-list, so it answers **403**.
-2. **A local-network request.** Chrome 138+ gates page→localhost requests behind a *Local Network
-   Access* permission. On Chrome 151 this was measured sitting at `"prompt"`, and the fetch simply
-   fails until it is granted. **No Ollama setting can change this** — it is enforced in the browser,
-   before the request leaves.
-
-The launcher sidesteps both by serving the deck at `http://localhost:8000` **and proxying
-`/ollama/*` through to Ollama**, so the page talks to the model on *its own origin*. That is neither
-cross-origin nor a local-network request, so there is nothing to allow and nothing to prompt for.
-Verified in Chrome 151 with Ollama at its stock configuration.
-
-> An earlier version of this lab asked instructors to set `OLLAMA_ORIGINS=*`. **Don't.** It widens
-> your local Ollama to any web page you visit, and on a current Chrome it does not even fix the
-> problem, because the local-network gate is separate from CORS.
-
-**Opening the HTML directly still works for every slide** — only the chat needs the launcher, and if
-it cannot reach the model the panel says so and points at the fix rather than failing silently. The
-terminal (`ollama run atlasbot`) remains a perfectly good alternative.
+Decline it and nothing breaks — the launcher also serves the deck at `http://localhost:8000` and
+proxies the model through the page's own origin, so the chat works that way regardless.
+</details>
 
 **Inside the panel:** the model toggle switches between `atlasbot` and `atlasbot-hard` (this is how
 you run the hardened-build exhibit in front of the room), **Reset** clears the conversation — the
